@@ -17,7 +17,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="flex flex-col gap-y-6 footerHeader">
-          <h2 className="text-white text-sm font-semibold lg;text-2xl">Help</h2>
+          <h2 className="text-white text-sm font-semibold lg:text-2xl">Help</h2>
           <div className="flex flex-col gap-y-2 text-xs lg:text-lg cursor-pointer">
             <p>Account Support</p>
             <p>Listing Events</p>

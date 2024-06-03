@@ -8,6 +8,9 @@ export const appRoutes =  {
   forgot_password: '/forgot-password',
     
   // Landing page
-  home: '/'
+  home: '/',
+
+  // contact us
+  contact_us:'/contact-us'
 }
 

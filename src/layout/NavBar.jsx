@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Select, MenuItem, TextField, InputAdornment, Box } from "@mui/material";
+import { Link } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import { AppButton } from "../components/button/AppButton";
 import styles from './Layout.module.css'
+import { appRoutes } from "../config/routeMgt/RoutePaths";
 const NavBar = () => {
   const [isActive, setIsActive] = useState("Home");
 
@@ -62,13 +64,15 @@ const NavBar = () => {
         {/* main nav area for large sreens*/}
         <div className="py-10 pl-11 w-full max-[1023px]:hidden border-t border-t-[var(--app-grey)] relative flex justify-center ">
           <nav className=" flex  xl:w-3/4 lg:w-full justify-between max-w-full absolute top-[-1px] bottom-0 ">
-            <p
+            <Link
               className={`${isActive === "Home" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold lg:pl-6  xl:pl-10  pt-5`}
               onClick={() => {
                 setIsActive("Home");
-              }}>
+              }}
+              to={appRoutes.home}
+            >
               Home
-            </p>
+            </Link>
             <p
               className={`${isActive === "Find Events" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold  lg:pl-6  xl:pl-10  pt-5`}
               onClick={() => {
@@ -97,13 +101,15 @@ const NavBar = () => {
               }}>
               About Us
             </p>
-            <p
+            <Link
               className={`${isActive === "Contact Us" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold  lg:pl-6  xl:pl-10 pt-5`}
               onClick={() => {
                 setIsActive("Contact Us");
-              }}>
+              }}
+            to={appRoutes.contact_us}
+            >
               Contact Us
-            </p>
+            </Link>
           </nav>
         </div>
 

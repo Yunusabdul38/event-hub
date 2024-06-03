@@ -1,0 +1,13 @@
+@media (max-width: 1023px) {
+  .navCategorySelect {
+    display: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .navSearch {
+    margin-left: 2px;
+    padding-left: 2px;
+    max-width: 132px;
+  }
+}

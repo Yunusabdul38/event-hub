@@ -3,9 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --app-grey: #A9A9A9;
-  --app-blue:#3557C2;
-
+  --app-grey: #a9a9a9;
+  --app-blue: #3557c2;
 
   font-family: "Montserrat", sans-serif;
   font-synthesis: none;
@@ -14,9 +13,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-
-
 body {
   min-height: 100vh;
   max-width: 100vw;
@@ -24,10 +20,26 @@ body {
 .main {
   min-height: calc(100vh - 440px);
 }
-.footer{font-family: "Open Sans",
-  sans-serif;}
+.footer {
+  font-family: "Open Sans", sans-serif;
+}
 
-  .footer div .footerHeader {
-    font-family: "Montserrat",
-      sans-serif;
-  }
+.footer div .footerHeader {
+  font-family: "Montserrat", sans-serif;
+}
+
+.button {
+  @apply border h-fit rounded-[10px] border-separate font-medium text-white transition ease-in-out duration-300 text-sm tracking-wider hover:opacity-60;
+  padding: 6.5px 10px 8.5px 10px;
+}
+
+.transparentButton {
+  @apply rounded-[10px] h-fit font-medium bg-transparent transition ease-in-out duration-500 text-sm tracking-wider text-[var(--app-blue)] hover:text-white hover:border-none hover:bg-[var(--app-blue)];
+  padding: 6px 10px;
+  border: 1.5px solid var(--app-blue);
+}
+
+.textButton {
+  @apply rounded-[10px] h-fit font-medium bg-transparent transition ease-in-out duration-500 text-sm tracking-wider text-[var(--app-blue)] border-transparent border hover:border-[var(--app-blue)] ;
+  padding: 6px 10px;
+}

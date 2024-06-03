@@ -1,3 +1,4 @@
+
 const NavBar = () => {
   return (
     <div className="flex sticky top-0 bg-white">

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 export const AppButton = ({ containerStyle, type = "button", isDisabled = false, handleClick, variant = "default", label = "Submit", isLoading, bgColor = "bg-[var(--app-blue)]" }) => {
   return (
-    <button disabled={isDisabled} type={type} className={variant === "default" ? ` ${containerStyle} button ${bgColor} ` : variant === "transparent" ? ` ${containerStyle} transparentButton ` : `${containerStyle} textButton `} onClick={handleClick}>
+    <button disabled={isDisabled} type={type} className={variant === "default" ? ` ${containerStyle} button ${bgColor} ` : variant === "transparent" ? ` ${containerStyle}  transparentButton ` : `${containerStyle} textButton `} onClick={handleClick}>
       {isLoading}
       {label}
     </button>

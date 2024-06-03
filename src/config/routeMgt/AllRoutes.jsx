@@ -1,8 +1,43 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { appRoutes } from './RoutePaths';
+
+// import { RequireAuth } from 'react-auth-kit';
+
+import Home from '../../features/home/Home';
+import DashboardLayout from '../../layout/Layout';
+
+const routesArray = [
+  {
+    path: appRoutes.home,
+    element: <Home />,
+  },
+];
 
 const AllRoutes = () => {
   return (
-    <div>AllRoutes</div>
-  )
-}
+    <Router>
+      <Routes>
+        <Route element={<DashboardLayout />}>
+          {routesArray.map((route, index) => (
+            <Route
+              key={index}
+              path={route.path}
+              element={route.element}
+              // element={
+              //   route.path === appRoute.login ? (
+              //     route.element
+              //   ) : (
+              //     <RequireAuth loginPath={appRoute.login}>
+              //       {route.element}
+              //     </RequireAuth>
+              //   )
+              // }
+            />
+          ))}
+        </Route>
+      </Routes>
+    </Router>
+  );
+};
 
-export default AllRoutes
+export default AllRoutes;

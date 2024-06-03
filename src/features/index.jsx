@@ -2,7 +2,7 @@
 
 const index = () => {
   return (
-    <div>index</div>
+    <div>index feat</div>
   )
 }
 

@@ -4,6 +4,7 @@ import { appRoutes } from './RoutePaths';
 // import { RequireAuth } from 'react-auth-kit';
 
 import Home from '../../features/home/Home';
+import ContactUs from '../../features/contactUs/pages/ContactUs'
 import DashboardLayout from '../../layout/Layout';
 
 const routesArray = [
@@ -11,6 +12,10 @@ const routesArray = [
     path: appRoutes.home,
     element: <Home />,
   },
+  {
+    path: appRoutes.contact_us,
+    element: <ContactUs />
+  }
 ];
 
 const AllRoutes = () => {

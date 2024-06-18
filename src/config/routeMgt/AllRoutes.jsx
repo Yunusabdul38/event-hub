@@ -6,6 +6,7 @@ import { appRoutes } from './RoutePaths';
 import Home from '../../features/home/Home';
 import ContactUs from '../../features/contactUs/pages/ContactUs'
 import DashboardLayout from '../../layout/Layout';
+import CreateEvent from '../../features/createEvent/CreateEvent';
 
 const routesArray = [
   {
@@ -15,7 +16,11 @@ const routesArray = [
   {
     path: appRoutes.contact_us,
     element: <ContactUs />
-  }
+  },
+  {
+    path:appRoutes.create_Event,
+    element:<CreateEvent/>,
+  },
 ];
 
 const AllRoutes = () => {

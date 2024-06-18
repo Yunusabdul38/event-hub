@@ -11,6 +11,9 @@ export const appRoutes =  {
   home: '/',
 
   // contact us
-  contact_us:'/contact-us'
+  contact_us:'/contact-us',
+
+  // create Events
+  create_Event:"/create-event",
 }
 

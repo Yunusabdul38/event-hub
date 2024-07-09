@@ -3,25 +3,28 @@ import { MdOutlineAccessTime } from "react-icons/md";
 import { IoTicket } from "react-icons/io5";
 import { CiLocationOn } from "react-icons/ci";
 import vector from "../../assets/Vector.svg"
+import useEvent from "../../hooks/useEvent";
 
-export default function Preview() {
+export default function Review() {
+  const {title:{name:Title},banner:{image},session,description:{detail},location:{name:place}} = useEvent()
   return (
     <section className="capitalize w-full lg:px-16 pt-6 mx-auto max-w-4xl text-[#2D2C3C]">
     <h2 className="mb-10 lg:mb-2 text-[#2D2C3C] font-Montserrat text-xl lg:text-2xl font-medium text-center lg:text-start">
     Nearly there! Check everything’s correct.
     </h2>
     <div className="p-6 border-[#2B293D] border-[3px] rounded-2xl my-8">
-      <div className="py-10 w-full rounded-md bg-[#B9B9B9]">
-        <img src={vector} className="m-auto w-32 h-32" />
-      </div>
-      <h1 className="my-4 capitalize text-center md:text-start text-2xl font-bold">event title</h1>
-      <div className="w-full flex md:flex-row gap-3 md:gap-0 flex-col justify-between items-start">
-        <div className="text-sm grid gap-3">
-          <h3 className="font-medium text-xl capitalize">date and time</h3>
-          <h5 className="flex items-center gap-2"> <RxCalendar/> day date</h5>
-          <h5 className="flex items-center gap-2"> <MdOutlineAccessTime/> time</h5>
-          <h5 className="ml-5 text-[#4539B4]"> + add to calendar</h5>
+        <div className="h-[300px] rounded-md">
+        <img src={image} className="m-auto w-full object-cover h-full rounded-md" />
         </div>
+      
+      <h1 className="my-4 capitalize text-center md:text-start text-2xl font-bold">{Title}</h1>
+      <div className="w-full flex md:flex-row gap-3 md:gap-0 flex-col justify-between items-start">
+        {session.map((date,index)=>  <div className="text-sm grid gap-3" key={index}>
+          <h3 className="font-medium text-xl capitalize">date and time</h3>
+          <h5 className="flex items-center gap-2"> <RxCalendar/>{date.startDate.date}</h5>
+          <h5 className="flex items-center gap-2"> <MdOutlineAccessTime/>{date.startTime.time}</h5>
+          <h5 className="ml-5 text-[#4539B4]"><a href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${Title}&dates=${date.startDate.date}T${date.startTime.time}Z/${date.startDate.date}T${date.endTime.time}Z&details=${detail}&location=${place}`} target="_blank">+ add to calendar</a></h5>
+        </div>)}
         <div className="text-sm grid gap-3 h-fit">
           <h3 className="font-medium text-xl">ticket information</h3>
           <h5 className="flex items-center gap-2"> <IoTicket/> Ticket Type: Price /ticket</h5>

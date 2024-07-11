@@ -21,7 +21,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="flex  sticky top-0 bg-white justify-between max-[1023px]:pb-20">
+    <div className="flex sticky top-0 bg-white justify-between max-[1023px]:pb-20 z-10">
       <div className="flex flex-col w-full">
         <div className="py-5 flex items-center pl-11 max-sm:pl-2 justify-between">
           <span style={{ fontFamily: "cursive" }} className="text-[var(--app-blue)] text-xl font-semibold">

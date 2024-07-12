@@ -6,6 +6,7 @@ import { appRoutes } from './RoutePaths';
 import Home from '../../features/home/Home';
 import ContactUs from '../../features/contactUs/pages/ContactUs'
 import DashboardLayout from '../../layout/Layout';
+import MainProfile from '../../features/profile';
 
 const routesArray = [
   {
@@ -15,6 +16,10 @@ const routesArray = [
   {
     path: appRoutes.contact_us,
     element: <ContactUs />
+  },
+  {
+    path: appRoutes.profile,
+    element: <MainProfile/>
   }
 ];
 

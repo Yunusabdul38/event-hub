@@ -4,6 +4,7 @@ import About from "../components/About";
 import Bookings from "../components/Bookings";
 import Settings from "../components/Settings";
 import event1 from "../../../assets/event.png";
+import PropTypes from "prop-types";
 
 const user = {
   name: "mercy ayomide",
@@ -62,7 +63,7 @@ const user = {
     }
   ]
 };
-const Profile = () => {
+const Profile = ({activePath}) => {
   const [profileHeadings, setProfileHeadings] = useState([
     {
       name: "about me",
@@ -110,12 +111,20 @@ const Profile = () => {
   return (
     <main className="lg:px-0 md:px-0 px-2">
       <div className="w-full flex py-10 px-4 gap-4">
-        <div className="profileImage w-[350px] rounded-2xl h-[200px]">
-          <img
-            className="w-full h-full object-cover"
-            src={profileImage}
-            alt="Profile Image"
-          />
+        <div className="profileImage w-[350px] rounded-[18px] overflow-hidden shadow-md h-[250px] bg-gray-200 flex items-center justify-center">
+          {profileImage ? (
+            <img
+              className="w-full h-full object-cover"
+              src={profileImage}
+              alt="Profile Image"
+            />
+          ):(
+            <img
+              className="w-full h-full p-10"
+              src="https://img.icons8.com/fluency-systems-filled/96/user.png"
+              alt="user"
+            />
+          )}
         </div>
 
         <div className="profileBio w-full flex items-start justify-between">
@@ -145,7 +154,10 @@ const Profile = () => {
           </div>
 
           <div className="editIcon cursor-pointer pt-1">
-            <img width="30" height="30" src="https://img.icons8.com/fluency-systems-regular/48/create-new.png" alt="create-new"/>
+            <img className="w-[25px] h-[25px] cursor-pointer" src="https://img.icons8.com/fluency-systems-regular/48/create-new.png" alt="create-new" onClick={() => 
+              activePath({
+                path: "account info"
+              })}/>
           </div>
         </div>
       </div>
@@ -178,3 +190,7 @@ const Profile = () => {
 };
 
 export default Profile;
+
+Profile.propTypes = {
+  activePath: PropTypes.func
+}

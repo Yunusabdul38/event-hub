@@ -13,9 +13,11 @@ const MainProfile = () => {
         setActive(e.path);
       }} />
       <div className="w-full">
-        {active == "profile" && <Profile />}
+        {active == "profile" && <Profile activePath={(e) => {
+          setActive(e.path);
+        }} />}
         {active == "account info" && <AccountInfo />}
-        {active == "change email" && <ChangeEmail />}
+        {active == "change email" && <ChangeEmail currentEmail={"johnnie.vehe@gmail.com"} />}
         {active == "password" && <Password />}
       </div>
     </main>

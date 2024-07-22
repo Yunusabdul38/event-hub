@@ -25,7 +25,7 @@ AppButton.defaultProps = {
   containerStyle: "",
   type: "button",
   isDisabled: false,
-  handleClick: () => {},
+  handleClick: () => { },
   variant: "default",
   label: "Submit",
   isLoading: false,

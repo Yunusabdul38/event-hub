@@ -3,9 +3,12 @@ import { appRoutes } from "./RoutePaths";
 
 // import { RequireAuth } from 'react-auth-kit';
 
+import ComingSoon from '../../features/contactUs/pages/ComingSoon';
+import ContactUs from '../../features/contactUs/pages/ContactUs'
+import DashboardLayout from '../../layout/Layout';
+import LogIn from '../../authentication/pages/LogIn';
+import SignUp from '../../authentication/pages/SignUp';
 import Home from "../../features/home/Home";
-import ContactUs from "../../features/contactUs/pages/ContactUs";
-import DashboardLayout from "../../layout/Layout";
 import CreateEvent from "../../features/createEvent/CreateEvent";
 import CreateEventBanner from "../../features/createEvent/CreateEventBanner";
 import TicketType from "../../features/createEvent/TicketType"
@@ -20,7 +23,19 @@ const routesArray = [
   },
   {
     path: appRoutes.contact_us,
-    element: <ContactUs />,
+    element: <ContactUs />
+  },
+  {
+    path: appRoutes.login,
+    element: <LogIn />
+  },
+  {
+    path: appRoutes.sign_up,
+    element: <SignUp />
+  },
+  {
+    path: appRoutes.coming_soon,
+    element: <ComingSoon />
   },
   {
     path: appRoutes.create_Event,
@@ -48,15 +63,6 @@ const AllRoutes = () => {
               key={index}
               path={route.path}
               element={route.element}
-              // element={
-              //   route.path === appRoute.login ? (
-              //     route.element
-              //   ) : (
-              //     <RequireAuth loginPath={appRoute.login}>
-              //       {route.element}
-              //     </RequireAuth>
-              //   )
-              // }
             >
               {route.children?.map((routes, number) => (
                 <Route

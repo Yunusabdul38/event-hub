@@ -43,3 +43,10 @@ body {
   @apply rounded-[10px] h-fit font-medium bg-transparent transition ease-in-out duration-500 text-sm tracking-wider text-[var(--app-blue)] border-transparent border hover:border-[var(--app-blue)] ;
   padding: 6px 10px;
 }
+
+@layer utilities {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    @apply appearance-none;
+  }
+}

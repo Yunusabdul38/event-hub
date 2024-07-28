@@ -1,14 +1,20 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { appRoutes } from './RoutePaths';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { appRoutes } from "./RoutePaths";
 
 // import { RequireAuth } from 'react-auth-kit';
 
-import Home from '../../features/home/Home';
 import ComingSoon from '../../features/contactUs/pages/ComingSoon';
 import ContactUs from '../../features/contactUs/pages/ContactUs'
 import DashboardLayout from '../../layout/Layout';
 import LogIn from '../../authentication/pages/LogIn';
 import SignUp from '../../authentication/pages/SignUp';
+import Home from "../../features/home/Home";
+import CreateEvent from "../../features/createEvent/CreateEvent";
+import CreateEventBanner from "../../features/createEvent/CreateEventBanner";
+import TicketType from "../../features/createEvent/TicketType"
+import Review from "../../features/createEvent/Preview";
+import CreateEventForm from "../../features/createEvent/CreateEventForm";
+import MainProfile from '../../features/profile';
 
 const routesArray = [
   {
@@ -30,6 +36,20 @@ const routesArray = [
   {
     path: appRoutes.coming_soon,
     element: <ComingSoon />
+  },
+  {
+    path: appRoutes.create_Event,
+    element: <CreateEvent />,
+    children: [
+    { path: appRoutes.create_Event, element: <CreateEventForm /> },
+      { path: appRoutes.create_Banner, element: <CreateEventBanner /> },
+      { path: appRoutes.create_TicketType, element: <TicketType /> },
+      { path: appRoutes.review, element: <Review /> },
+    ],
+  },
+  {
+    path: appRoutes.profile,
+    element: <MainProfile/>
   }
 ];
 
@@ -43,16 +63,15 @@ const AllRoutes = () => {
               key={index}
               path={route.path}
               element={route.element}
-            // element={
-            //   route.path === appRoute.login ? (
-            //     route.element
-            //   ) : (
-            //     <RequireAuth loginPath={appRoute.login}>
-            //       {route.element}
-            //     </RequireAuth>
-            //   )
-            // }
-            />
+            >
+              {route.children?.map((routes, number) => (
+                <Route
+                  path={routes.path}
+                  key={number}
+                  element={routes.element}
+                />
+              ))}
+            </Route>
           ))}
         </Route>
       </Routes>

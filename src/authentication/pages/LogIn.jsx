@@ -5,8 +5,11 @@ import AuthenticationDetails from "../../components/button/AuthenticationDetails
 import AuthenticationForm from "../../components/button/AuthenticationForm"
 import { useState } from "react";
 import { EyeInvisibleOutlined, EyeOutlined, ArrowRightOutlined, GoogleOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+
 
 const LogIn = () => {
+  const navigate = useNavigate();
 
   const [errors, setErrors] = useState({})
   const [showPassword, setShowPassword] = useState(true);
@@ -109,7 +112,7 @@ const LogIn = () => {
           </Link>
           <div className="w-full">
             <div className="mb-3 flex flex-row gap-3"><p>Remember me</p><input type="checkbox" /></div>
-            <AppButton type="submit" label="Login" />
+            <AppButton type="submit" label="Login" handleClick={() => navigate(appRoutes.profile)} />
             <Link to={appRoutes.login}>
               <p className="border-2 p-3 my-4 text-center font-semibold rounded-md"><GoogleOutlined className="cursor-pointer text-[20px] text-[orangered]" /> Login with Google </p>
             </Link>

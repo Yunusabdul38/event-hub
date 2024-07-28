@@ -12,7 +12,7 @@ export const appRoutes = {
   // contact us
 
   // Coming soon/Find events
-  coming_soon: '/coming-soon'
+  coming_soon: '/coming-soon',
 
   // create Events
   create_Event:"/create-event",

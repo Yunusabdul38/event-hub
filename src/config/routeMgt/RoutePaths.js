@@ -18,5 +18,8 @@ export const appRoutes =  {
   create_Banner:"/create-event/Banner",
   create_TicketType:"/create-event/Ticket-Type",
   review:"/create-event/Review",
+
+  // profile
+  profile: '/profile',
 }
 

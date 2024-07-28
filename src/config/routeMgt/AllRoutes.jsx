@@ -11,6 +11,7 @@ import CreateEventBanner from "../../features/createEvent/CreateEventBanner";
 import TicketType from "../../features/createEvent/TicketType"
 import Review from "../../features/createEvent/Preview";
 import CreateEventForm from "../../features/createEvent/CreateEventForm";
+import MainProfile from '../../features/profile';
 
 const routesArray = [
   {
@@ -31,6 +32,10 @@ const routesArray = [
       { path: appRoutes.review, element: <Review /> },
     ],
   },
+  {
+    path: appRoutes.profile,
+    element: <MainProfile/>
+  }
 ];
 
 const AllRoutes = () => {

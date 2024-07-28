@@ -21,7 +21,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="flex sticky top-0 bg-white justify-between max-[1023px]:pb-20 z-10">
+    <div className="flex z-10 sticky top-0 bg-white justify-between max-[1023px]:pb-20">
       <div className="flex flex-col w-full">
         <div className="py-5 flex items-center pl-11 max-sm:pl-2 justify-between">
           <span style={{ fontFamily: "cursive" }} className="text-[var(--app-blue)] text-xl font-semibold">
@@ -77,16 +77,19 @@ const NavBar = () => {
               className={`${isActive === "Find Events" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold  lg:pl-6  xl:pl-10  pt-5`}
               onClick={() => {
                 setIsActive("Find Events");
-              }}>
+              }}
+              >
               Find Events
             </p>
-            <p
+            <Link
               className={`${isActive === "Create Events" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold  lg:pl-6  xl:pl-10   pt-5`}
               onClick={() => {
                 setIsActive("Create Events");
-              }}>
+              }}
+              to={appRoutes.create_Event}
+              >
               Create Events
-            </p>
+            </Link>
             <p
               className={`${isActive === "Help Center" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold  lg:pl-6  xl:pl-10  pt-5`}
               onClick={() => {

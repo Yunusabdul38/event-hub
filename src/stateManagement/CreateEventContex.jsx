@@ -1,6 +1,7 @@
 import { createContext, useReducer } from "react";
 import PropTypes from "prop-types";
 
+
 //initial create event details object
 const initialValue = {
   title: { name: "", error: false },

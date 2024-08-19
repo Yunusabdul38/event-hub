@@ -23,7 +23,7 @@ const initialValue = {
       {
         id: 565,
         ticketName: { name: "", error: false },
-        ticketPrice: { price: "", error: false },
+        ticketPrice: { price: "000", error: false },
       },
     ],
   },
@@ -31,7 +31,7 @@ const initialValue = {
 export const CreateEventContext = createContext(initialValue);
 const reducerFn = (state, action) => {
   if (action.type === "event/banner") {
-    return { ...state, banner: { ...state.banner, image: action.image } };
+    return { ...state, banner: { ...state.banner, image: action.image,error: false } };
   }
   if (action.type === "event/banner/error") {
     return { ...state, banner: { ...state.banner, error: true } };

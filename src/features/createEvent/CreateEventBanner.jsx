@@ -1,17 +1,20 @@
-import { Link, useNavigate } from "react-router-dom";
 import { AppButton } from "../../components/button/AppButton";
-import { appRoutes } from "../../config/routeMgt/RoutePaths";
 import useEvent from "../../hooks/useEvent";
+import PropTypes from "prop-types";
+import { useView } from "../../hooks/useView";
 
-export default function CreateEventBanner() {
+export default function CreateEventBanner({navigate,navigateBack}) {
   const {
-    banner: { error, },
+    banner: { error },
     dispatchFn,
   } = useEvent();
-  const navigate = useNavigate();
+
   const onSubmit = function () {
-    navigate(appRoutes.create_TicketType);
+    navigate();
   };
+  //effect to makes component view start from the top of the page
+  useView()
+
   return (
     <form className="capitalize w-full lg:px-16" onSubmit={onSubmit}>
       <h2 className="mb-6 lg:mb-2 text-[#2D2C3C] font-Montserrat text-xl lg:text-2xl font-semibold">
@@ -22,15 +25,11 @@ export default function CreateEventBanner() {
           className="text-start text-sm border cursor-pointer focus:outline-none border-none file:text-[#1D1D1D] file:font-medium"
           id="file_input"
           type="file"
+          placeholder="select an image"
           required
           onChange={(e) => {
             const url = URL.createObjectURL(e.target.files[0]);
-            dispatchFn({ type: "event/banner", image: url });
-          }}
-          onBlur={(e) => {
-            if (e.target.value === "") {
-              dispatchFn({ type: "event/banner/error" });
-            }
+            dispatchFn({ type: "event/banner", image: url, });
           }}
         />
       </div>
@@ -42,15 +41,13 @@ export default function CreateEventBanner() {
         <p>Valid file formats: JPG, GIF, PNG.</p>
       </div>
       <div className="flex justify-end gap-3 items-center">
-        <Link to={appRoutes.create_Event}>
           <AppButton
             variant="text"
             label="Go back to Edit Event"
             type="nav"
             containerStyle="capitalize"
+            handleClick={navigateBack}
           />
-        </Link>
-
         <AppButton
           type="submit"
           label="save & continue"
@@ -59,4 +56,9 @@ export default function CreateEventBanner() {
       </div>
     </form>
   );
+}
+
+CreateEventBanner.propTypes={
+  navigate:PropTypes.func,
+  navigateBack:PropTypes.func
 }

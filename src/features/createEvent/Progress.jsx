@@ -1,13 +1,10 @@
-import { useLocation } from "react-router-dom";
-import { appRoutes } from "../../config/routeMgt/RoutePaths";
-
-export default function Progress() {
-  const { pathname } = useLocation();
-  const pseudoStyle = pathname.includes("Banner")
+import PropTypes from "prop-types";
+export default function Progress({route}) {
+  const pseudoStyle = route==1
     ? "before:w-1/2"
-    : pathname.includes("Ticket-Type")
+    : route==2
     ? "before:w-3/4"
-    : pathname.includes("Review")
+    : route==3
     ? "before:w-full"
     : "before:w-1/4";
 
@@ -27,18 +24,14 @@ export default function Progress() {
         </div>
         <div
           className={`transition-all ease-in-out ${
-            pathname.includes(appRoutes.create_Banner) ||
-            pathname.includes(appRoutes.create_TicketType) ||
-            pathname.includes(appRoutes.review)
+            route >= 1
               ? "text-[#2B293D]"
               : "text-[#6F6F6F]"
           } relative flex flex-col items-center -top-[15px]`}
         >
           <span
             className={`${
-              pathname.includes("Banner") ||
-              pathname.includes(appRoutes.create_TicketType) ||
-              pathname.includes(appRoutes.review)
+              route >= 1
                 ? "border-[#2B293D]"
                 : "border-[#6F6F6F]"
             } w-4 h-4 rounded-full bg-white border-solid  border-4`}
@@ -47,16 +40,14 @@ export default function Progress() {
         </div>
         <div
           className={`transition-all ease-in-out ${
-            pathname.includes(appRoutes.create_TicketType) ||
-            pathname.includes(appRoutes.review)
+            route >= 2
               ? "text-[#2B293D]"
               : "text-[#6F6F6F]"
           } relative flex flex-col items-center -top-[15px]`}
         >
           <span
             className={`${
-              pathname.includes(appRoutes.create_TicketType) ||
-              pathname.includes(appRoutes.review)
+              route >= 2
                 ? "border-[#2B293D]"
                 : "border-[#6F6F6F]"
             } w-4 h-4 rounded-full bg-white border-solid  border-4`}
@@ -65,14 +56,14 @@ export default function Progress() {
         </div>
         <div
           className={`transition-all ease-in-out ${
-            pathname.includes(appRoutes.review)
+            route === 3
               ? "text-[#2B293D]"
               : "text-[#6F6F6F]"
           } relative flex flex-col items-center -top-[15px]`}
         >
           <span
             className={`${
-              pathname.includes(appRoutes.review)
+              route === 3
                 ? "border-[#2B293D]"
                 : "border-[#6F6F6F]"
             } w-4 h-4 rounded-full bg-white border-solid  border-4`}
@@ -83,3 +74,7 @@ export default function Progress() {
     </div>
   );
 }
+
+Progress.propTypes = {
+  route:PropTypes.number
+};

@@ -6,6 +6,14 @@ export const appRoutes = {
   reset_password: '/reset-password',
   forgot_password: '/forgot-password',
 
+  //Pages
+  search: '/search',
+  eventsDescription: '/eventdescription',
+  ticketBooking: '/ticketBooking',
+  attendeeDets: '/attendeeDetails',
+  orderSummary: '/orderSummary',
+  share: '/share',
+
   // Landing page
   home: '/',
 

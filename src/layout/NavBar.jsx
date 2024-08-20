@@ -6,8 +6,6 @@ import { AppButton } from "../components/button/AppButton";
 import styles from './Layout.module.css'
 import { appRoutes } from "../config/routeMgt/RoutePaths";
 
-
-
 const NavBar = () => {
   const [isActive, setIsActive] = useState("Home");
 
@@ -54,7 +52,7 @@ const NavBar = () => {
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
-                      <SearchIcon htmlColor="var(--app-blue)" className="cursor-pointer" />
+                      <SearchIcon htmlColor="var(--app-blue)" className="cursor-pointer"/>
                     </InputAdornment>
                   ),
                   disableUnderline: true,

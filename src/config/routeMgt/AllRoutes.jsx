@@ -10,11 +10,8 @@ import LogIn from '../../authentication/pages/LogIn';
 import SignUp from '../../authentication/pages/SignUp';
 import Home from "../../features/home/Home";
 import CreateEvent from "../../features/createEvent/CreateEvent";
-import CreateEventBanner from "../../features/createEvent/CreateEventBanner";
-import TicketType from "../../features/createEvent/TicketType"
-import Review from "../../features/createEvent/Preview";
-import CreateEventForm from "../../features/createEvent/CreateEventForm";
-import MainProfile from '../../features/profile';
+import MainProfile from "../../features/profile";
+import CreateEventContextProvider from "../../stateManagement/CreateEventContex";
 
 const routesArray = [
   {
@@ -39,18 +36,16 @@ const routesArray = [
   },
   {
     path: appRoutes.create_Event,
-    element: <CreateEvent />,
-    children: [
-    { path: appRoutes.create_Event, element: <CreateEventForm /> },
-      { path: appRoutes.create_Banner, element: <CreateEventBanner /> },
-      { path: appRoutes.create_TicketType, element: <TicketType /> },
-      { path: appRoutes.review, element: <Review /> },
-    ],
+    element: (
+      <CreateEventContextProvider>
+        <CreateEvent />
+      </CreateEventContextProvider>
+    ),
   },
   {
     path: appRoutes.profile,
-    element: <MainProfile/>
-  }
+    element: <MainProfile />,
+  },
 ];
 
 const AllRoutes = () => {

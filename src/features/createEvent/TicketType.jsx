@@ -1,21 +1,21 @@
 import { HiOutlinePlusCircle } from "react-icons/hi2";
 import { AppButton } from "../../components/button/AppButton";
-import { Link, useNavigate } from "react-router-dom";
-import { appRoutes } from "../../config/routeMgt/RoutePaths";
 import paidTicket from "../../assets/ion_ticket.png"
 import freeTicket from "../../assets/free 1.png"
 import useEvent from "../../hooks/useEvent";
 import SellingTicket from "./SellingTicket";
+import PropTypes from "prop-types";
 
-export default function TicketType() {
+export default function TicketType({navigate,navigateBack}) {
   const {EventTicketType,dispatchFn,SellingTicketType} = useEvent()
-  const navigate = useNavigate()
+  //const navigate = useNavigate()
   const onSubmit = function (){
     if(EventTicketType){
-      return navigate(appRoutes.review)
+      return navigate()
     }
     dispatchFn({ type: "event/empty/ticketType" });    
   }
+  //add more ticket input
   const moreTickets = function () {
     const id = Math.random() * 1990;
     dispatchFn({ type: "ticket/increase", id });
@@ -30,7 +30,7 @@ export default function TicketType() {
           <div className={`${EventTicketType==="paid"?"border-4":""} flex flex-col items-center border-[#828282] border rounded-xl p-4`} onClick={()=>
           dispatchFn({type:"event/ticket/type",ticketType:"paid"})
         }>
-            <input className="absolute bottom-0 opacity-0" required value={EventTicketType} />
+            <input className="absolute bottom-0 opacity-0" required defaultValue={EventTicketType} />
             <img src={paidTicket} className="text-8xl font-thin" />
             <h3 className="capitalize">Ticketed Event</h3>
             <h4>My event requires tickets for entry</h4>
@@ -57,11 +57,14 @@ export default function TicketType() {
         </div>
       </div>
       <div className="flex justify-end gap-3 items-center">
-      <Link to={appRoutes.create_Banner} >
-          <AppButton variant="text" label="Go back to Edit Event" type="nav" containerStyle="capitalize" />
-        </Link>
+          <AppButton variant="text" label="Go back to Edit Event" type="nav" containerStyle="capitalize" handleClick={navigateBack}/>
           <AppButton type="submit" label="save & continue" containerStyle="capitalize" />
       </div>
     </form>
   );
+}
+
+TicketType.propTypes={
+  navigate:PropTypes.func,
+  navigateBack:PropTypes.func
 }

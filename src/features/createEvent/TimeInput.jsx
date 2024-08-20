@@ -1,4 +1,5 @@
 import { FaStar } from "react-icons/fa6";
+import PropTypes from "prop-types";
 
 export default function TimeInput({ label, type, id, placeholder, element,inputHandler,value,empty,emptyHandler}) {
   return (
@@ -38,4 +39,16 @@ export default function TimeInput({ label, type, id, placeholder, element,inputH
       </div>
     </div>
   );
+}
+
+TimeInput.propTypes={
+  label:PropTypes.string,
+  type:PropTypes.string,
+  id:PropTypes.string,
+  placeholder:PropTypes.string,
+  element:PropTypes.element,
+  inputHandler:PropTypes.func,
+  value:PropTypes.string,
+  emptyHandler:PropTypes.func,
+  empty:PropTypes.bool
 }

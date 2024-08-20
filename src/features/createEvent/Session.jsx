@@ -3,15 +3,20 @@ import { IoIosRemoveCircleOutline } from "react-icons/io";
 import { MdAccessTime } from "react-icons/md";
 import { LuCalendarDays } from "react-icons/lu";
 import useEvent from "../../hooks/useEvent";
+import PropTypes from "prop-types";
 
 export default function Session({ deleteSession = false, id}) {
+  //event sessions
   const { dispatchFn,session } = useEvent();
+  //remove ticket input
   const reduceSesions = function () {
     dispatchFn({ type: "session/decrease", id });
   };
+   //dispatch actions for inputs values
   const inputValue = (type, value) => {
     dispatchFn({ type: type, value, id });
   };
+  //dispatch actions for empty input fiels (onBlur and onSubmit)
   const empty = (type,field) => {
     dispatchFn({ type: type, field,id});
   };
@@ -60,3 +65,8 @@ export default function Session({ deleteSession = false, id}) {
     </div>
   );
 }
+
+Session.propTypes = {
+  deleteSession:PropTypes.number,
+  id:PropTypes.number,
+};

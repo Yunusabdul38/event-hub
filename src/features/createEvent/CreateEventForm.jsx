@@ -1,18 +1,16 @@
 import { FaStar } from "react-icons/fa6";
 import { GoChevronDown } from "react-icons/go";
 import { HiOutlinePlusCircle } from "react-icons/hi2";
-
+import PropTypes from "prop-types";
 import Label from "../createEvent/Label";
 
 import { AppButton } from "../../components/button/AppButton";
-import { useNavigate } from "react-router-dom";
-import { appRoutes } from "../../config/routeMgt/RoutePaths";
 import useEvent from "../../hooks/useEvent";
 import Session from "./Session";
 import EventCategoryOptions from "./EventCategoryOptions";
 
-export default function CreateEventForm() {
-  const navigate = useNavigate()
+export default function CreateEventForm({navigate}) {
+  // useEvent context to to handle form errors
   const {
     session,
     dispatchFn,
@@ -22,23 +20,25 @@ export default function CreateEventForm() {
     description:{detail,error:descriptionError},
     eventType:{type}
   } = useEvent();
-
+  // dispatch actions for event sessions
   const moreSesions = function () {
     const id = Math.random() * 1990;
     dispatchFn({ type: "session/increase", id });
   };
-
+  //dispatch actions for inputs values
   const inputValue = (type, value) => {
     dispatchFn({ type: type, value });
   };
+  //dispatch actions for empty input fiels (onBlur and onSubmit)
   const empty = (field) => {
     dispatchFn({ type: "event/empty", field });
   };
-
   
   const onSubmit = function (){
-    navigate(appRoutes.create_Banner)
+    //prop to navigate to the next create form component
+    navigate()
   }
+
   return (
     <form className="capitalize  lg:px-16 accent-[#aba6da]" onSubmit={onSubmit}>
       <div className="lg:w-full max-w-4xl mb-8">
@@ -211,4 +211,8 @@ export default function CreateEventForm() {
       </div>
     </form>
   );
+}
+
+CreateEventForm.propTypes={
+  navigate:PropTypes.func,
 }

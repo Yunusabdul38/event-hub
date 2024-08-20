@@ -3,15 +3,21 @@ import { appRoutes } from "./RoutePaths";
 
 // import { RequireAuth } from 'react-auth-kit';
 
-import Home from "../../features/home/Home";
-import ContactUs from "../../features/contactUs/pages/ContactUs";
-import DashboardLayout from "../../layout/Layout";
 import SearchResults from "../../components/pages/SearchResults";
 import EventsDesc from "../../components/pages/EventsDesc";
 import TicketBooking from "../../components/pages/TicketBooking";
 import AttendeeDets from "../../components/pages/AttendeeDets";
 import OrderSummary from "../../components/pages/OrderSummary";
 import Share from "../../components/pages/Share";
+import ComingSoon from '../../features/contactUs/pages/ComingSoon';
+import ContactUs from '../../features/contactUs/pages/ContactUs'
+import DashboardLayout from '../../layout/Layout';
+import LogIn from '../../authentication/pages/LogIn';
+import SignUp from '../../authentication/pages/SignUp';
+import Home from "../../features/home/Home";
+import CreateEvent from "../../features/createEvent/CreateEvent";
+import MainProfile from "../../features/profile";
+import CreateEventContextProvider from "../../stateManagement/CreateEventContex";
 
 const routesArray = [
   {
@@ -46,6 +52,30 @@ const routesArray = [
     path: appRoutes.share,
     element: <Share />,
   },
+  {
+    path: appRoutes.login,
+    element: <LogIn />
+  },
+  {
+    path: appRoutes.sign_up,
+    element: <SignUp />
+  },
+  {
+    path: appRoutes.coming_soon,
+    element: <ComingSoon />
+  },
+  {
+    path: appRoutes.create_Event,
+    element: (
+      <CreateEventContextProvider>
+        <CreateEvent />
+      </CreateEventContextProvider>
+    ),
+  },
+  {
+    path: appRoutes.profile,
+    element: <MainProfile />,
+  },
 ];
 
 const AllRoutes = () => {
@@ -58,7 +88,15 @@ const AllRoutes = () => {
               key={index}
               path={route.path}
               element={route.element}
-            />
+            >
+              {route.children?.map((routes, number) => (
+                <Route
+                  path={routes.path}
+                  key={number}
+                  element={routes.element}
+                />
+              ))}
+            </Route>
           ))}
         </Route>
       </Routes>

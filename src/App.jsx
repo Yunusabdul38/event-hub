@@ -16,9 +16,9 @@ const queryClient = new QueryClient({
 function App() {
   return (
     // <AuthProvider authType="localstorage" authName="event-hub">
-      <QueryClientProvider client={queryClient}>
-        <AllRoutes />
-      </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <AllRoutes />
+    </QueryClientProvider>
     // </AuthProvider>
   );
 }

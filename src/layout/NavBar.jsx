@@ -5,6 +5,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { AppButton } from "../components/button/AppButton";
 import styles from './Layout.module.css'
 import { appRoutes } from "../config/routeMgt/RoutePaths";
+
 const NavBar = () => {
   const [isActive, setIsActive] = useState("Home");
 
@@ -21,7 +22,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="flex z-30 sticky top-0 bg-white justify-between max-[1023px]:pb-20">
+    <div className="flex z-10 sticky top-0 bg-white justify-between max-[1023px]:pb-20">
       <div className="flex flex-col w-full">
         <div className="py-5 flex items-center pl-11 max-sm:pl-2 justify-between">
           <span style={{ fontFamily: "cursive" }} className="text-[var(--app-blue)] text-xl font-semibold">
@@ -73,20 +74,23 @@ const NavBar = () => {
             >
               Home
             </Link>
-            <p
-              className={`${isActive === "Find Events" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold  lg:pl-6  xl:pl-10  pt-5`}
+            <Link className={`${isActive === "Find Events" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold  lg:pl-6  xl:pl-10  pt-5`}
               onClick={() => {
                 setIsActive("Find Events");
-              }}>
+              }}
+              to={appRoutes.coming_soon}
+            >
               Find Events
-            </p>
-            <p
+            </Link>
+            <Link
               className={`${isActive === "Create Events" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold  lg:pl-6  xl:pl-10   pt-5`}
               onClick={() => {
                 setIsActive("Create Events");
-              }}>
+              }}
+              to={appRoutes.create_Event}
+              >
               Create Events
-            </p>
+            </Link>
             <p
               className={`${isActive === "Help Center" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold  lg:pl-6  xl:pl-10  pt-5`}
               onClick={() => {
@@ -106,7 +110,7 @@ const NavBar = () => {
               onClick={() => {
                 setIsActive("Contact Us");
               }}
-            to={appRoutes.contact_us}
+              to={appRoutes.contact_us}
             >
               Contact Us
             </Link>
@@ -120,10 +124,15 @@ const NavBar = () => {
           <AppButton variant="transparent" label="Create Event +" containerStyle="border-black" />
         </div>
       </div>
+
       {/* sign up & login */}
       <div className="mt-5 pr-11 flex justify-between gap-4 md:gap-8 w-2/5 xl:w-1/5 lg:w-1/3  ">
-        <AppButton variant="text" label="Sign Up" containerStyle="whitespace-nowrap" />
-        <AppButton label="Login" />
+        <Link to={appRoutes.sign_up}>
+          <AppButton variant="text" label="Sign Up" containerStyle="whitespace-nowrap" />
+        </Link>
+        <Link to={appRoutes.login}>
+          <AppButton label="Login" />
+        </Link>
       </div>{" "}
     </div>
   );

@@ -1,8 +1,6 @@
-
-
-export const appRoutes =  {
+export const appRoutes = {
   // Authentiation
-  sign_up:'/sign-up',
+  sign_up: '/sign-up',
   login: '/login',
   logout: '/logout',
   reset_password: '/reset-password',
@@ -16,11 +14,18 @@ export const appRoutes =  {
   orderSummary: '/orderSummary',
   share: '/share',
 
-    
   // Landing page
   home: '/',
 
   // contact us
-  contact_us:'/contact-us'
+
+  // Coming soon/Find events
+  coming_soon: '/coming-soon',
+
+  // create Events
+  create_Event:"/create-event",
+
+  // profile
+  profile: '/profile',
 }
 

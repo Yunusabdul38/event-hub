@@ -20,7 +20,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        montserrat: ["Montserrat", "sans-serif"],
+        Montserrat: ["Montserrat", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
         openSans: ["Open Sans", "sans-serif"],
       },

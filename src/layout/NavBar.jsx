@@ -5,9 +5,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import { AppButton } from "../components/button/AppButton";
 import styles from './Layout.module.css'
 import { appRoutes } from "../config/routeMgt/RoutePaths";
+import logo from "../assets/logo.png";
 
 const NavBar = () => {
   const [isActive, setIsActive] = useState("Home");
+  const isLogin = false;
 
   // category and search
   const [selectedValue, setSelectedValue] = useState("");
@@ -22,15 +24,13 @@ const NavBar = () => {
   };
 
   return (
-    <div className="flex z-10 sticky top-0 bg-white justify-between max-[1023px]:pb-20">
-      <div className="flex flex-col w-full">
-        <div className="py-5 flex items-center pl-11 max-sm:pl-2 justify-between">
-          <span style={{ fontFamily: "cursive" }} className="text-[var(--app-blue)] text-xl font-semibold">
-            Logo
-          </span>
+    <div className="flex flex-wrap z-20 border-b border-b-gray-200 sticky top-0 bg-white justify-between lg:px-12 md:px-8 px-4 h-auto">
+      <div className="flex flex-wrap justify-between w-full">
+        <div className="py-5 w-full flex flex-wrap lg:gap-x-20 md:gap-x-16 gap-x-4 gap-y-4 items-center justify-between border-b border-b-gray-300">
+          <img src={logo} alt="Logo" className="w-[70px]" />
 
           {/* category search */}
-          <div className="xl:mr-[20vw] lg:mr-[15vw]  mr-[5vw]">
+          <div className="">
             <Box display="flex" alignItems="center">
               {/* <InputLabel id="demo-simple-select-helper-label">Category</InputLabel> */}
               <Select IconComponent={() => null} labelId="demo-simple-select-helper-label" id="demo-simple-select-helper" value={selectedValue} onChange={handleSelectChange} size="small" variant="outlined" displayEmpty sx={{ mr: 0, bgcolor: "var(--app-blue)", borderTopLeftRadius: 8, borderBottomLeftRadius: 8, color: "white" }} label="Category" name={"Category"} className={styles.navCategorySelect}>
@@ -52,7 +52,7 @@ const NavBar = () => {
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
-                      <SearchIcon htmlColor="var(--app-blue)" className="cursor-pointer"/>
+                      <SearchIcon htmlColor="var(--app-blue)" className="cursor-pointer" />
                     </InputAdornment>
                   ),
                   disableUnderline: true,
@@ -60,13 +60,29 @@ const NavBar = () => {
               />
             </Box>
           </div>
+
+          {/* sign up & login */}
+          {isLogin ? (
+            <div className="profileImage bg-gray-300 border w-[50px] h-[50px] rounded-full">
+
+            </div>
+          ) : (
+            <div className="min-w-[120px] flex items-center justify-between gap-4">
+              <Link to={appRoutes.sign_up}>
+                <AppButton variant="text" label="Sign Up" containerStyle="whitespace-nowrap min-w-[70px]" />
+              </Link>
+              <Link to={appRoutes.login}>
+                <AppButton label="Login" containerStyle="min-w-[70px]" />
+              </Link>
+            </div>
+          )}
         </div>
 
         {/* main nav area for large sreens*/}
-        <div className="py-10 pl-11 w-full max-[1023px]:hidden border-t border-t-[var(--app-grey)] relative flex justify-center ">
-          <nav className=" flex  xl:w-3/4 lg:w-full justify-between max-w-full absolute top-[-1px] bottom-0 ">
+        <div className="hidden lg:flex md:flex w-full relative justify-center">
+          <nav className="flex gap-4 justify-between">
             <Link
-              className={`${isActive === "Home" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold lg:pl-6  xl:pl-10  pt-5`}
+              className={`${isActive === "Home" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold px-1 lg:px-5 md:px-3 py-5`}
               onClick={() => {
                 setIsActive("Home");
               }}
@@ -74,7 +90,7 @@ const NavBar = () => {
             >
               Home
             </Link>
-            <Link className={`${isActive === "Find Events" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold  lg:pl-6  xl:pl-10  pt-5`}
+            <Link className={`${isActive === "Find Events" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold px-1 lg:px-5 md:px-3 py-5`}
               onClick={() => {
                 setIsActive("Find Events");
               }}
@@ -83,30 +99,30 @@ const NavBar = () => {
               Find Events
             </Link>
             <Link
-              className={`${isActive === "Create Events" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold  lg:pl-6  xl:pl-10   pt-5`}
+              className={`${isActive === "Create Events" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold px-1 lg:px-5 md:px-3 py-5`}
               onClick={() => {
                 setIsActive("Create Events");
               }}
               to={appRoutes.create_Event}
-              >
+            >
               Create Events
             </Link>
             <p
-              className={`${isActive === "Help Center" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold  lg:pl-6  xl:pl-10  pt-5`}
+              className={`${isActive === "Help Center" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold px-1 lg:px-5 md:px-3 py-5`}
               onClick={() => {
                 setIsActive("Help Center");
               }}>
               Help Center
             </p>
             <p
-              className={`${isActive === "About Us" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold  lg:pl-6  xl:pl-10  pt-5`}
+              className={`${isActive === "About Us" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold px-1 lg:px-5 md:px-3 py-5`}
               onClick={() => {
                 setIsActive("About Us");
               }}>
               About Us
             </p>
             <Link
-              className={`${isActive === "Contact Us" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold  lg:pl-6  xl:pl-10 pt-5`}
+              className={`${isActive === "Contact Us" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold px-1 lg:px-5 md:px-3 py-5`}
               onClick={() => {
                 setIsActive("Contact Us");
               }}
@@ -118,22 +134,12 @@ const NavBar = () => {
         </div>
 
         {/* main nav for mobile screens (smartphone and tab) */}
-        <div className=" flex lg:hidden items-center justify-items-center justify-center gap-4 w-full py-5 absolute top-20 border-t border-t-[var(--app-grey)]">
+        <div className="flex lg:hidden md:hidden items-center justify-items-center justify-center gap-4 w-full py-5">
           <AppButton variant="transparent" label="Home" />
           <AppButton variant="transparent" label="Find Events" />
           <AppButton variant="transparent" label="Create Event +" containerStyle="border-black" />
         </div>
       </div>
-
-      {/* sign up & login */}
-      <div className="mt-5 pr-11 flex justify-between gap-4 md:gap-8 w-2/5 xl:w-1/5 lg:w-1/3  ">
-        <Link to={appRoutes.sign_up}>
-          <AppButton variant="text" label="Sign Up" containerStyle="whitespace-nowrap" />
-        </Link>
-        <Link to={appRoutes.login}>
-          <AppButton label="Login" />
-        </Link>
-      </div>{" "}
     </div>
   );
 };

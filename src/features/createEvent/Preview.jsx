@@ -21,8 +21,8 @@ export default function Review({eventDetails}) {
   useView();
 
   return (
-    <section className="capitalize w-full lg:px-16 pt-6 mx-auto max-w-4xl text-[#2D2C3C]">
-      <h2 className="mb-10 lg:mb-2 text-[#2D2C3C] font-Montserrat text-xl lg:text-2xl font-medium text-center lg:text-start">
+    <section className="capitalize w-full lg-screen:px-16 pt-6 mx-auto max-w-4xl text-[#2D2C3C]">
+      <h2 className="mb-10 lg-screen:mb-2 text-[#2D2C3C] font-Montserrat text-xl lg-screen:text-2xl font-medium text-center lg-screen:text-start">
         Nearly there! Check everything’s correct.
       </h2>
       <div className="p-6 border-[#2B293D] border-[3px] rounded-2xl my-8">
@@ -33,10 +33,10 @@ export default function Review({eventDetails}) {
           />
         </div>
 
-        <h1 className="my-4 capitalize text-center md:text-start text-2xl font-bold">
+        <h1 className="my-4 capitalize text-center md-screen:text-start text-2xl font-bold">
           {Title}
         </h1>
-        <div className="w-full flex md:flex-row gap-3 md:gap-0 flex-col justify-between items-start">
+        <div className="w-full flex md-screen:flex-row gap-3 md-screen:gap-0 flex-col justify-between items-start">
           <div className="text-sm grid gap-3">
             <h3 className="font-medium text-xl capitalize">date and time</h3>
             {session.map((date, index) => {
@@ -81,7 +81,7 @@ export default function Review({eventDetails}) {
           <h5 className="inline-flex text-sm items-center gap-2">
             <CiLocationOn /> address
           </h5>
-          <div className="w-full max-w-xl h-80  rounded-md mx-auto lg:mx-0 border">
+          <div className="w-full max-w-xl h-80  rounded-md mx-auto lg-screen:mx-0 border">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31383.264972843925!2d7.4186407276351!3d10.50790263235687!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104d355834371775%3A0x480195979abfe174!2sKaduna%20800283%2C%20Kaduna!5e0!3m2!1sen!2sng!4v1724044659683!5m2!1sen!2sng"
               width="100%"

@@ -13,6 +13,9 @@ export const appRoutes = {
   attendeeDets: '/attendeeDetails',
   orderSummary: '/orderSummary',
   share: '/share',
+  helpCenter: '/help-center',
+  aboutUs: '/about-us',
+  contactUs: '/contact-us',
 
   // Landing page
   home: '/',

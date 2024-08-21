@@ -27,7 +27,9 @@ const NavBar = () => {
     <div className="flex flex-wrap z-20 border-b border-b-gray-200 sticky top-0 bg-white justify-between lg:px-12 md:px-8 px-4 h-auto">
       <div className="flex flex-wrap justify-between w-full">
         <div className="py-5 w-full flex flex-wrap lg:gap-x-20 md:gap-x-16 gap-x-4 gap-y-4 items-center justify-between border-b border-b-gray-300">
-          <img src={logo} alt="Logo" className="w-[70px]" />
+          <Link to="/" >
+            <img src={logo} alt="Logo" className="w-[70px]" />
+          </Link>
 
           {/* category search */}
           <div className="">
@@ -107,26 +109,30 @@ const NavBar = () => {
             >
               Create Events
             </Link>
-            <p
+            <Link
               className={`${isActive === "Help Center" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold px-1 lg:px-5 md:px-3 py-5`}
               onClick={() => {
                 setIsActive("Help Center");
-              }}>
+              }}
+              to={appRoutes.helpCenter}
+              >
               Help Center
-            </p>
-            <p
+            </Link>
+            <Link
               className={`${isActive === "About Us" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold px-1 lg:px-5 md:px-3 py-5`}
               onClick={() => {
                 setIsActive("About Us");
-              }}>
+              }}
+              to={appRoutes.aboutUs}
+              >
               About Us
-            </p>
+            </Link>
             <Link
               className={`${isActive === "Contact Us" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold px-1 lg:px-5 md:px-3 py-5`}
               onClick={() => {
                 setIsActive("Contact Us");
               }}
-              to={appRoutes.contact_us}
+              to={appRoutes.contactUs}
             >
               Contact Us
             </Link>

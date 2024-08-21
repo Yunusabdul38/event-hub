@@ -21,12 +21,12 @@ export default function TicketType({navigate,navigateBack}) {
     dispatchFn({ type: "ticket/increase", id });
   };
   return (
-    <form className="capitalize w-full lg:px-16 pt-6" onSubmit={onSubmit}>
+    <form className="capitalize w-full lg-screen:px-16 pt-6" onSubmit={onSubmit}>
       <div className="max-w-3xl mb-8">
-        <h2 className="mb-6 lg:mb-2 text-[#2D2C3C] font-Montserrat text-xl lg:text-2xl font-medium">
+        <h2 className="mb-6 lg-screen:mb-2 text-[#2D2C3C] font-Montserrat text-xl lg-screen:text-2xl font-medium">
           what type of event are you running?
         </h2>
-        <div className="grid gap-2 lg:gap-10 grid-cols-2 relative" >
+        <div className="grid grid-cols-1 [@media(min-width:420px)]:grid-cols-2 gap-2 lg-screen:gap-10 relative" >
           <div className={`${EventTicketType==="paid"?"border-4":""} flex flex-col items-center border-[#828282] border rounded-xl p-4`} onClick={()=>
           dispatchFn({type:"event/ticket/type",ticketType:"paid"})
         }>
@@ -43,17 +43,17 @@ export default function TicketType({navigate,navigateBack}) {
             <h4>My event requires tickets for entry</h4>
           </div>
         </div>
-        {EventTicketType===null && <p className="text-red-600 absolute z-0 md:left-60 md:-bottom-6 -bottom-6">Event selling ticket type is required</p>} 
+        {EventTicketType===null && <p className="text-red-600 absolute z-0 md-screen:left-60 md-screen:-bottom-6 -bottom-6">Event selling ticket type is required</p>} 
       </div>
       <div className="max-w-3xl mb-8 relative">
-        <h2 className="text-[#2D2C3C] font-Montserrat text-xl lg:text-2xl font-medium mb-8">
+        <h2 className="text-[#2D2C3C] font-Montserrat text-xl lg-screen:text-2xl font-medium mb-8">
           what tickets are you selling
         </h2>
         <div className="w-full grid gap-4">
         <div className="w-full grid gap-4">
         {SellingTicketType.map((data,index)=> <SellingTicket key={data.id}  deleteTicket={index} id={data.id}/> )}
         </div>
-        <HiOutlinePlusCircle className="text-2xl font-normal lg:font-semibold absolute top-16 z-0 right-0" onClick={moreTickets}/>
+        <HiOutlinePlusCircle className="text-2xl font-normal lg-screen:font-semibold absolute top-16 z-0 right-0" onClick={moreTickets}/>
         </div>
       </div>
       <div className="flex justify-end gap-3 items-center">

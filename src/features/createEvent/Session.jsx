@@ -23,7 +23,7 @@ export default function Session({ deleteSession = false, id}) {
 
   const findDate = session.find(data=> data.id===id)
   return (
-    <div className="flex w-full sm:flex-nowrap gap-4 flex-wrap items-center">
+    <div className="flex w-full sm-screen:flex-nowrap gap-4 flex-wrap items-center">
       <TimeInput
         label="Start Date"
         id="startDate"

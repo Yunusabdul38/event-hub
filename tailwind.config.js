@@ -17,6 +17,23 @@ export default {
 
       sm: { max: "500px" },
       // => @media (max-width: 639px) { ... }
+
+      //create event screen
+      'sm-screen': '640px',
+      // => @media (min-width: 640px) { ... }
+
+      'md-screen': '768px',
+      // => @media (min-width: 768px) { ... }
+
+      'lg-screen': '1024px',
+      // => @media (min-width: 1024px) { ... }
+
+      'xl-screen': '1280px',
+      // => @media (min-width: 1280px) { ... }
+
+      '2xl-screen': '1536px',
+      // => @media (min-width: 1536px) { ... }
+
     },
     extend: {
       fontFamily: {

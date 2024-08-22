@@ -1,26 +1,24 @@
-import React from 'react'
 import recommend from "../../../src/assets/images/recommend.png";
 import { FaArrowRight } from "react-icons/fa6";
-import { useNavigate } from 'react-router-dom';
 
 export default function Recommend() {
   return (
-    <div className="relative font-montserrat">
-          <div className="w-[80vw] md:w-[90vw] h-[30vh] md:h-[25vh] sm:h-[40vh] rounded-[5px] m-auto mb-[2rem]">
-            <img src={recommend} alt="" className="w-full h-full sm:object-cover" />
-          </div>
-          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[#2D2C3C]">
-            <h1 className="text-[1.8rem] md:text-[1.3rem] sm:text-[1rem] font-[700]">
-              Events specially curated for you!
-            </h1>
-            <p className="text-[0.9rem] sm:text-[0.8rem]">
-              Get event suggestions tailored to your interests! Don't let your
-              favorite events slip away.
-            </p>
-            <button className="mt-[2rem] flex m-auto bg-[#2B293D] text-[#FFE047] px-[3rem] sm:px-[1rem] py-[1rem] rounded-[5px] items-center gap-[1rem] text-[1.3rem] sm:text-[1rem]">
-              Get Started <FaArrowRight />
-            </button>
-          </div>
-        </div>
+    <div className="recommend relative min-h-[250px] font-montserrat lg:px-12 md:px-8 px-4 my-4 flex items-center justify-center">
+      <div className="m-auto lg:w-[85%] md:w-[90%] w-full h-full absolute lg:rounded-[12px] md:rounded-[8px] rounded-[0px] overflow-hidden">
+        <img src={recommend} alt="" className="w-full h-full object-cover" />
+      </div>
+      <div className="text-[#2D2C3C] relative z-10">
+        <h1 className="text-[24px] font-[700]">
+          Events specially curated for you!
+        </h1>
+        <p className="text-sm">
+          Get event suggestions tailored to your interests! Don&apos;t let your
+          favorite events slip away.
+        </p>
+        <button className="mt-[2rem] flex justify-center m-auto bg-[#2B293D] text-[#FFE047] px-4 py-3 rounded-[5px] items-center gap-4 text-md min-w-[170px]">
+          Get Started <FaArrowRight />
+        </button>
+      </div>
+    </div>
   )
 }

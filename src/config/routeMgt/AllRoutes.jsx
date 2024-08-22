@@ -10,7 +10,7 @@ import AttendeeDets from "../../components/pages/AttendeeDets";
 import OrderSummary from "../../components/pages/OrderSummary";
 import Share from "../../components/pages/Share";
 import ComingSoon from '../../features/contactUs/pages/ComingSoon';
-import ContactUs from '../../features/contactUs/pages/ContactUs'
+// import ContactUs from '../../features/contactUs/pages/ContactUs';
 import DashboardLayout from '../../layout/Layout';
 import LogIn from '../../authentication/pages/LogIn';
 import SignUp from '../../authentication/pages/SignUp';
@@ -25,8 +25,8 @@ const routesArray = [
     element: <Home />,
   },
   {
-    path: appRoutes.contact_us,
-    element: <ContactUs />,
+    path: appRoutes.contactUs,
+    element: <ComingSoon />,
   },
   {
     path: appRoutes.search,
@@ -76,6 +76,18 @@ const routesArray = [
     path: appRoutes.profile,
     element: <MainProfile />,
   },
+  {
+    path: appRoutes.helpCenter,
+    element: <ComingSoon />,
+  },
+  {
+    path: appRoutes.aboutUs,
+    element: <ComingSoon />,
+  },
+  {
+    path: appRoutes.contactUs,
+    element: <ComingSoon />,
+  },  
 ];
 
 const AllRoutes = () => {

@@ -55,7 +55,7 @@ function CountDown({ duration }) {
         )
     }
     return (
-        <div className="mt-10">
+        <div className="w-full flex justify-center">
             {getFormatedTime(time)}
         </div>
     )

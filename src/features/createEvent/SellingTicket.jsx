@@ -12,11 +12,11 @@ export default function SellingTicket({ deleteTicket = false, id }) {
   };
   const findTicket = SellingTicketType.find((data) => data.id === id);
   return (
-    <div className="grid md-screen:grid-cols-[2fr_1fr_.1fr] grid-cols-[2fr_1fr] gap-4">
-      <div className="flex gap-1 lg-screen:gap-2 items-start justify-start flex-col relative w-full">
+    <div className="grid md:grid-cols-[2fr_1fr_.1fr] grid-cols-[2fr_1fr] gap-4">
+      <div className="flex gap-1 lg:gap-2 items-start justify-start flex-col relative w-full">
         <label
           htmlFor="ticket-name"
-          className="inline-flex items-center lg-screen:items-start font-normal lg-screen:font-semibold"
+          className="inline-flex items-center lg:items-start font-normal lg:font-semibold"
         >
           ticket name
         </label>
@@ -24,7 +24,7 @@ export default function SellingTicket({ deleteTicket = false, id }) {
           <input
             type="text"
             placeholder="Enter the name of your event"
-            className="w-full border border-[#828282] text-[#828282] text-sm rounded-xl lg:rounded-lg focus:ring-[#828282] focus:border-[#828282] block p-2.5 placeholder-[#828282] bg-white outline-none text-center lg-screen:text-start"
+            className="w-full border border-[#828282] text-[#828282] text-sm rounded-xl lg:rounded-lg focus:ring-[#828282] focus:border-[#828282] block p-2.5 placeholder-[#828282] bg-white outline-none text-center lg:text-start"
             required
             onChange={(e) => {
               inputValue("event/ticket/name", e.target.value);
@@ -33,10 +33,10 @@ export default function SellingTicket({ deleteTicket = false, id }) {
           />
         </div>
       </div>
-      <div className="flex gap-1 lg-screen:gap-2 items-start justify-start flex-col relative w-full">
+      <div className="flex gap-1 lg:gap-2 items-start justify-start flex-col relative w-full">
         <label
           htmlFor="ticket-price"
-          className="inline-flex items-center lg-screen:items-start font-normal lg-screen:font-semibold"
+          className="inline-flex items-center lg:items-start font-normal lg:font-semibold"
         >
           ticket price
         </label>
@@ -44,7 +44,7 @@ export default function SellingTicket({ deleteTicket = false, id }) {
           <input
             type="number"
             id="ticket-price"
-            className="w-full border border-[#828282] text-[#828282] text-sm rounded-xl lg-screen:rounded-lg focus:ring-[#828282] focus:border-[#828282] block p-2.5 placeholder-[#828282] bg-white outline-none text-center lg-screen:text-start disabled:cursor-not-allowed"
+            className="w-full border border-[#828282] text-[#828282] text-sm rounded-xl lg:rounded-lg focus:ring-[#828282] focus:border-[#828282] block p-2.5 placeholder-[#828282] bg-white outline-none text-center lg:text-start disabled:cursor-not-allowed"
             onChange={(e) => {
               inputValue("event/ticket/price", e.target.value);
             }}
@@ -68,6 +68,6 @@ export default function SellingTicket({ deleteTicket = false, id }) {
 }
 
 SellingTicket.propTypes = {
-  deleteTicket:PropTypes.number,
-  id:PropTypes.number,
+  deleteTicket: PropTypes.number,
+  id: PropTypes.number,
 };

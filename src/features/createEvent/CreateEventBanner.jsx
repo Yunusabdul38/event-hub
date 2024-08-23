@@ -3,7 +3,7 @@ import useEvent from "../../hooks/useEvent";
 import PropTypes from "prop-types";
 import { useView } from "../../hooks/useView";
 
-export default function CreateEventBanner({navigate,navigateBack}) {
+export default function CreateEventBanner({ navigate, navigateBack }) {
   const {
     banner: { error },
     dispatchFn,
@@ -13,14 +13,14 @@ export default function CreateEventBanner({navigate,navigateBack}) {
     navigate();
   };
   //effect to makes component view start from the top of the page
-  useView()
+  useView();
 
   return (
-    <form className="capitalize w-full lg-screen:px-16 " onSubmit={onSubmit}>
-      <h2 className="mb-6 lg-screen:mb-2 text-[#2D2C3C] font-Montserrat text-xl lg-screen:text-2xl font-semibold">
+    <form className="capitalize w-full lg:px-16 " onSubmit={onSubmit}>
+      <h2 className="mb-6 lg:mb-2 text-[#2D2C3C] font-Montserrat text-xl lg:text-2xl font-semibold">
         upload image
       </h2>
-      <div className="file:bg-[#EEEEEE] file:font-openSans border borer-[#828282] text-[#828282] text-sm rounded-xl lg-screen:rounded-lg-screen  p-2.5 placeholder-[#828282] bg-white outline-none w-2/3 lg-screen:mx-0 mx-auto min-w-fit mb-4">
+      <div className="file:bg-[#EEEEEE] file:font-openSans border borer-[#828282] text-[#828282] text-sm rounded-xl lg:rounded-lg  p-2.5 placeholder-[#828282] bg-white outline-none w-2/3 lg:mx-0 mx-auto min-w-fit mb-4">
         <input
           className="text-start text-sm border cursor-pointer focus:outline-none border-none file:text-[#1D1D1D] file:font-medium"
           id="file_input"
@@ -29,7 +29,7 @@ export default function CreateEventBanner({navigate,navigateBack}) {
           required
           onChange={(e) => {
             const url = URL.createObjectURL(e.target.files[0]);
-            dispatchFn({ type: "event/banner", image: url, });
+            dispatchFn({ type: "event/banner", image: url });
           }}
         />
       </div>
@@ -41,13 +41,13 @@ export default function CreateEventBanner({navigate,navigateBack}) {
         <p>Valid file formats: JPG, GIF, PNG.</p>
       </div>
       <div className="flex justify-end gap-3 items-center">
-          <AppButton
-            variant="text"
-            label="Go back to Edit Event"
-            type="nav"
-            containerStyle="capitalize"
-            handleClick={navigateBack}
-          />
+        <AppButton
+          variant="text"
+          label="Go back to Edit Event"
+          type="nav"
+          containerStyle="capitalize"
+          handleClick={navigateBack}
+        />
         <AppButton
           type="submit"
           label="save & continue"
@@ -58,7 +58,7 @@ export default function CreateEventBanner({navigate,navigateBack}) {
   );
 }
 
-CreateEventBanner.propTypes={
-  navigate:PropTypes.func,
-  navigateBack:PropTypes.func
-}
+CreateEventBanner.propTypes = {
+  navigate: PropTypes.func,
+  navigateBack: PropTypes.func,
+};

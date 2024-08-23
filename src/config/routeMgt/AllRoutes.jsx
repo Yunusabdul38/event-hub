@@ -9,11 +9,11 @@ import TicketBooking from "../../components/pages/TicketBooking";
 import AttendeeDets from "../../components/pages/AttendeeDets";
 import OrderSummary from "../../components/pages/OrderSummary";
 import Share from "../../components/pages/Share";
-import ComingSoon from '../../features/contactUs/pages/ComingSoon';
+import ComingSoon from "../../components/ComingSoon";
 // import ContactUs from '../../features/contactUs/pages/ContactUs';
-import DashboardLayout from '../../layout/Layout';
-import LogIn from '../../authentication/pages/LogIn';
-import SignUp from '../../authentication/pages/SignUp';
+import DashboardLayout from "../../layout/Layout";
+import LogIn from "../../authentication/pages/LogIn";
+import SignUp from "../../authentication/pages/SignUp";
 import Home from "../../features/home/Home";
 import CreateEvent from "../../features/createEvent/CreateEvent";
 import MainProfile from "../../features/profile";
@@ -54,15 +54,15 @@ const routesArray = [
   },
   {
     path: appRoutes.login,
-    element: <LogIn />
+    element: <LogIn />,
   },
   {
     path: appRoutes.sign_up,
-    element: <SignUp />
+    element: <SignUp />,
   },
   {
     path: appRoutes.coming_soon,
-    element: <ComingSoon />
+    element: <ComingSoon />,
   },
   {
     path: appRoutes.create_Event,
@@ -87,7 +87,7 @@ const routesArray = [
   {
     path: appRoutes.contactUs,
     element: <ComingSoon />,
-  },  
+  },
 ];
 
 const AllRoutes = () => {
@@ -96,11 +96,7 @@ const AllRoutes = () => {
       <Routes>
         <Route element={<DashboardLayout />}>
           {routesArray.map((route, index) => (
-            <Route
-              key={index}
-              path={route.path}
-              element={route.element}
-            >
+            <Route key={index} path={route.path} element={route.element}>
               {route.children?.map((routes, number) => (
                 <Route
                   path={routes.path}

@@ -21,9 +21,9 @@ body {
   min-height: 100vh;
   max-width: 100vw;
 }
-.main {
+/* .main {
   min-height: calc(100vh - 440px);
-}
+} */
 .footer {
   font-family: "Open Sans", sans-serif;
 }

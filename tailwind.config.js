@@ -12,7 +12,8 @@ export default {
         openSans: ["Open Sans", "sans-serif"],
       },
       backgroundImage:{
-        "comming_soon":"url('src/assets/Saly-2.jpg')"
+        "coming_soon":"url('src/assets/Saly-2.svg')",
+        "coming_soon2":"url('src/assets/Saly-2.jpg')"
       }
     },
   },

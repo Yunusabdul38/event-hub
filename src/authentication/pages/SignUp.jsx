@@ -1,10 +1,11 @@
-import { AppButton } from "../../components/button/AppButton"
 import { Link } from "react-router-dom";
 import { appRoutes } from "../../config/routeMgt/RoutePaths";
 import AuthenticationDetails from "../../components/button/AuthenticationDetails";
 import AuthenticationForm from "../../components/button/AuthenticationForm"
 import { useState } from "react";
-import { EyeInvisibleOutlined, EyeOutlined, ArrowRightOutlined, GoogleOutlined } from "@ant-design/icons";
+import { FcGoogle } from "react-icons/fc";
+import { GoArrowUpRight } from "react-icons/go";
+import { IoEyeOffSharp, IoEyeSharp } from "react-icons/io5";
 
 
 const SignUp = () => {
@@ -19,7 +20,6 @@ const SignUp = () => {
     confirmPassword: '',
     check: ''
   })
-
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -65,108 +65,121 @@ const SignUp = () => {
   }
 
   return (
-    <div className="bg-[#F0F0F0] w-full flex flex-wrap lg:flex-nowrap justify-between items-center  lg:p-10 sm:p-5 gap-10 text-[14px]" >
-      <AuthenticationDetails>
-        <div className="p-3">
-          <h1 className="py-3 text-[20px] font-bold">Event Hub</h1>
-          <p>
-            Welcome to our community event platform! Easily discover and join events that match your interests. Whether you are looking to connect with others, learn new skills, or simply have fun, we have something for everyone. Our user-friendly interface makes it simple to find, create, and manage events. Join us today and be part of a vibrant community!
-          </p>
-          {/* <img src="public/images/e-hub.jpg" alt="e-hub" /> */}
-        </div>
-        <div className="bg-white border-2 rounded-lg mt-10">
-          <div className="p-3">
-            <p>
-              Hi, I am Mercy Ayomide, a passionate community member eager to connect and collaborate on events. My journey in event management started with a deep love for bringing people together and creating unforgettable experiences. I enjoy exploring new ideas and making every event special. Feel free to reach out to me via email or phone for any inquiries or collaboration opportunities. Looking forward to connecting with you!
-            </p>
-          </div>
-          <div className="border-t-2 p-4 flex justify-between items-center">
-            <div className="flex justify-between items-center gap-4">
-              <img src="public/images/profile-img.jpg" alt="picture" className="w-[50px] rounded-md" />
-              <span>Peter. V</span>
-            </div>
-          </div>
-        </div>
-      </AuthenticationDetails>
-
+    <div className="bg-[#F0F0F0] flex flex-wrap lg:flex-nowrap justify-between items-center lg:p-10 sm:p-5 gap-10 text-[14px] max-w-7xl mx-auto" >
+      <AuthenticationDetails />
       <AuthenticationForm>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <h1 className="text-center text-[20px] font-bold">Sign Up</h1>
-            <p className="text-center font-semibold py-5">
-              Create an account to unlock exclusive features.</p>
-
-            <label htmlFor="text" className="block">
-              {!errors.name ? <span>Name</span> : <span className="my-13 text-[red]">{errors.name}</span>}
+      <form onSubmit={handleSubmit} className="grid gap-3 w-full">
+          <h1 className="text-[20px] font-bold text-center">Sign Up</h1>
+          <p className="text-center font-semibold">
+          Create an account to unlock exclusive features.
+          </p>
+          <span className="grid gap-2 w-full">
+            <label htmlFor="name">
+              {!errors.name && <span>Name</span>}
+              {errors.email && (
+                <span className="my-13 text-[red]">{errors.name}</span>
+              )}
             </label>
-            <input type="text" name="name" placeholder="Full name"
-              className="border-2 outline-none rounded-md w-full p-3 mb-3"
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className="block">
-              {!errors.email ? <span>Email</span> : <span className="my-13 text-[red]">{errors.email}</span>}
-            </label>
-            <input type="text" name="email" placeholder="Enter email"
-              className="border-2 outline-none rounded-md w-full p-3 mb-3"
-              onChange={handleChange}
-            />
-          </div>
-
-          <label htmlFor="password" className="block">
-            {!errors.password ? <p>Password <span className="text-[grey] font-light italic">(minimum of 8 charracters)</span></p> : <span className="my-13 text-[red]">{errors.password}</span>}
-          </label>
-          <div className="flex flex-row items-center justify-between gap-3 pr-3 mb-3 border-2 rounded-md w-full">
             <input
-              className="p-3 w-full outline-none"
-              type={showPassword ? "text" : "password"}
+              type="text"
+              name="name"
+              placeholder="Full name"
+              className="border border-gray-500 outline-none rounded-md p-3 text-center md:text-start"
+              required
+              onChange={handleChange}
+            />
+          </span>
+          <span className="grid gap-2 w-full">
+            <label htmlFor="email">
+              {!errors.email && <span>Email</span>}
+              {errors.email && (
+                <span className="my-13 text-[red]">{errors.email}</span>
+              )}
+            </label>
+            <input
+              type="text"
+              name="email"
+              placeholder="Enter Email"
+              className="border border-gray-500 outline-none rounded-md p-3 text-center md:text-start"
+              required
+              onChange={handleChange}
+            />
+          </span>
+          <span className="grid gap-2 w-full relative">
+            <label htmlFor="password">
+              {!errors.password ? (
+                <span>Password</span>
+              ) : (
+                <span className="my-13 text-[red]">{errors.password}</span>
+              )}
+            </label>
+            <input
+              className="border border-gray-500 outline-none rounded-md p-3 text-center md:text-start"
+              type={!showPassword ? "text" : "password"}
               id="password"
               name="password"
               placeholder="Enter password"
+              required
               onChange={handleChange}
             />
-            <div className="p-1" onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+            <div
+           className="absolute right-2 bottom-0 p-1 text-gray-600 text-lg"
+              onClick={() => setShowPassword(prev => !prev)}
+            >
+              {!showPassword ? <IoEyeSharp /> : <IoEyeOffSharp />}
             </div>
-          </div>
-
-          <label htmlFor="password" className="block">
-            {!errors.confirmPassword ? <span>Confirm password</span> : <span className="my-13 text-[red]">{errors.confirmPassword}</span>}
-          </label>
-          <div className="flex flex-row items-center justify-between gap-3 pr-3 mb-3 border-2 rounded-md w-full">
+          </span>
+          <span className="grid gap-2 w-full relative">
+            <label htmlFor="confirm_password">
+              {!errors.confirmPassword && <span>Password</span>}
+              {errors.confirmPassword  && <span className="my-13 text-[red]">{errors.confirmPassword}</span>}
+            </label>
             <input
-              className="p-3 w-full outline-none"
-              type={showPassword ? "text" : "password"}
-              id="password"
-              name="password"
+              className="border border-gray-500 outline-none rounded-md p-3 text-center md:text-start"
+              type={!showPassword ? "text" : "password"}
+              id="confirm_password"
+              name="confirm_password"
               placeholder="Confirm password"
+              required
               onChange={handleChange}
             />
-            <div className="p-1" onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+            <div
+              className="absolute right-2 bottom-0 p-1 text-gray-600 text-lg"
+              onClick={() => setShowPassword(prev => !prev)}
+            >
+              {!showPassword ? <IoEyeSharp /> : <IoEyeOffSharp />}
             </div>
+          </span>
+          <div className="flex items-center text-center">
+              <input type="checkbox" />
+              <span>I agree with the <span className="no-underline text-[blue]">Terms of Use</span> and <span className="no-underline text-[blue]">Privacy Policy</span></span> 
           </div>
+          {errors.check && <span className="my-13 text-[red] block">{errors.check}</span>}
+          <button
+            className="hover:bg-[#17337C] bg-[#3557C2] border-none capitalize text-white font-openSans font-semibold w-full py-3 cursor-pointer"
+            type="submit"
+          >
+            sign up
+          </button>
+          <div className="text-center relative py-3">
+            <hr className="text-gray-700"/>
+            <span className="absolute top-2 bg-white px-2">Or</span>
+          </div>
+          <button className="border border-gray-700 text-black capitalize font-openSans font-semibold w-full py-2 flex justify-center items-center gap-2 cursor-pointer bg-[#F7F7F8]">
+            <FcGoogle className="text-2xl" />
+            <span>Login with Google </span>
+          </button>
 
-          <div className="w-full">
-            <div className="flex gap-2 my-3 sm:text-[12px]">
-              <input type="checkbox" name="check" onChange={handleChange} />
-              <div>{!errors.check ? <p className="text-[12px]">I agree with the <a href="#" className="underline text-[blue]">Terms of Use</a> and <a href="#" className="underline text-[blue]">Privacy Policy</a></p> : <span className="my-13 text-[red] block">{errors.check}</span>}</div>
-            </div>
-
-            <AppButton type="submit" label="Sign up" />
-            <Link to={appRoutes.sign_up}>
-              <p className="border-2 p-3 my-4 text-center font-semibold rounded-md">
-                <GoogleOutlined className="cursor-pointer text-[20px] text-[orangered]" />
-                Sign Up with Google </p>
+          <div className="text-center">
+          Already have an account?
+            <Link to={appRoutes.login} className="font-semibold no-underline text-black hover:text-[#3557C2]">
+            LogIn
+                <GoArrowUpRight />
             </Link>
-            <p className="text-center">Already have an account? <Link to={appRoutes.login}>
-              <span className="font-semibold">LogIn<ArrowRightOutlined /></span></Link></p>
           </div>
         </form>
       </AuthenticationForm>
     </div>
   )
 }
-
 export default SignUp

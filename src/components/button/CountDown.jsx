@@ -33,21 +33,21 @@ function CountDown({ duration }) {
                     <div className="bg-gray-300 p-2">Seconds</div>
                 </div> */}
                 <div className="flex flex-row gap-4 justify-center items-center text-center">
-                    <div>
-                        <div className="bg-gray-100 p-3 font-bold text-[20px]">{days}</div>
-                        <span className="bg-gray-100 p-3">Days</span>
+                    <div  className="bg-gray-100 p-3bg-gray-100 p-3 shadow-md">
+                        <div className="font-bold text-[20px]">{days}</div>
+                        <span>Days</span>
                     </div>
-                    <div>
-                        <div className="bg-gray-100 p-3 font-bold text-[20px]">{hours}</div>
-                        <span className="bg-gray-100 p-3">Hours</span>
+                    <div  className="bg-gray-100 p-3bg-gray-100 p-3 shadow-md">
+                        <div className="font-bold text-[20px]">{hours}</div>
+                        <span>Hours</span>
                     </div>
-                    <div>
-                        <div className="bg-gray-100 p-3 font-bold text-[20px]">{minutes}</div>
-                        <span className="bg-gray-100 p-3">Mins</span>
+                    <div  className="bg-gray-100 p-3bg-gray-100 p-3 shadow-md">
+                        <div className="font-bold text-[20px]">{minutes}</div>
+                        <span >Mins</span>
                     </div>
-                    <div>
-                        <div className="bg-gray-100 p-3 font-bold text-[20px]">{seconds}</div>
-                        <span className="bg-gray-100 p-3">Secs</span>
+                    <div className="bg-gray-100 p-3bg-gray-100 p-3 shadow-md">
+                        <div className="font-bold text-[20px]">{seconds}</div>
+                        <span>Secs</span>
                     </div>
 
                 </div>
@@ -55,7 +55,7 @@ function CountDown({ duration }) {
         )
     }
     return (
-        <div className="mt-10">
+        <div className="w-full flex justify-center">
             {getFormatedTime(time)}
         </div>
     )

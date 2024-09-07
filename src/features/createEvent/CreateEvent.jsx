@@ -7,8 +7,11 @@ import CreateEventBanner from "./CreateEventBanner";
 import TicketType from "./TicketType";
 import Review from "./Preview";
 import useEvent from "../../hooks/useEvent";
+import { useView } from "../../hooks/useView";
 
 export default function CreateEvent() {
+  //effect to makes component view start from the top of the page
+  useView();
   const [route, setRoute] = useState(0);
   const navigate = useNavigate();
   const eventDetails = useEvent();

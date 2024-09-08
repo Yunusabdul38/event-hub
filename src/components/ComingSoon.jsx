@@ -43,10 +43,10 @@ function ComingSoon() {
                   <input
                     type="text"
                     placeholder="Email address"
-                    className="w-full outline-none pr-2 pl-8 py-2"
+                    className="w-full outline-none pr-2 pl-8 py-2 border rounded"
                   />
                 </span>
-                <button className="hover:bg-[#17337C] bg-[#3557C2] border-none capitalize text-white font-openSans font-semibold w-full xl:w-1/2 outline-none py-2 cursor-pointer">
+                <button className="hover:bg-[#17337C] bg-[#3557C2] border-none capitalize text-white font-openSans font-semibold w-full xl:w-1/2 outline-none py-2 cursor-pointer rounded">
                   notify me
                 </button>
               </div>

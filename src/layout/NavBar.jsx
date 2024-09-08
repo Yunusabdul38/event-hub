@@ -96,7 +96,7 @@ const NavBar = () => {
               onClick={() => {
                 setIsActive("Find Events");
               }}
-              to={appRoutes.coming_soon}
+              to={appRoutes.search}
             >
               Find Events
             </Link>

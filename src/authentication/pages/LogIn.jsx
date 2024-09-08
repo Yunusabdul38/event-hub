@@ -95,7 +95,7 @@ const LogIn = () => {
               onChange={handleChange}
             />
             <div
-              className="absolute right-2 bottom-0 p-1 text-gray-600 text-lg"
+              className="absolute right-2 bottom-3 p-1 text-gray-600 text-lg"
               onClick={() => setShowPassword((prev) => !prev)}
             >
               {!showPassword ? <IoEyeSharp /> : <IoEyeOffSharp />}

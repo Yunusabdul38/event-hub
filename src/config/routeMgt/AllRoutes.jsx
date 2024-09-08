@@ -1,8 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { appRoutes } from "./RoutePaths";
-
-// import { RequireAuth } from 'react-auth-kit';
-
 import SearchResults from "../../components/pages/SearchResults";
 import EventsDesc from "../../components/pages/EventsDesc";
 import TicketBooking from "../../components/pages/TicketBooking";
@@ -88,6 +85,10 @@ const routesArray = [
     path: appRoutes.contactUs,
     element: <ComingSoon />,
   },
+  {
+    path: appRoutes.find_Event,
+    element: "",
+  }
 ];
 
 const AllRoutes = () => {

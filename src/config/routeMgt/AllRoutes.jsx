@@ -7,7 +7,7 @@ import AttendeeDets from "../../components/pages/AttendeeDets";
 import OrderSummary from "../../components/pages/OrderSummary";
 import Share from "../../components/pages/Share";
 import ComingSoon from "../../components/ComingSoon";
-// import ContactUs from '../../features/contactUs/pages/ContactUs';
+import Review from '../../components/EventPreview';
 import DashboardLayout from "../../layout/Layout";
 import LogIn from "../../authentication/pages/LogIn";
 import SignUp from "../../authentication/pages/SignUp";
@@ -31,7 +31,7 @@ const routesArray = [
   },
   {
     path: appRoutes.eventsDescription,
-    element: <EventsDesc />,
+    element: <Review />,
   },
   {
     path: appRoutes.ticketBooking,

@@ -1,7 +1,6 @@
 import { createContext, useReducer } from "react";
 import PropTypes from "prop-types";
 
-
 //initial create event details object
 const initialValue = {
   title: { name: "", error: false },
@@ -30,21 +29,61 @@ const initialValue = {
       },
     ],
   },
+  organizationDetails: {
+    orgName: { name: "", error: false },
+    orgEmail: { Email: "", error: false },
+    orgContact: { contact: "", error: false },
+  },
 };
 export const CreateEventContext = createContext(initialValue);
 const reducerFn = (state, action) => {
+  //dispact event for event organizer name action
+  if (action.type === "event/orgName") {
+    return {
+      ...state,
+      organizationDetails: {
+        ...state.organizationDetails,
+        orgName: { ...state.organizationDetails.orgName, name: action.value, error:false },
+      },
+    };
+  }
+   //dispact event for event organizatier email action
+   if (action.type === "event/orgEmail") {
+    return {
+      ...state,
+      organizationDetails: {
+        ...state.organizationDetails,
+        orgEmail: { ...state.organizationDetails.orgEmail, Email: action.value,error:false },
+      },
+    };
+  }
+
+  //dispact event for event organizer contact action
+  if (action.type === "event/orgContact") {
+    return {
+      ...state,
+      organizationDetails: {
+        ...state.organizationDetails,
+        orgContact: { ...state.organizationDetails.orgContact, contact: action.value,error:false },
+      },
+    };
+  }
+
   //dispact event banner/image action
   if (action.type === "event/banner") {
-    return { ...state, banner: { ...state.banner, image: action.image,error: false } };
+    return {
+      ...state,
+      banner: { ...state.banner, image: action.image, error: false },
+    };
   }
   //dispact event actions for empty input fields
   if (action.type === "event/empty") {
-    //dispact event tickttype
-    if(action.type === "event/empty/ticketType"){
-      return {...state,ticket:{...state.ticket,EventTicketType:null}}
+    //dispact event ticketType
+    if (action.type === "event/empty/ticketType") {
+      return { ...state, ticket: { ...state.ticket, EventTicketType: null } };
     }
-     //dispact event type action
-    if(action.field === "eventType"){
+    //dispact event type action
+    if (action.field === "eventType") {
       return {
         ...state,
         event: {
@@ -53,6 +92,40 @@ const reducerFn = (state, action) => {
         },
       };
     }
+
+    //dispact event for empty event organizer mail error
+   if (action.field === "orgEmail/empty") {
+    return {
+      ...state,
+      organizationDetails: {
+        ...state.organizationDetails,
+        orgEmail: { ...state.organizationDetails.orgEmail, error: true },
+      },
+    };
+  }
+
+    //dispact event for empty event organizer name error
+   if (action.field === "orgName/empty") {
+    return {
+      ...state,
+      organizationDetails: {
+        ...state.organizationDetails,
+        orgName: { ...state.organizationDetails.orgName, error: true },
+      },
+    };
+  }    
+  
+    //dispact event for empty event organizer contact error
+    if (action.field === "orgContact/empty") {
+      return {
+        ...state,
+        organizationDetails: {
+          ...state.organizationDetails,
+          orgContact: { ...state.organizationDetails.orgContact, error: true },
+        },
+      };
+    }  
+
     //dispact event date & time actions
     if (
       action.field === "startDate" ||
@@ -190,7 +263,7 @@ const reducerFn = (state, action) => {
       },
     };
   }
-    //dispact event session action
+  //dispact event session action
   if (action.type === "session/decrease") {
     const session = state.event.date_Time.filter(
       (date) => date.id !== action.id
@@ -203,7 +276,7 @@ const reducerFn = (state, action) => {
       },
     };
   }
-    //dispact event ticket action
+  //dispact event ticket action
   if (action.type === "ticket/increase") {
     return {
       ...state,
@@ -220,7 +293,7 @@ const reducerFn = (state, action) => {
       },
     };
   }
-    //dispact event ticket action
+  //dispact event ticket action
   if (action.type === "ticket/decrease") {
     const tickets = state.ticket.SellingTicketType.filter(
       (date) => date.id !== action.id
@@ -245,6 +318,6 @@ export default function CreateEventContextProvider({ children }) {
   );
 }
 
-CreateEventContextProvider.propTypes={
-  children:PropTypes.element
-}
+CreateEventContextProvider.propTypes = {
+  children: PropTypes.element,
+};

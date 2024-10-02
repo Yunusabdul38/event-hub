@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 
 const DashboardLayout = () => {
   return (
-      <div className='w-full flex flex-col '>
+      <div className='w-full flex flex-col'>
       <NavBar />
       <main className='main'>
         <Outlet />

@@ -10,9 +10,9 @@ export default function useEvent() {
     description,
     banner,
     ticket:{EventTicketType,SellingTicketType},
-    dispatchFn,
+    dispatchFn,organizationDetails:{orgEmail,orgName,orgContact}
   } = useContext(CreateEventContext);
 
 
-  return { eventType,session, dispatchFn,title,banner,category,location,description,EventTicketType,SellingTicketType };
+  return { eventType,session, dispatchFn,title,banner,category,location,description,EventTicketType,SellingTicketType,orgEmail,orgName,orgContact };
 }

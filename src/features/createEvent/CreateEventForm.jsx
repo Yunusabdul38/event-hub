@@ -18,7 +18,7 @@ export default function CreateEventForm({ navigate }) {
     category: { category: categories, error: categoryError },
     location: { name, error: locationError },
     description: { detail, error: descriptionError },
-    eventType: { type },
+    eventType: { type },orgEmail,orgName,orgContact
   } = useEvent();
   // dispatch actions for event sessions
   const moreSesions = function () {
@@ -186,6 +186,62 @@ export default function CreateEventForm({ navigate }) {
               <option value="france"></option>
             </datalist>
           </Label>
+        </div>
+        <div className="mt-4">
+        <h2 className="mb-2 lg:ml-[14.3rem] text-[#2D2C3C] font-Montserrat text-xl lg:text-2xl font-semibold">
+          organizers details
+        </h2>
+        <Label title="organizer name" empty={orgName.error}>
+          <input
+            type="text"
+            placeholder="Enter the name of your organization"
+            className="w-full lg:w-4/5 border borer-[#828282] text-[#828282] text-sm rounded-xl lg:rounded-lg focus:ring-[#828282] focus:border-[#828282] block p-2.5 placeholder-[#828282] bg-white outline-none text-center lg:text-start"
+            required
+            value={orgName.name}
+            onChange={(e) => {
+              inputValue("event/orgName", e.target.value);
+            }}
+            onBlur={(e) => {
+              if (e.target.value === "") {
+                empty("orgName/empty");
+              }
+            }}
+          />
+        </Label>
+        <Label title="organizer contact" empty={orgContact.error}>
+          <input
+            type="number"
+            placeholder="2345749"
+            className="w-full lg:w-4/5 border borer-[#828282] text-[#828282] text-sm rounded-xl lg:rounded-lg focus:ring-[#828282] focus:border-[#828282] block p-2.5 placeholder-[#828282] bg-white outline-none text-center lg:text-start"
+            required
+            value={orgContact.contact}
+            onChange={(e) => {
+              inputValue("event/orgContact", e.target.value);
+            }}
+            onBlur={(e) => {
+              if (e.target.value === "") {
+                empty("orgContact/empty");
+              }
+            }}
+          />
+        </Label>
+        <Label title="organizer email" empty={orgEmail.error}>
+          <input
+            type="email"
+            placeholder="Enter the your oganization email"
+            className="w-full lg:w-4/5 border borer-[#828282] text-[#828282] text-sm rounded-xl lg:rounded-lg focus:ring-[#828282] focus:border-[#828282] block p-2.5 placeholder-[#828282] bg-white outline-none text-center lg:text-start"
+            required
+            value={orgEmail.Email}
+            onChange={(e) => {
+              inputValue("event/orgEmail", e.target.value);
+            }}
+            onBlur={(e) => {
+              if (e.target.value === "") {
+                empty("orgEmail/empty");
+              }
+            }}
+          />
+        </Label>
         </div>
       </div>
       <div className="lg:w-full max-w-6xl mb-14">

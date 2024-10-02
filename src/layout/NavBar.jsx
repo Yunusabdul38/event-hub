@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Select, MenuItem, TextField, InputAdornment, Box } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import { AppButton } from "../components/button/AppButton";
 import styles from './Layout.module.css'
@@ -32,7 +32,7 @@ const NavBar = () => {
           </Link>
 
           {/* category search */}
-          <div className="">
+          <div className="hidden sm:block">
             <Box display="flex" alignItems="center">
               {/* <InputLabel id="demo-simple-select-helper-label">Category</InputLabel> */}
               <Select IconComponent={() => null} labelId="demo-simple-select-helper-label" id="demo-simple-select-helper" value={selectedValue} onChange={handleSelectChange} size="small" variant="outlined" displayEmpty sx={{ mr: 0, bgcolor: "var(--app-blue)", borderTopLeftRadius: 8, borderBottomLeftRadius: 8, color: "white" }} label="Category" name={"Category"} className={styles.navCategorySelect}>
@@ -141,9 +141,16 @@ const NavBar = () => {
 
         {/* main nav for mobile screens (smartphone and tab) */}
         <div className="flex lg:hidden md:hidden items-center justify-items-center justify-center gap-4 w-full py-5">
+          <Link to={appRoutes.home}>
           <AppButton variant="transparent" label="Home" />
+          </Link>
+          <NavLink to={appRoutes.search}>
           <AppButton variant="transparent" label="Find Events" />
-          <AppButton variant="transparent" label="Create Event +" containerStyle="border-black" />
+          </NavLink>
+          
+         <NavLink to={appRoutes.create_Event}>
+         <AppButton variant="transparent" label="Create Event +" containerStyle="border-black" />
+         </NavLink>
         </div>
       </div>
     </div>

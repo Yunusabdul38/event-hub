@@ -5,9 +5,8 @@ import education from "../../../src/assets/images/education.png";
 import entertainment from "../../../src/assets/images/entertainment.png";
 import field from "../../../src/assets/images/field.png";
 import governmental from "../../../src/assets/images/governmental.png";
-import image1 from "../../../src/assets/images/image1.png";
-import image2 from "../../../src/assets/images/image2.png";
-import image3 from "../../../src/assets/images/image3.png";
+import image1 from "../../../src/assets/images/blocks.png";
+import image2 from "../../../src/assets/images/blog.png";
 import Recommend from "../../components/pages/Recommend";
 import OtherEvents from "../../components/pages/OtherEvents";
 import EventCard from "../../components/cards/EventCard";
@@ -44,7 +43,7 @@ const upcomingData = [
     interested: 14,
   },
   {
-    image: image3,
+    image: image1,
     location: "KADAHIVE",
     month: "FEB",
     date: "25 - 26",
@@ -54,7 +53,7 @@ const upcomingData = [
     interested: 14,
   },
   {
-    image: image1,
+    image: image2,
     location: "Colab",
     month: "JAN",
     date: "25 - 26",
@@ -64,7 +63,7 @@ const upcomingData = [
     interested: 14,
   },
   {
-    image: image2,
+    image: image1,
     location: "Ihifix",
     month: "FEB",
     date: "01 - 04",
@@ -74,7 +73,7 @@ const upcomingData = [
     interested: 14,
   },
   {
-    image: image3,
+    image: image2,
     location: "KADAHIVE",
     month: "FEB",
     date: "25 - 26",
@@ -213,7 +212,7 @@ export default function Home() {
               <FaSliders className="text-[1.4rem]" />
             </div>
             {/* Mobile view */}
-            <div className="w-full lg:hidden md:hidden flex gap-2 text-[#1D275F] text-sm">
+            <div className="w-full lg:hidden md:hidden flex gap-2 text-[#1D275F] text-sm flex-wrap">
               <div className="bg-[#F2F4FF] rounded-[50px] px-[1rem] py-[0.3rem]">
                 <select
                   name=""

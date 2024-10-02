@@ -53,15 +53,15 @@ const LogIn = () => {
   };
 
   return (
-    <div className="bg-[#F0F0F0] flex flex-wrap lg:flex-nowrap justify-between items-center lg:p-10 sm:p-5 gap-10 text-[14px] max-w-7xl mx-auto">
+    <div className="bg-[#F0F0F0] flex flex-wrap lg:flex-nowrap justify-between items-center gap-10 text-[14px] max-w-7xl mx-auto px-4">
       <AuthenticationDetails />
       <AuthenticationForm>
-        <form onSubmit={handleSubmit} className="grid gap-3 w-full">
+        <form onSubmit={handleSubmit} className="w-full">
           <h1 className="text-[20px] font-bold text-center">Login</h1>
           <p className="text-center font-semibold">
             Welcome back! Please log in to access your account.
           </p>
-          <span className="grid gap-2 w-full">
+          <div className="w-full">
             <label htmlFor="email">
               {!errors.email && <span>Email</span>}
               {errors.email && (
@@ -72,12 +72,12 @@ const LogIn = () => {
               type="text"
               name="email"
               placeholder="Enter Email"
-              className="border border-gray-500 outline-none rounded-md p-3 text-center md:text-start"
+              className="w-full border border-gray-500 outline-none rounded-md p-3 text-center md:text-start"
               required
               onChange={handleChange}
             />
-          </span>
-          <span className="grid gap-2 w-full relative">
+          </div>
+          <div className="grid gap-2 w-full relative">
             <label htmlFor="password">
               {!errors.password ? (
                 <span>Password</span>
@@ -86,7 +86,7 @@ const LogIn = () => {
               )}
             </label>
             <input
-              className="border border-gray-500 outline-none rounded-md p-3 text-center md:text-start"
+              className="border border-gray-500 outline-none rounded-md p-3 text-center md:text-start w-full"
               type={!showPassword ? "text" : "password"}
               id="password"
               name="password"
@@ -100,7 +100,7 @@ const LogIn = () => {
             >
               {!showPassword ? <IoEyeSharp /> : <IoEyeOffSharp />}
             </div>
-          </span>
+          </div>
           <Link
             to={appRoutes.reset_password}
             className="text-right text-[blue] no-underline"

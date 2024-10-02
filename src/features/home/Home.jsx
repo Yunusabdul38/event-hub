@@ -191,13 +191,14 @@ export default function Home() {
             {categoriesData.map((data, index) => {
               const { name, image } = data;
               return (
-                <div key={index} className="cursor-pointer w-[170px] lg:h-[210px] md:h-[210px] h-[140px] px-2">
+                <div
+                  key={index}
+                  className="cursor-pointer w-[170px] lg:h-[210px] md:h-[210px] h-[140px] px-2"
+                >
                   <div className="lg:w-[150px] md:w-[100px] w-[70px] lg:h-[150px] md:h-[100px] h-[70px] m-auto rounded-full">
                     <img src={image} alt="" className="object-cover" />
                   </div>
-                  <p className="text-center font-[500] mt-2 text-sm">
-                    {name}
-                  </p>
+                  <p className="text-center font-[500] mt-2 text-sm">{name}</p>
                 </div>
               );
             })}
@@ -220,7 +221,14 @@ export default function Home() {
                   id=""
                   className="min-w-[9vw] bg-[#F2F4FF] focus:outline-none"
                 >
-                  <option value="">Weekdays</option>
+                  <option value="">Pick a day</option>
+                  <option value="monday">Monday</option>
+                  <option value="tuesday">Tuesday</option>
+                  <option value="wednesday">Wednesday</option>
+                  <option value="thursday">Thursday</option>
+                  <option value="friday">Friday</option>
+                  <option value="saturday">Saturday</option>
+                  <option value="sunday">Sunday</option>
                 </select>
               </div>
               <div className="bg-[#F2F4FF] rounded-[50px] px-[1rem] py-[0.3rem]">
@@ -229,7 +237,12 @@ export default function Home() {
                   id=""
                   className="min-w-[9vw] bg-[#F2F4FF] focus:outline-none"
                 >
-                  <option value="">Event Type</option>
+                  <option value="">Pick an event type</option>
+                  <option value="conference">Conference</option>
+                  <option value="workshop">Workshop</option>
+                  <option value="hackathon">Hackathon</option>
+                  <option value="meetup">Meetup</option>
+                  <option value="webinar">Webinar</option>
                 </select>
               </div>
               <div className="bg-[#F2F4FF] rounded-[50px] px-[1rem] py-[0.3rem]">
@@ -238,7 +251,15 @@ export default function Home() {
                   id=""
                   className="min-w-[9vw] bg-[#F2F4FF] focus:outline-none"
                 >
-                  <option value="">Any Category</option>
+                  <option value="">Pick a category</option>
+                  {categoriesData.map((data, index) => {
+                    const { name } = data;
+                    return (
+                      <option value="" key={index}>
+                        {name}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
             </div>
@@ -251,7 +272,14 @@ export default function Home() {
                   id=""
                   className="min-w-[9vw] bg-[#F2F4FF] focus:outline-none"
                 >
-                  <option value="">Weekdays</option>
+                  <option value="">Pick a day</option>
+                  <option value="monday">Monday</option>
+                  <option value="tuesday">Tuesday</option>
+                  <option value="wednesday">Wednesday</option>
+                  <option value="thursday">Thursday</option>
+                  <option value="friday">Friday</option>
+                  <option value="saturday">Saturday</option>
+                  <option value="sunday">Sunday</option>
                 </select>
               </div>
               <div className="bg-[#F2F4FF] rounded-[50px] px-[1rem] py-[0.3rem]">
@@ -260,7 +288,12 @@ export default function Home() {
                   id=""
                   className="min-w-[9vw] bg-[#F2F4FF] focus:outline-none"
                 >
-                  <option value="">Event Type</option>
+                  <option value="">Pick an event type</option>
+                  <option value="conference">Conference</option>
+                  <option value="workshop">Workshop</option>
+                  <option value="hackathon">Hackathon</option>
+                  <option value="meetup">Meetup</option>
+                  <option value="webinar">Webinar</option>
                 </select>
               </div>
               <div className="bg-[#F2F4FF] rounded-[50px] px-[1rem] py-[0.3rem]">
@@ -269,18 +302,23 @@ export default function Home() {
                   id=""
                   className="min-w-[9vw] bg-[#F2F4FF] focus:outline-none"
                 >
-                  <option value="">Any Category</option>
+                  <option value="">Pick a category</option>
+                  {categoriesData.map((data, index) => {
+                    const { name } = data;
+                    return (
+                      <option value="" key={index}>
+                        {name}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
             </div>
-
           </div>
 
           <div className="mt-[2rem] flex flex-wrap justify-center gap-[2rem] md:gap-[1rem] sm:gap-0">
             {upcomingData.map((data, index) => {
-              return (
-                <EventCard event={data} key={index} />
-              );
+              return <EventCard event={data} key={index} />;
             })}
           </div>
           <button className="bg-[#3557C2] px-[10rem] sm:px-[7rem] py-[0.5rem] rounded-[5px] text-white flex m-auto">
@@ -290,15 +328,13 @@ export default function Home() {
 
         <div className="mt-[5rem] mb-[5rem] lg:px-12 md:px-8 px-4">
           <div className="flex items-center gap-[13rem]">
-          <h2 className="text-[24px] lg:text-[32px] md:text[28px] font-[700] font-montserrat text-[#2D2C3C]">
+            <h2 className="text-[24px] lg:text-[32px] md:text[28px] font-[700] font-montserrat text-[#2D2C3C]">
               Popular Events
             </h2>
           </div>
           <div className="mt-[2rem] flex flex-wrap justify-center gap-[2rem] md:gap-[1rem] sm:gap-0">
             {upcomingData.map((data, index) => {
-              return (
-                <EventCard event={data} key={index} />
-              );
+              return <EventCard event={data} key={index} />;
             })}
           </div>
           <button className="bg-[#3557C2] px-[10rem] sm:px-[7rem] py-[0.5rem] rounded-[5px] text-white flex m-auto">

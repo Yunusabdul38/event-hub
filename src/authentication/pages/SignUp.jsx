@@ -65,7 +65,7 @@ const SignUp = () => {
   }
 
   return (
-    <div className="bg-[#F0F0F0] flex flex-wrap lg:flex-nowrap justify-between items-center lg:p-10 sm:p-5 gap-10 text-[14px] max-w-7xl mx-auto" >
+    <div className="bg-[#F0F0F0] flex flex-wrap lg:flex-nowrap justify-between items-center lg:p-10 sm:p-5 gap-10 text-[14px] max-w-7xl mx-auto px-4" >
       <AuthenticationDetails />
       <AuthenticationForm>
       <form onSubmit={handleSubmit} className="grid gap-3 w-full">
@@ -84,7 +84,7 @@ const SignUp = () => {
               type="text"
               name="name"
               placeholder="Full name"
-              className="border border-gray-500 outline-none rounded-md p-3 text-center md:text-start"
+              className="w-full border border-gray-500 outline-none rounded-md p-3 text-center md:text-start"
               required
               onChange={handleChange}
             />
@@ -100,7 +100,7 @@ const SignUp = () => {
               type="text"
               name="email"
               placeholder="Enter Email"
-              className="border border-gray-500 outline-none rounded-md p-3 text-center md:text-start"
+              className="w-full border border-gray-500 outline-none rounded-md p-3 text-center md:text-start"
               required
               onChange={handleChange}
             />
@@ -114,7 +114,7 @@ const SignUp = () => {
               )}
             </label>
             <input
-              className="border border-gray-500 outline-none rounded-md p-3 text-center md:text-start"
+              className="w-full border border-gray-500 outline-none rounded-md p-3 text-center md:text-start"
               type={!showPassword ? "text" : "password"}
               id="password"
               name="password"
@@ -135,7 +135,7 @@ const SignUp = () => {
               {errors.confirmPassword  && <span className="my-13 text-[red]">{errors.confirmPassword}</span>}
             </label>
             <input
-              className="border border-gray-500 outline-none rounded-md p-3 text-center md:text-start"
+              className="w-full border border-gray-500 outline-none rounded-md p-3 text-center md:text-start"
               type={!showPassword ? "text" : "password"}
               id="confirm_password"
               name="confirm_password"

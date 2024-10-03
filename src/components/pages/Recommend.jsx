@@ -3,7 +3,7 @@ import { FaArrowRight } from "react-icons/fa6";
 
 export default function Recommend() {
   return (
-    <div className="recommend relative min-h-[250px] font-montserrat lg:px-12 md:px-8 px-4 my-4 flex items-center justify-center">
+    <div className="recommend relative min-h-[250px] font-montserrat lg:px-12 md:px-8 px-4 my-4 flex items-center justify-center text-center">
       <div className="m-auto lg:w-[85%] md:w-[90%] w-full h-full absolute lg:rounded-[12px] md:rounded-[8px] rounded-[0px] overflow-hidden">
         <img src={recommend} alt="" className="w-full h-full object-cover" />
       </div>

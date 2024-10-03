@@ -43,7 +43,7 @@ export default function OtherEvents() {
       <h2 className="text-[24px] lg:text-[32px] md:text[28px] font-[700] font-montserrat text-[#2D2C3C]">
         Explore Categories
       </h2>
-      <div className="mt-[2rem] flex flex-wrap justify-evenly gap-[2rem] md:gap-[1rem] sm:gap-0">
+      <div className="mt-[2rem] flex flex-wrap justify-center lg:gap-[2rem] md:gap-[1rem] gap-4">
         {otherEventsData.map((data, index) => {
           return (
             <EventCard event={data} key={index} />

@@ -18,20 +18,13 @@ const EventCard = ({ event }) => {
     ticket,
   } = event;
   return (
-    <Link to={`/eventdescription`} className="mb-[3rem] border border-gray-50 hover:border-gray-100 transition-all duration-300 p-4 rounded-[8px] cursor-pointer">
-      <div className="relative">
-        <div className="w-[25rem] md:w-[22rem] h-[28vh] md:h-[20vh]  rounded-tr-[10px] rounded-tl-[10px]">
+    <Link to={`/eventdescription`} className="mb-[3rem] border border-gray-50 hover:border-gray-100 transition-all duration-300 p-4 rounded-[8px] cursor-pointer max-w-96">
           <img
             src={image}
             alt=""
-            className="w-full h-full object-cover rounded-tr-[10px] rounded-tl-[10px]"
-          />
-        </div>
-        <div className="w-[3rem] h-[3rem] rounded-[100px] bg-white absolute top-3 right-5">
-          <MdOutlineStarBorderPurple500 className="text-[1.7rem] absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-        </div>
-      </div>
-      <div className="px-[1rem] md:px-0 mt-[1rem] flex gap-[1rem] md:gap-[0.5rem] text-[#2D2C3C]">
+            className="w-full h-1/2 object-cover rounded-tr-[10px] rounded-tl-[10px]"
+          />      
+      <div className="mt-9 px-[1rem] md:px-0 flex gap-[1rem] md:gap-[0.5rem] text-[#2D2C3C]">
         <div className="">
           <h1 className="text-[#4539B4] font-[600] text-center">
             {month}

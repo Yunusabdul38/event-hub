@@ -71,3 +71,8 @@ body {
   bottom: 0;
   background: linear-gradient(to top, #00000076, #00000028);
 }
+
+.active{
+  color: red;
+  
+}

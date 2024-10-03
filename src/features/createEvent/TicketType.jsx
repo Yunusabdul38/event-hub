@@ -63,22 +63,28 @@ export default function TicketType({ navigate, navigateBack }) {
           </p>
         )}
       </div>
-      <div className="max-w-3xl mb-8 relative">
-        <h2 className="text-[#2D2C3C] font-Montserrat text-xl lg:text-2xl font-medium mb-8">
-          what tickets are you selling
-        </h2>
-        <div className="w-full grid gap-4">
+      {EventTicketType === "paid" && (
+        <div className="max-w-3xl mb-8 relative">
+          <h2 className="text-[#2D2C3C] font-Montserrat text-xl lg:text-2xl font-medium mb-8">
+            what tickets are you selling
+          </h2>
           <div className="w-full grid gap-4">
-            {SellingTicketType.map((data, index) => (
-              <SellingTicket key={data.id} deleteTicket={index} id={data.id} />
-            ))}
+            <div className="w-full grid gap-4">
+              {SellingTicketType.map((data, index) => (
+                <SellingTicket
+                  key={data.id}
+                  deleteTicket={index}
+                  id={data.id}
+                />
+              ))}
+            </div>
+            <HiOutlinePlusCircle
+              className="text-2xl font-normal lg:font-semibold absolute top-16 z-0 right-0"
+              onClick={moreTickets}
+            />
           </div>
-          <HiOutlinePlusCircle
-            className="text-2xl font-normal lg:font-semibold absolute top-16 z-0 right-0"
-            onClick={moreTickets}
-          />
         </div>
-      </div>
+      )}
       <div className="flex justify-end gap-3 items-center">
         <AppButton
           variant="text"

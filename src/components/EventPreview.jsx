@@ -3,20 +3,21 @@ import { MdOutlineAccessTime } from "react-icons/md";
 import { IoTicket } from "react-icons/io5";
 import { CiLocationOn } from "react-icons/ci";
 import PropTypes from "prop-types";
-import { useView } from "../../hooks/useView";
+import { useView } from "../hooks/useView";
+import OtherEvents from "./pages/OtherEvents";
+import Image from "../assets/images/blocks.png"
 
-
-export default function Review({ eventDetails }) {
-  //Event details
-  const {
-    title: { name: Title },
-    banner: { image },
-    session,
-    description: { detail },
-    location: { name: place },
-    EventTicketType,
-    SellingTicketType,
-  } = eventDetails;
+export default function Review() {
+  // //Event details
+  // const {
+  //   title: { name: Title },
+  //   banner: { image },
+  //   session,
+  //   description: { detail },
+  //   location: { name: place },
+  //   EventTicketType,
+  //   SellingTicketType,
+  // } = eventDetails;
 
   //effect to makes component view start from the top of the page
   useView();
@@ -24,61 +25,48 @@ export default function Review({ eventDetails }) {
   return (
     <>
       <section className="capitalize w-full lg:px-16 pt-6 mx-auto max-w-4xl text-[#2D2C3C]">
-        <h2 className="mb-10 lg:mb-2 text-[#2D2C3C] font-Montserrat text-xl lg:text-2xl font-medium text-center lg:text-start">
-          Nearly there! Check everything’s correct.
-        </h2>
+       
         <div className="p-6 border-[#2B293D] border-[3px] rounded-2xl my-8">
           <div className="h-[300px] rounded-md">
             <img
-              src={image}
+              src={Image}
               className="m-auto w-full object-cover h-full rounded-md flex justify-center items-center"
             />
           </div>
           <h1 className="my-4 capitalize text-center md:text-start text-2xl font-bold">
-            {Title}
+            react bootcamp
           </h1>
           <div className="w-full flex md:flex-row gap-3 md:gap-0 flex-col justify-between items-start">
             <div className="text-sm grid gap-3">
               <h3 className="font-medium text-xl capitalize">date and time</h3>
-              {session.map((date, index) => {
-                return (
-                  <div key={index}>
                     <h5 className="flex items-center gap-2">
-                      {" "}
                       <RxCalendar />
-                      {date.startDate.date}
+                      12/12/2023
                     </h5>
                     <h5 className="flex items-center gap-2">
-                      {" "}
                       <MdOutlineAccessTime />
-                      {date.startTime.time} - {date.endTime.time}
+                      9:00 - 12:00
                     </h5>
                     <h5 className="ml-5 text-[#4539B4]">
                       <a
-                        href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${Title}&dates=${date.startDate.date}T${date.startTime.time}Z/${date.startDate.date}T${date.endTime.time}Z&details=${detail}&location=${place}`}
+                        href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=react bootchamp&dates=12/12/2023T$9:00Z/$12/12/2023T1Z&details=none&location=$kaduna`}
                         target="_blank"
                       >
                         + add to calendar
                       </a>
-                    </h5>
-                  </div>
-                );
-              })}
+                    </h5>              
             </div>
             <div className="text-sm grid gap-3 h-fit">
               <h3 className="font-medium text-xl">ticket information</h3>
-              {SellingTicketType.map((ticket) => {
-                return (
-                  <h5 key={ticket.id} className="flex items-center gap-2">
-                    <IoTicket /> {EventTicketType}: {ticket.ticketName.name} /
-                    {ticket.ticketPrice.price}
+             
+                  <h5 className="flex items-center gap-2">
+                    <IoTicket /> ticket type: free /
                   </h5>
-                );
-              })}
+              
             </div>
           </div>
           <div className="mt-8 grid gap-3">
-            <h3 className="font-medium text-xl capitalize">{place}</h3>
+            <h3 className="font-medium text-xl capitalize">kaduna</h3>
             <h5 className="inline-flex text-sm items-center gap-2">
               <CiLocationOn /> address
             </h5>
@@ -113,10 +101,13 @@ export default function Review({ eventDetails }) {
           </div>
           <div className="mt-8 grid gap-3">
             <h3 className="font-medium text-xl capitalize">Event Description</h3>
-            <p className="text-[#5A5A5A] font-normal text-sm">{detail}</p>
+            <p className="text-[#5A5A5A] font-normal text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut nobis quidem quod, nihil itaque provident minima qui eos. Aperiam officiis sed quibusdam dolor iusto quo magni hic, id aliquam necessitatibus recusandae dolorem ut, expedita enim! Eius aliquam id saepe qui, aperiam vitae repellat veritatis natus neque maiores provident iste officia! Saepe debitis blanditiis numquam recusandae praesentium dolor voluptate vitae commodi iusto incidunt perferendis ipsa, cumque non perspiciatis quod nihil delectus voluptatibus. Ab rem iste rerum minima, ipsam perspiciatis adipisci, architecto dignissimos a ut aperiam accusantium earum fugit aspernatur reprehenderit omnis qui cumque tenetur optio sint nihil! Mollitia nobis vel perspiciatis.</p>
           </div>
         </div>
       </section>
+      <div className="mt-[5rem] md:px-0">
+        <OtherEvents />
+      </div>
     </>
   );
 }

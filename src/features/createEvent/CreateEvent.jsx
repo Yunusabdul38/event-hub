@@ -8,6 +8,7 @@ import TicketType from "./TicketType";
 import Review from "./Preview";
 import useEvent from "../../hooks/useEvent";
 import { useView } from "../../hooks/useView";
+import OtherEvents from "../../components/pages/OtherEvents";
 
 export default function CreateEvent() {
   //effect to makes component view start from the top of the page
@@ -33,7 +34,7 @@ export default function CreateEvent() {
   }
   return (
     <>
-      <section className="px-5 font-openSans max-w-7xl m-auto py-5">
+      <section className="px-5 font-openSans max-w-7xl m-auto pt-5">
         <div className="inline-flex items-center gap-2 text-xl lg:text-2xl text-[##2D2C3C] font-extrabold">
           <IoIosArrowRoundBack
             color="#2B293D"
@@ -71,6 +72,9 @@ export default function CreateEvent() {
           )}
         </div>
       </section>
+      <div className="mt-[1rem] md:px-0">
+        <OtherEvents />
+      </div>
     </>
   );
 }

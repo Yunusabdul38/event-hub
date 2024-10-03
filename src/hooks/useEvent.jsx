@@ -3,7 +3,7 @@ import { CreateEventContext } from "../stateManagement/CreateEventContex";
 
 export default function useEvent() {
   const {
-    event: { date_Time:session, eventType },
+    event: { date_Time:session},
     title,
     category,
     location,
@@ -14,5 +14,5 @@ export default function useEvent() {
   } = useContext(CreateEventContext);
 
 
-  return { eventType,session, dispatchFn,title,banner,category,location,description,EventTicketType,SellingTicketType,orgEmail,orgName,orgContact };
+  return { session, dispatchFn,title,banner,category,location,description,EventTicketType,SellingTicketType,orgEmail,orgName,orgContact };
 }

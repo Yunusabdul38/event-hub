@@ -1,6 +1,5 @@
 import { FaStar } from "react-icons/fa6";
 import { GoChevronDown } from "react-icons/go";
-import { HiOutlinePlusCircle } from "react-icons/hi2";
 import PropTypes from "prop-types";
 import Label from "../createEvent/Label";
 
@@ -17,14 +16,8 @@ export default function CreateEventForm({ navigate }) {
     title: { name: Title, error: titleError },
     category: { category: categories, error: categoryError },
     location: { name, error: locationError },
-    description: { detail, error: descriptionError },
-    eventType: { type },orgEmail,orgName,orgContact
+    description: { detail, error: descriptionError },orgEmail,orgName,orgContact
   } = useEvent();
-  // dispatch actions for event sessions
-  const moreSesions = function () {
-    const id = Math.random() * 1990;
-    dispatchFn({ type: "session/increase", id });
-  };
   //dispatch actions for inputs values
   const inputValue = (type, value) => {
     dispatchFn({ type: type, value });
@@ -80,51 +73,6 @@ export default function CreateEventForm({ navigate }) {
         <h2 className="mb-2 lg:ml-[14.3rem] text-[#2D2C3C] font-Montserrat text-xl lg:text-2xl font-semibold">
           date & time
         </h2>
-        <div className=" flex gap-[2%] [@media(min-width:360px)]:gap-4  [@media(min-width:430px)]:gap-8 lg:mx-20 px-0 sm:px-11 text-sm">
-          <h3 className="sm:flex flex-none inline-flex items-center lg:items-start font-normal lg:font-semibold">
-            event types <FaStar color="#D6111A" fontSize="10px" />
-          </h3>
-          <div className="grid gap-2">
-            <div className="flex gap-2">
-              <div className="flex-none sm:flex">
-                <input
-                  name="eventType"
-                  id="single"
-                  type="radio"
-                  value="single event"
-                  required
-                  // checked={eventType === "single event"}
-                  onChange={(e) => {
-                    inputValue("event/eventType", e.target.value);
-                  }}
-                />
-                <label
-                  className="font-normal lg:font-semibold ml-1"
-                  htmlFor="single"
-                >
-                  single event
-                </label>
-              </div>
-
-              <div className="flex-none sm:flex relative">
-                <input
-                  type="radio"
-                  name="eventType"
-                  id="recurring"
-                  value="recurring event"
-                  // checked={eventType === "recurring event"}
-                  required
-                  onChange={(e) => {
-                    inputValue("event/eventType", e.target.value);
-                  }}
-                />
-                <label className="font-normal lg:font-semibold ml-1">
-                  recurring event
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       <div className="relative max-w-6xl sm:pl-12 lg:pl-[8.5rem] flex justify-between lg:gap-8 px-0 text-sm mb-14">
         <h3 className="hidden lg:flex items-center lg:items-start font-normal lg:font-semibold">
@@ -135,12 +83,6 @@ export default function CreateEventForm({ navigate }) {
             <Session key={data.id} id={data.id} deleteSession={index} />
           ))}
         </div>
-        {type !== "single event" && type !== "" && (
-          <HiOutlinePlusCircle
-            className="z-0 absolute right-0 top-0 block text-2xl font-normal lg:font-semibold "
-            onClick={moreSesions}
-          />
-        )}
       </div>
       <div className="lg:w-full max-w-4xl mb-14">
         <h2 className="mb-2 lg:ml-[14.3rem] text-[#2D2C3C] font-Montserrat text-xl lg:text-2xl font-semibold">

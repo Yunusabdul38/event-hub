@@ -4,7 +4,6 @@ import { IoTicket } from "react-icons/io5";
 import { CiLocationOn } from "react-icons/ci";
 import PropTypes from "prop-types";
 import { useView } from "../../hooks/useView";
-import OtherEvents from "../../components/pages/OtherEvents";
 
 
 export default function Review({ eventDetails }) {
@@ -118,9 +117,6 @@ export default function Review({ eventDetails }) {
           </div>
         </div>
       </section>
-      <div className="mt-[3rem] md:px-0">
-        <OtherEvents />
-      </div>
     </>
   );
 }

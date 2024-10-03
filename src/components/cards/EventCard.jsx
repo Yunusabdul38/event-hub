@@ -18,7 +18,7 @@ const EventCard = ({ event }) => {
     ticket,
   } = event;
   return (
-    <Link to={`/eventdescription`} className="mb-[3rem] border border-gray-50 hover:border-gray-100 transition-all duration-300 p-4 rounded-[8px] cursor-pointer max-w-80">
+    <Link to={`/eventdescription`} className="mb-[3rem] border border-gray-50 hover:border-gray-100 transition-all duration-300 p-4 rounded-[8px] cursor-pointer max-w-96">
           <img
             src={image}
             alt=""

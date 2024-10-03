@@ -5,7 +5,7 @@ import { CiLocationOn } from "react-icons/ci";
 import PropTypes from "prop-types";
 import { useView } from "../hooks/useView";
 import OtherEvents from "./pages/OtherEvents";
-import Image from "../assets/blocks.png"
+import Image from "../assets/images/blocks.png"
 
 export default function Review() {
   // //Event details

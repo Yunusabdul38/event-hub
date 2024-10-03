@@ -6,7 +6,6 @@ const initialValue = {
   title: { name: "", error: false },
   category: { category: "", error: false },
   event: {
-    eventType: { type: "", error: false },
     date_Time: [
       {
         id: 565,
@@ -82,16 +81,6 @@ const reducerFn = (state, action) => {
     if (action.type === "event/empty/ticketType") {
       return { ...state, ticket: { ...state.ticket, EventTicketType: null } };
     }
-    //dispact event type action
-    if (action.field === "eventType") {
-      return {
-        ...state,
-        event: {
-          ...state.event,
-          eventType: { ...state.event.eventType, error: true },
-        },
-      };
-    }
 
     //dispact event for empty event organizer mail error
    if (action.field === "orgEmail/empty") {
@@ -158,16 +147,6 @@ const reducerFn = (state, action) => {
   //dispact event category/tag action
   if (action.type === "event/category") {
     return { ...state, category: { category: action.value, error: false } };
-  }
-  //dispact event type of event action
-  if (action.type === "event/eventType") {
-    return {
-      ...state,
-      event: {
-        ...state.event,
-        eventType: { ...state.eventType, type: action.value, error: false },
-      },
-    };
   }
   //dispact event location action
   if (action.type === "event/location") {

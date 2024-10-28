@@ -6,8 +6,10 @@ import PropTypes from "prop-types";
 import { useView } from "../hooks/useView";
 import OtherEvents from "./pages/OtherEvents";
 import Image from "../assets/images/blocks.png"
-
+import Modal from "./Modal";
+import { useState } from "react";
 export default function Review() {
+  const [modal, setModal] = useState(false);
   // //Event details
   // const {
   //   title: { name: Title },
@@ -21,10 +23,12 @@ export default function Review() {
 
   //effect to makes component view start from the top of the page
   useView();
-
   return (
     <>
-      <section className="capitalize w-full lg:px-16 pt-6 mx-auto max-w-4xl text-[#2D2C3C]">
+    {modal && <Modal modalHandler={() => setModal(false)} />}
+    <div className="capitalize w-full lg:px-16 pt-6 mx-auto max-w-4xl flex flex-col">
+    <button className="bg-[#3557c2] capitalize text-[#fff] px-[1rem] py-[0.5rem] rounded-[10px] self-end" onClick={()=> setModal(true)} >register for event</button>
+      <section className="capitalize">
        
         <div className="p-6 border-[#2B293D] border-[3px] rounded-2xl my-8">
           <div className="h-[300px] rounded-md">
@@ -105,6 +109,7 @@ export default function Review() {
           </div>
         </div>
       </section>
+    </div>
       <div className="mt-[5rem] md:px-0">
         <OtherEvents />
       </div>

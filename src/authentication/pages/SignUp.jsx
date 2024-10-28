@@ -6,15 +6,18 @@ import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { GoArrowUpRight } from "react-icons/go";
 import { IoEyeOffSharp, IoEyeSharp } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import { userSignUp } from "../../services/Auth/user-context";
 
 
 const SignUp = () => {
-
+  const dispatch = useDispatch()
   const [errors, setErrors] = useState({})
-
+  const {loading:isLoading} = useSelector((state) => state.user)
+  
   const [showPassword, setShowPassword] = useState(true);
   const [formData, setFormData] = useState({
-    name: '',
+    fullName: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -22,10 +25,10 @@ const SignUp = () => {
   })
   const handleSubmit = (e) => {
     e.preventDefault()
-
+    const {confirmPassword,email,fullName,password} = formData
     const validationErrors = {};
 
-    if (!formData.name.trim()) {
+    if (!formData.fullName.trim()) {
       validationErrors.name = "Name is required"
     }
 
@@ -54,15 +57,17 @@ const SignUp = () => {
     if (Object.keys(validationErrors).length === 0) {
       alert("Form Submitted Successfuly")
       setFormData({})
-    }
+    }  
+    
+    //dispatch(userSignUp({confirmPassword,email,fullName,password}))
   }
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData, [name]: value
     })
   }
+
 
   return (
     <div className="bg-[#F0F0F0] flex flex-wrap lg:flex-nowrap justify-between items-center lg:p-10 sm:p-5 gap-10 text-[14px] max-w-7xl mx-auto px-4" >
@@ -74,16 +79,16 @@ const SignUp = () => {
           Create an account to unlock exclusive features.
           </p>
           <span className="grid gap-2 w-full">
-            <label htmlFor="name">
-              {!errors.name && <span>Name</span>}
+            <label htmlFor="fullName">
+              {!errors.name && <span>fullName</span>}
               {errors.email && (
                 <span className="my-13 text-[red]">{errors.name}</span>
               )}
             </label>
             <input
               type="text"
-              name="name"
-              placeholder="Full name"
+              name="fullName"
+              placeholder="Fullname"
               className="w-full border border-gray-500 outline-none rounded-md p-3 text-center md:text-start"
               required
               onChange={handleChange}
@@ -130,15 +135,15 @@ const SignUp = () => {
             </div>
           </span>
           <span className="grid gap-2 w-full relative">
-            <label htmlFor="confirm_password">
+            <label htmlFor="confirmPassword">
               {!errors.confirmPassword && <span>Password</span>}
               {errors.confirmPassword  && <span className="my-13 text-[red]">{errors.confirmPassword}</span>}
             </label>
             <input
               className="w-full border border-gray-500 outline-none rounded-md p-3 text-center md:text-start"
               type={!showPassword ? "text" : "password"}
-              id="confirm_password"
-              name="confirm_password"
+              id="confirmPassword"
+              name="confirmPassword"
               placeholder="Confirm password"
               required
               onChange={handleChange}
@@ -156,8 +161,9 @@ const SignUp = () => {
           </div>
           {errors.check && <span className="my-13 text-[red] block">{errors.check}</span>}
           <button
-            className="hover:bg-[#17337C] bg-[#3557C2] border-none capitalize text-white font-openSans font-semibold w-full py-3 cursor-pointer"
+            className="hover:bg-[#17337C] bg-[#3557C2] border-none capitalize text-white font-openSans font-semibold w-full py-3 cursor-pointer disabled:cursor-not-allowed"
             type="submit"
+            disabled={isLoading}
           >
             sign up
           </button>
@@ -165,7 +171,7 @@ const SignUp = () => {
             <hr className="text-gray-700"/>
             <span className="absolute top-2 bg-white px-2">Or</span>
           </div>
-          <button className="border border-gray-700 text-black capitalize font-openSans font-semibold w-full py-2 flex justify-center items-center gap-2 cursor-pointer bg-[#F7F7F8]">
+          <button className="border border-gray-700 text-black capitalize font-openSans font-semibold w-full py-2 flex justify-center items-center gap-2 cursor-pointer bg-[#F7F7F8] disabled:cursor-not-allowed" disabled={isLoading}>
             <FcGoogle className="text-2xl" />
             <span>Login with Google </span>
           </button>

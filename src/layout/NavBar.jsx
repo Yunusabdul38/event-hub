@@ -6,15 +6,15 @@ import { AppButton } from "../components/button/AppButton";
 import styles from './Layout.module.css'
 import { appRoutes } from "../config/routeMgt/RoutePaths";
 import logo from "../assets/logo.png";
+import { useSelector } from "react-redux";
 
 const NavBar = () => {
   const [isActive, setIsActive] = useState("Home");
   const isLogin = false;
-
+  const {token,user} = useSelector((state) => state?.user);
   // category and search
   const [selectedValue, setSelectedValue] = useState("");
   const [searchText, setSearchText] = useState("");
-
   const handleSelectChange = (event) => {
     setSelectedValue(event.target.value);
   };
@@ -64,9 +64,9 @@ const NavBar = () => {
           </div>
 
           {/* sign up & login */}
-          {isLogin ? (
+          {token !== null ? (
             <div className="profileImage bg-gray-300 border w-[50px] h-[50px] rounded-full">
-
+                <img src={user?.avatar} alt="Profile Image" className="w-full h-full rounded-full" />
             </div>
           ) : (
             <div className="min-w-[120px] flex items-center justify-between gap-4">
@@ -140,16 +140,18 @@ const NavBar = () => {
         </div>
 
         {/* main nav for mobile screens (smartphone and tab) */}
-        <div className="flex lg:hidden md:hidden items-center justify-items-center justify-center gap-4 w-full py-5">
-          <Link to={appRoutes.home}>
-          <AppButton variant="transparent" label="Home" />
+        <div className="flex lg:hidden md:hidden items-stretch justify-center gap-4 w-full py-5">
+        
+          <Link to={appRoutes.home} className="text-base border capitalize text-[#3557C2] px-2 py-1 rounded-lg border-[#3557C2]">
+          {/* <AppButton variant="transparent" label="Home"/> */}
+          home
           </Link>
-          <NavLink to={appRoutes.search}>
-          <AppButton variant="transparent" label="Find Events" />
+          <NavLink to={appRoutes.search}  className="text-base border capitalize text-[#3557C2] px-2 py-1 rounded-lg border-[#3557C2] self-center">
+          Find events
           </NavLink>
-          
-         <NavLink to={appRoutes.create_Event}>
-         <AppButton variant="transparent" label="Create Event +" containerStyle="border-black" />
+    
+         <NavLink to={appRoutes.create_Event}  className="text-base border capitalize text-[#3557C2] px-2 py-1 rounded-lg border-[#3557C2]">
+          create event +
          </NavLink>
         </div>
       </div>

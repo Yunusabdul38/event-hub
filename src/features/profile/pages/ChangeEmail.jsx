@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
 import {useState} from "react";
+import { useSelector } from "react-redux";
 
-const ChangeEmail = ({currentEmail}) => {
+const ChangeEmail = () => {
   const [userEmail, setUserEmail] = useState('');
   const [confirmEmail, setConfirmEmail] = useState('');
-  
+  const {email} = useSelector((state) => state.user.user);
+
   const isValidEmail = (email) => {
     const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regex.test(email);
@@ -31,7 +33,7 @@ const ChangeEmail = ({currentEmail}) => {
       <h2 className="text-3xl text-gray-800 font-bold mb-8 border-b border-gray-600 py-2">Change Email </h2>
 
       <div className="changeEmail max-w-[500px]">
-        <p className="font-bold mb-4 text-lg">Current Email: {currentEmail}</p>
+        <p className="font-bold mb-4 text-lg">Current Email: {email}</p>
 
         <form className="flex flex-col gap-4">
           <div className="flex flex-wrap items-center justify-between newEmail">

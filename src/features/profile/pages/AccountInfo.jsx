@@ -1,10 +1,16 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUserDetails } from "../../../services/Auth/user-context";
 
 const AccountInfo = () => {
-  const [profileImage, setProfileImage] = useState(null);
+  const {fullName,avatar,portfolio,github,bio} = useSelector((state) => state.user.user);
+  const [profileImage, setProfileImage] = useState(avatar);
   const [contactInfo, setContactInfo] = useState([]);
   const [profileInfo, setProfileInfo] = useState([]);
-
+  const dispatcher = useDispatch();
+  const user = useSelector((state) => state?.user);
+  const [firstName,...lastName] = fullName?.split(" ");
+  
   const handleProfileImage = (e) => {
     const imageFile = e.target.files[0];
     const fileReader = new FileReader();
@@ -26,14 +32,46 @@ const AccountInfo = () => {
     setProfileInfo({ ...profileInfo, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = () => {
-    if(profileInfo.length < 4 || contactInfo.length < 5) {
-      alert("Fill form completely");
-      return;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // if(profileInfo.length < 4 || contactInfo.length < 5) {
+    //   alert("Fill form completely");
+    //   return;
+    // }
+    let data = {
+      fullName:fullName,
+      bio,
+      portfolio,
+      github,
+      avatar
+    };
+    if(profileInfo.firstname){
+      data.fullName = profileInfo.firstname + " " + profileInfo.lastname
     }
-    console.log(profileInfo);
-    console.log(contactInfo);
-    console.log(profileImage);
+    if(profileInfo.lastname){
+      data.fullName = profileInfo.firstname + " " + profileInfo.lastname
+      const full = profileInfo.firstname + " " + profileInfo.lastname
+      let [_, ...b] = full.split(" ")
+      console.log(b.join(" "));
+    }
+    if(profileInfo.bio){
+      data.bio = profileInfo.bio
+    }
+    if(profileInfo.website){
+      data.portfolio = profileInfo.website
+    }
+    if(contactInfo.number){
+      data.contact = contactInfo.number
+    }
+    if(profileInfo.profileImage){
+      data.avatar = profileInfo.profileImage
+    } 
+    if(profileInfo.github){
+      data.github = profileInfo.github
+    }
+    
+    dispatcher(updateUserDetails({data,token:user.token}));
+  
   }
 
   return (
@@ -45,27 +83,17 @@ const AccountInfo = () => {
       <div className="profileImage max-w-[500px] lg:px-8 md:px-4 px-1 flex flex-col items-center justify-center mx-auto my-8">
         <h3 className="text-2xl font-bold my-4">Profile Photo</h3>
         <div className="image lg:w-[200px] md:w-[200px] w-[200px] h-[200px] border relative rounded-full bg-gray-200 flex items-center justify-center">
-          {profileImage ? (
             <img
               className="w-full h-full rounded-full"
-              src={profileImage}
+              src={avatar}
               alt="Profile Image"
             />
-          ) : (
-            <img
-              className="w-[120px] h-[120px]"
-              src="https://img.icons8.com/fluency-systems-filled/96/ffffff/user.png"
-              alt="user"
-            />
-          )}
-
           <div className="imageBtn absolute cursor-pointer border border-gray-800 overflow-hidden w-[45px] h-[45px] rounded-full bottom-[15px] right-[0px]">
             <img
               className="absolute p-2 cursor-pointer bg-white/90 rounded-full w-[45px]"
               src="https://img.icons8.com/ios-filled/100/camera--v3.png"
               alt="camera--v3"
             />
-
             <input
               className="absolute cursor-pointer top-[50%] -translate-y-[50%] opacity-0"
               type="file"
@@ -91,6 +119,7 @@ const AccountInfo = () => {
               type="text"
               name="firstname"
               id="firstname"
+              defaultValue={firstName??""}
               placeholder="Enter first name"
             />
           </div>
@@ -105,6 +134,7 @@ const AccountInfo = () => {
               type="text"
               name="lastname"
               id="lastname"
+              defaultValue={lastName.join(" ")??""} 
               placeholder="Enter last name"
             />
           </div>
@@ -119,21 +149,36 @@ const AccountInfo = () => {
               type="text"
               name="website"
               id="website"
+              defaultValue={portfolio}
               placeholder="Enter website"
             />
           </div>
 
           <div className="flex flex-wrap items-center justify-between company">
-            <label className="w-[30%]" htmlFor="company">
-              Company:
+            <label className="w-[30%]" htmlFor="github">
+              Github:
             </label>
             <input
               onChange={handleProfileInfo}
               className="w-[70%] text-gray-800 border border-gray-300 px-2 rounded-[8px] h-[45px]"
               type="text"
-              name="company"
-              id="company"
-              placeholder="Enter company name"
+              name="github"
+              defaultValue={github}
+              id="github"
+              placeholder="Enter Github"
+            />
+          </div>
+          <div className="flex flex-wrap items-center justify-between company">
+            <label className="w-[30%]" htmlFor="bio">
+              bio:
+            </label>
+            <textarea
+              onChange={handleProfileInfo}
+              className="w-[70%] text-gray-800 border border-gray-300 px-2 rounded-[8px] h-32 py-3"
+              name="bio"
+              defaultValue={bio}
+              id="bio"
+              placeholder="tell us about yourself"
             />
           </div>
         </form>
@@ -224,10 +269,11 @@ const AccountInfo = () => {
 
       <div className="formBtn max-w-[500px] mx-auto my-8 text-left">
         <button
-          className="bg-[#3557C2]/90 text-white px-8 hover:bg-[#3557C2] transition-all duration-400 py-3 rounded-[8px]"
+          className="bg-[#3557C2]/90 text-white px-8 hover:bg-[#3557C2] transition-all duration-400 py-3 rounded-[8px] disabled:cursor-not-allowed"
           onClick={handleSubmit}
+          disabled={user.loading}
         >
-          Save My Profile
+          {user.loading ? "Loading..." : "Save my profile"}
         </button>
       </div>
     </main>

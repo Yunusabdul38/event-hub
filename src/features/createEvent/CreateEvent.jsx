@@ -43,7 +43,7 @@ export default function CreateEvent() {
           />
           <h2>Create a New Event</h2>
         </div>
-        <div className="px-0 sm:px-9 lg:px-0">
+        <div className="">
           <Progress route={route} />
           {route === 0 && (
             <CreateEventForm

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const MyEvents = ({events}) => {
   return (
-    <main>
+    <main className="flex justify-between items-center flex-wrap"> 
       {events?.map(event => (
         <div key={event.id} className="event">
           <div className="event__image">
@@ -22,7 +22,6 @@ const MyEvents = ({events}) => {
           </div>
         </div>
       ))}
-      My events
     </main>
   )
 }

@@ -7,7 +7,6 @@ import AttendeeDets from "../../components/pages/AttendeeDets";
 import OrderSummary from "../../components/pages/OrderSummary";
 import Share from "../../components/pages/Share";
 import ComingSoon from "../../components/ComingSoon";
-import Review from '../../components/EventPreview';
 import DashboardLayout from "../../layout/Layout";
 import LogIn from "../../authentication/pages/LogIn";
 import SignUp from "../../authentication/pages/SignUp";
@@ -15,6 +14,8 @@ import Home from "../../features/home/Home";
 import CreateEvent from "../../features/createEvent/CreateEvent";
 import MainProfile from "../../features/profile";
 import CreateEventContextProvider from "../../stateManagement/CreateEventContex";
+import ContactUs from "../../features/contactUs/ContactUs";
+import AboutUs from "../../features/aboutUs/aboutUs";
 
 const routesArray = [
   {
@@ -23,7 +24,7 @@ const routesArray = [
   },
   {
     path: appRoutes.contactUs,
-    element: <ComingSoon />,
+    element: <ContactUs  />,
   },
   {
     path: appRoutes.search,
@@ -31,7 +32,7 @@ const routesArray = [
   },
   {
     path: appRoutes.eventsDescription,
-    element: <Review />,
+    element: <EventsDesc />,
   },
   {
     path: appRoutes.ticketBooking,
@@ -79,7 +80,7 @@ const routesArray = [
   },
   {
     path: appRoutes.aboutUs,
-    element: <ComingSoon />,
+    element: <AboutUs />,
   },
   {
     path: appRoutes.contactUs,

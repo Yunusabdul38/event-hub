@@ -12,6 +12,9 @@ import AIimage from '../../../src/assets/images/AIimage.png'
 import SimpleMap from "./SimpleMap";
 import TicketBooking from "./TicketBooking";
 import { useNavigate, Link } from "react-router-dom";
+import Modal from "../Modal";
+import AttendeeDets from "./AttendeeDets";
+import Share from "./Share";
 
 const tagData = [
   { name: "Tech" },
@@ -28,6 +31,8 @@ const tagData = [
 ];
 
 export default function EventsDesc() {
+  const [modal, setModal] = useState(false);
+  const [shareModal, setShareModal] = useState(false);
   const navigate = useNavigate();
 
   function buyTicket(e) {
@@ -36,11 +41,21 @@ export default function EventsDesc() {
   }
 
   function toShare(){
-    navigate('/share')
+    setShareModal(true)
   }
 
   return (
-    <div className="px-[2rem] md:px-[1rem] py-[2rem] sm:py-[1rem] font-openSans">
+    <>
+    {modal && <Modal modalHandler={() => setModal(false)} >
+   
+      <AttendeeDets/>
+    </Modal>}
+    {shareModal && <Modal modalHandler={() => setShareModal(false)} >
+  
+   <Share/>
+ </Modal>}  
+    <div className="sm:px-9 lg:px-0 px-5 max-w-7xl m-auto pt-5 font-openSans">
+      <div className="max-w-4xl mx-auto">
       <div className="w-[100%] h-[40vh] md:h-[25vh] sm:h-[20vh] rounded-[10px]">
         <img
           src={AIimage}
@@ -50,16 +65,16 @@ export default function EventsDesc() {
       </div>
 
       <div className="mt-[2rem] sm:mt-[1rem]  text-[#2D2C3C] flex items-center justify-between">
-        <h1 className="text-[2rem] sm:text-[1.2rem] font-[800]">
+        <h1 className="text-xl sm:text-[1.2rem] font-[800]">
           Introduction to Artificial Intelligence
         </h1>
-        <div className="text-[2rem] sm:text-[1.5rem] flex gap-[1.5rem] sm:gap-[1rem]">
+        <div className="text-[2rem] sm:text-[1.5rem] flex gap-2">
           <IoStar className="cursor-pointer"/>
           <BiShareAlt onClick={toShare} className="cursor-pointer"/>
         </div>
       </div>
 
-      <div className="mt-[3rem] flex sm:grid sm:gap-[0.5rem] justify-between">
+      <div className="flex flex-col sm:flex-row justify-between">
         <div className="text-[#2D2C3C] grid gap-[0.8rem]">
           <h1 className="text-[1.3rem] md:text-[1.5rem] sm:text-[1.2rem] font-[600]">
             Date and Time
@@ -82,10 +97,11 @@ export default function EventsDesc() {
             </p>
           </a>
         </div>
-        <div>
+        <div className="py-4">
           <button
-            onClick={buyTicket}
-            className="flex gap-[0.5rem] text-[1.2rem] sm:text-[1rem] items-center bg-[#3557C2] px-[2rem] py-[0.7rem] rounded-[5px] text-white"
+            //onClick={buyTicket}
+            onClick={()=> setModal(true)}
+            className="py-3 px-6 sm:px-2 rounded-md flex w-full  bg-[#3557C2] text-white justify-center "
           >
             <IoTicket className="text-[1.5rem]" /> Buy Tickets
           </button>
@@ -99,10 +115,10 @@ export default function EventsDesc() {
         </div>
       </div>
 
-      <div className="mt-[3rem] w-[40%] md:w-[50%] sm:w-[90%]">
+      <div className="mt-[3rem] md:w-[50%] sm:w-[90%] grid gap-4">
         <h1 className="text-[1.4rem] md:text-[1.5rem] sm:text-[1.2rem] font-[600]">Location</h1>
-        <span className="flex md:items-start gap-[0.5rem] my-[0.5rem]">
-          <SlLocationPin className="text-[1.8rem] md:text-[4rem] md:hidden" />
+        <span className="flex md:items-start gap-4">
+          <SlLocationPin className="text-4xl md:text-[4rem] md:hidden" />
           <p className="md:text-[1.2rem] sm:text-[1rem]">
             Lorem ipsum dolor sit amet consectetur. Eget ut ipsum et quam et a a
             cras ipsum. Sed augue volutpat augue volutpat viverra magna quis.{" "}
@@ -115,7 +131,7 @@ export default function EventsDesc() {
 
       <div className="mt-[3rem]">
         <h1 className="text-[1.4rem] sm:text-[1.2rem] font-[600]">Hosted By</h1>
-        <div className="w-[20vw] md:w-[40vw] sm:w-[80vw] mt-[1rem] mx-[1rem] p-[1rem]">
+        <div className="md:w-[40vw] sm:w-[80vw] mt-[1rem] mx-[1rem] p-[1rem]">
           <div className="flex items-center justify-between">
             <div className=" relative w-[3.5rem] h-[3.5rem] rounded-[100px] bg-[#D9D9D9]">
               <MdPerson className="text-white text-[2rem] absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2" />
@@ -178,7 +194,7 @@ export default function EventsDesc() {
 
       <div className="mt-[3rem]">
         <h1 className="text-[1.4rem] sm:text-[1.2rem] font-[600]">Tags</h1>
-        <div className="w-[30vw] md:w-[45vw] sm:w-[90vw] mt-[1rem] flex flex-wrap gap-[1rem]">
+        <div className="md:w-[45vw] sm:w-[90vw] mt-[1rem] flex flex-wrap gap-[1rem]">
           {tagData.map((data, index) => {
             return (
               <div
@@ -191,10 +207,11 @@ export default function EventsDesc() {
           })}
         </div>
       </div>
-
+          </div>
       <div className="mt-[5rem] md:px-0">
         <OtherEvents />
       </div>
     </div>
+    </>
   );
 }

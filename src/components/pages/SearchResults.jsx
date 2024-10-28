@@ -143,6 +143,7 @@ export default function SearchResults() {
     setShowFilter(prev=>!prev)
   }
   return (
+    <>
     <div className="overflow-x-hidden">
       <SeaarchHeader/>
       <div className="md:px-20">
@@ -161,15 +162,17 @@ export default function SearchResults() {
             })}
           </div>
       </div>
-
-      <div className="px-[4rem] md:px-0">
+      </div>
+    </div>
+    <div>
+    <div className="px-[4rem] md:px-0">
         <Recommend />
       </div>
 
       <div className="px-[4rem] md:px-[1rem]">
         <OtherEvents />
       </div>
-      </div>
     </div>
+    </>
   );
 }

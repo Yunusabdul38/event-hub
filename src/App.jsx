@@ -1,7 +1,7 @@
 // import { AuthProvider } from 'react-auth-kit';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import AllRoutes from './config/routeMgt/AllRoutes';
-
+import img from "./assets/images/AIimage.png"
 
 const queryClient = new QueryClient({
   defaultOptions: {

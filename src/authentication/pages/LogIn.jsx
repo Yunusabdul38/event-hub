@@ -1,27 +1,35 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { appRoutes } from "../../config/routeMgt/RoutePaths";
 import AuthenticationDetails from "../../components/button/AuthenticationDetails";
 import AuthenticationForm from "../../components/button/AuthenticationForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GoArrowUpRight } from "react-icons/go";
 import { IoEyeOffSharp, IoEyeSharp } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
+import { useDispatch, useSelector } from "react-redux";
+import { userSignIn } from "../../services/Auth/user-context";
 
 const LogIn = () => {
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(true);
+  const navigate = useNavigate()
+  const {loading:isLoading,token} = useSelector((state) => state.user)
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    if(token){
+      navigate(appRoutes.profile)
+    }
+  }, [token])
+  
+  const dispatch = useDispatch()
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const validationErrors = {};
-    if (!formData.name.trim()) {
-      validationErrors.name = "name is required";
-    }
 
     if (!formData.email.trim()) {
       validationErrors.email = "Email is required!";
@@ -38,10 +46,8 @@ const LogIn = () => {
     }
 
     setErrors(validationErrors);
+    dispatch(userSignIn(formData))  
 
-    // if (Object.keys(validationErrors).length === 0) {
-    //   alert("Form Submitted Successfuly")
-    // }
   };
 
   const handleChange = (e) => {
@@ -114,16 +120,17 @@ const LogIn = () => {
             </label>
           </div>
           <button
-            className="hover:bg-[#17337C] bg-[#3557C2] border-none capitalize text-white font-openSans font-semibold w-full py-3 cursor-pointer"
+            className="hover:bg-[#17337C] bg-[#3557C2] border-none capitalize text-white font-openSans font-semibold w-full py-3 cursor-pointer disabled:cursor-not-allowed"
             type="submit"
+            disabled={isLoading}
           >
-            login
+            {isLoading ? "Loading..." : "Login"}
           </button>
           <div className="text-center relative py-3">
             <hr className="text-gray-700" />
             <span className="absolute top-2 bg-white px-2">Or</span>
           </div>
-          <button className="bg-[#F7F7F8] border border-gray-700 text-black capitalize font-openSans font-semibold w-full py-2 flex justify-center items-center gap-2 cursor-pointer">
+          <button className="bg-[#F7F7F8] border border-gray-700 text-black capitalize font-openSans font-semibold w-full py-2 flex justify-center items-center gap-2 cursor-pointer disabled:cursor-not-allowed" disabled={isLoading}>
             <FcGoogle className="text-2xl" />
             <span>Login with Google </span>
           </button>

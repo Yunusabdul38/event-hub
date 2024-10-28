@@ -15,14 +15,9 @@ export default function AttendeeDets() {
   }
 
   return (
-    <div
-      initial={{ opacity: 0.5, scale: 0.2 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 flex justify-center items-center bg-[#bfdbfe]/30 backdrop-blur-sm font-openSans"
-    >
+ 
       <div
-        className="bg-[#F1F3F6] w-[40vw] md:w-[75vw] sm:w-[90vw] transition-all"
+        className="bg-[#F1F3F6] w-11/12 md:w-[75vw] sm:w-[90vw] transition-all"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="bg-white">
@@ -96,7 +91,7 @@ export default function AttendeeDets() {
                   />
                 </div>
 
-                <h1 className="text-[#5A5A5A] text-[0.8rem] sm:text-[0.5rem] text-center my-[1rem] bg-[#F1F3F6] py-[0.5rem]">
+                <h1 className="text-[#5A5A5A] text-[0.8rem] text-center my-[1rem] bg-[#F1F3F6] py-[0.5rem]">
                   I accept the{" "}
                   <a href="" className="text-[#006198]">
                     Terms of Service
@@ -118,7 +113,7 @@ export default function AttendeeDets() {
                   <button
                     onClick={toCheckout}
                     disabled={!email || !fullName || !phone}
-                    className="flex items-center gap-[0.4rem] mt-[1rem] px-[8rem] sm:px-[2rem] py-[0.7rem] m-auto bg-[#3557C2] rounded-[5px] text-white font-[500] disabled:bg-[#93c5fd]"
+                    className="justify-center flex items-center gap-[0.4rem] mt-[1rem] w-full sm:px-[2rem] py-[0.7rem] m-auto bg-[#3557C2] rounded-[5px] text-white font-[500] disabled:bg-[#93c5fd]"
                   >
                     Continue to Checkout{" "}
                     <IoIosArrowForward className="text-[1.2rem]" />
@@ -129,6 +124,5 @@ export default function AttendeeDets() {
           </div>
         </div>
       </div>
-    </div>
   );
 }

@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import profileImage from "../../../assets/img.png";
 import About from "../components/About";
 import Bookings from "../components/Bookings";
 import Settings from "../components/Settings";
 import event1 from "../../../assets/event.png";
 import PropTypes from "prop-types";
+import MyEvents from "../components/MyEvents";
+import { useSelector } from "react-redux";
+import { appRoutes } from "../../../config/routeMgt/RoutePaths";
+import { useNavigate } from "react-router-dom";
 
-const user = {
-  name: "mercy ayomide",
-  dob: "23/04/2000",
-  email: "mercyayomide@gmail.com",
+const users = {
   contact_number: "1234567890",
   about: "Lorem ipsum dolor sit amet consectetur adipisicing elit. At suscipit eaque, similique temporibus tempora animi debitis maxime eius nam modi adipisci atque! Quod nam incidunt aspernatur recusandae adipisci error consequuntur vitae nemo, dolore porro eaque temporibus sint esse obcaecati quae veniam facere facilis ducimus officiis magnam fuga inventore unde dolores!",
   bookings: [
@@ -64,6 +65,15 @@ const user = {
   ]
 };
 const Profile = ({activePath}) => {
+  const {user,token} = useSelector((state) => state?.user);
+  const navigate = useNavigate();
+  console.log(user,token)
+  useEffect(() => {
+    if(token===null) {
+      navigate('/')
+    }
+  }, [token])
+ 
   const [profileHeadings, setProfileHeadings] = useState([
     {
       name: "about me",
@@ -112,44 +122,36 @@ const Profile = ({activePath}) => {
     <main className="lg:px-0 md:px-0 px-2">
       <div className="w-full flex py-10 px-4 gap-4">
         <div className="profileImage w-[350px] rounded-[18px] overflow-hidden shadow-md h-[250px] bg-gray-200 flex items-center justify-center">
-          {profileImage ? (
             <img
               className="w-full h-full object-cover"
-              src={profileImage}
+              src={user?.avatar}
               alt="Profile Image"
             />
-          ):(
-            <img
-              className="w-full h-full p-10"
-              src="https://img.icons8.com/fluency-systems-filled/96/user.png"
-              alt="user"
-            />
-          )}
         </div>
 
         <div className="profileBio w-full flex items-start justify-between">
           <div className="details text-gray-700 flex flex-col gap-2">
             {/* Name */}
             <div className="name text-2xl capitalize mb-5 font-bold">
-              <h2>{user.name}</h2>
+              <h2>{user?.fullName}</h2>
             </div>
 
             {/* Date of Birth */}
             <div className="dob lg:text-[16px] md:text-[16px] text-sm">
               <span>Date of Birth: </span>
-              <span>{user.dob}</span>
+              <span>00/00/00</span>
             </div>
 
             {/* Email */}
             <div className="email lg:text-[16px] md:text-[16px] text-sm">
               <span>Email ID: </span>
-              <span>{user.email}</span>
+              <span>{user?.email}</span>
             </div>
 
             {/* Contact Number */}
             <div className="contact lg:text-[16px] md:text-[16px] text-sm">
               <span>Contact Number: </span>
-              <span>{user.contact_number}</span>
+              <span>{user?.contact_number?user?.contact_number:"000000000"}</span>
             </div>
           </div>
 
@@ -178,9 +180,9 @@ const Profile = ({activePath}) => {
         </div>
 
         <div className="headingsDetails">
-          {active == "about me" && <About about={user.about} />}
-          {active == "my bookings" && <Bookings bookings={user.bookings} />}
-          {active == "my events" && <p className="text-gray-700 leading-[1.5]">{user.events ?? 'No event created'}</p>}
+          {active == "about me" && <About />}
+          {active == "my bookings" && <Bookings bookings={users.bookings} />}
+          {active == "my events" && <div className="pr-4">{<MyEvents events={user.bookings}/>}</div>}
           {active == "calendar" && <p className="text-gray-700 leading-[1.5]">{user.calendar ?? 'No events added to your calendar'}</p>}
           {active == "settings" && <Settings />}
         </div>

@@ -14,15 +14,9 @@ export default function TicketBooking() {
   }
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0.5, scale: 0.2 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 flex justify-center items-center bg-[#bfdbfe]/30 backdrop-blur-sm font-montserrat"
-      >
+  
         <div
-          className="bg-[#F1F3F6] w-[40vw] md:w-[75vw] sm:w-[90vw] transition-all"
+          className="bg-[#F1F3F6]  md:w-[75vw] sm:w-[90vw] transition-all"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="bg-white">
@@ -62,7 +56,7 @@ export default function TicketBooking() {
             </div>
           </div>
 
-          <div className="mt-[8rem] bg-white py-[1rem]">
+          <div className="mt-[8rem] bg-white py-[1rem] px-2">
             <span className="flex justify-center gap-[8rem]">
               <h1>
                 Qty: <span className="text-[#3557C2]">{quantity}</span>
@@ -79,7 +73,51 @@ export default function TicketBooking() {
             </button>
           </div>
         </div>
-      </motion.div>
-    </AnimatePresence>
   );
 }
+
+
+
+
+{/* <form className="z-40 bg-slate-50 w-[90%] sm:w-3/4 md:w-1/2 mx-auto p-4 sm:p-6 capitalize grid gap-4 rounded-md transition-all duration-700 relative">
+            <h1 className="capitalize text-center text-orangeText text-2xl">register for fitech meetup</h1>
+            <HiXMark className="absolute right-5 top-3 text-2xl hover:text-orangeText" onClick={() => modalHandler()} />
+            <div>
+              <label
+                htmlFor="name"
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                name
+              </label>
+              <input
+                type="text"
+                id="name"
+                className="focus:border-orangeText outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                placeholder="john doe"
+                ref={nameRef}
+                required
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="email"
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                email
+              </label>
+              <input
+                ref={emailRef}
+                type="email"
+                id="email"
+                className="focus:border-orangeText outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                placeholder="example@gmail.com"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-[#3557c2] flex gap-2 items-center mt-2 bg-orangePrimary hover:bg-gray-600 text-white border-2 hover:text-orangeText hover:border-orangeText border-transparent transition-all duration-500 ease-in-out rounded-md px-2 py-3 sm:px-7 sm:py-2 capitalize font-LexendDeca font-normal w-full place-content-center"
+            >
+              Submit
+            </button>
+          </form> */}

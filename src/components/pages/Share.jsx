@@ -8,15 +8,9 @@ import { BsCopy } from "react-icons/bs";
 
 export default function Share() {
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0.5, scale: 0.2 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 flex justify-center items-center bg-[#bfdbfe]/30 backdrop-blur-sm font-openSans"
-      >
+    
         <div
-          className="bg-white w-[40vw] md:w-[75vw] sm:w-[90vw] transition-all"
+          className="bg-white w-11/12 md:w-[75vw] sm:w-[90vw] transition-all"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="text-center text-[#2D2C3C]">
@@ -28,16 +22,14 @@ export default function Share() {
               <RiWhatsappFill className="text-[#25D366]" />
               <BsLinkedin className="text-[#0762C8]" />
             </div>
-            <div className="flex items-center justify-center border-[#F1F3F6] border-[2px] mx-[5rem] sm:mx-[1rem] px-[1rem] text-start text-[#2D2C3C] mb-[5rem]">
+            <div className="flex items-center justify-center mx-auto border-[#F1F3F6] border-[2px] w-11/12 sm:mx-[1rem] px-[1rem] text-start text-[#2D2C3C] mb-[5rem]">
               <div>
                 <h1 className="font-[300]">Event URL</h1>
                 <h1 className="overflow-hidden text-ellipsis">https://www.eventify.com/s/sound-of-christmas-2023-tickets-cmsincshvu</h1>
               </div>
-              <BsCopy className="text-[2rem] cursor-pointer"/>
+              <BsCopy className="text-lg cursor-pointer"/>
             </div>
           </div>
         </div>
-      </motion.div>
-    </AnimatePresence>
   );
 }

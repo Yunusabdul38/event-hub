@@ -11,6 +11,8 @@ import Recommend from "../../components/pages/Recommend";
 import OtherEvents from "../../components/pages/OtherEvents";
 import EventCard from "../../components/cards/EventCard";
 import { FaSliders } from "react-icons/fa6";
+import { getEvents } from "../../services/Auth/event-contex";
+import { useDispatch, useSelector } from "react-redux";
 
 const categoriesData = [
   { name: "Technology & Innovation", image: tech },
@@ -87,6 +89,9 @@ export default function Home() {
   const [searchEvent, setSearchEvent] = useState("Google Dev Fest");
   const [placeValue, setPlaceValue] = useState("KadaHive");
   const [timeValue, setTimeValue] = useState("Any Date");
+  const dipatch =  useDispatch();
+  const event = useSelector((state) => state.events);
+  
 
   useEffect(() => {
     const storedValue = localStorage.getItem("searchEvent");
@@ -186,13 +191,13 @@ export default function Home() {
           <h2 className="text-[24px] lg:text-[32px] md:text[28px] font-[700] font-montserrat text-[#2D2C3C]">
             Explore Categories
           </h2>
-          <div className="flex flex-wrap gap-4 justify-center mt-[2rem]">
+          <div className="flex justify-center mt-4 flex-wrap">
             {categoriesData.map((data, index) => {
               const { name, image } = data;
               return (
                 <div
                   key={index}
-                  className="cursor-pointer w-[170px] lg:h-[210px] md:h-[210px] h-[140px] px-2"
+                  className="cursor-pointer lg:h-[210px] md:h-[210px] h-[140px] px-2"
                 >
                   <div className="lg:w-[150px] md:w-[100px] w-[70px] lg:h-[150px] md:h-[100px] h-[70px] m-auto rounded-full">
                     <img src={image} alt="" className="object-cover" />

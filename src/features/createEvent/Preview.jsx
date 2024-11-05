@@ -4,25 +4,37 @@ import { IoTicket } from "react-icons/io5";
 import { CiLocationOn } from "react-icons/ci";
 import PropTypes from "prop-types";
 import { useView } from "../../hooks/useView";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { END_POINT } from "../../config/environment";
+import { createEventFn } from "../../services/create-event-function";
+import { Loader } from "../../components/Loading";
+import { useState } from "react";
 
 
 export default function Review({ eventDetails }) {
-  //Event details
   const {
     title: { name: Title },
-    banner: { image },
+    banner: { image,file },
     session,
     description: { detail },
     location: { name: place },
     EventTicketType,
     SellingTicketType,
   } = eventDetails;
-
-  //effect to makes component view start from the top of the page
+  const navigate = useNavigate();
+  const {token} = useSelector((state) => state.user)
+  console.log(token)
+  const [isLoading,setIsLoading] = useState(false)
+  const handleSubmit = async () => {
+   await createEventFn(eventDetails,file,navigate,token,setIsLoading)
+   console.log("end")
+  };
   useView();
 
   return (
     <>
+    {isLoading && <Loader/>}
       <section className="capitalize w-full lg:px-16 pt-6 mx-auto max-w-4xl text-[#2D2C3C]">
         <h2 className="mb-10 lg:mb-2 text-[#2D2C3C] font-Montserrat text-xl lg:text-2xl font-medium text-center lg:text-start">
           Nearly there! Check everything’s correct.
@@ -99,10 +111,10 @@ export default function Review({ eventDetails }) {
             <div className="grid grid-cols-[.5fr_2fr] max-w-64 gap-3">
               <div className="rounded-md bg-[#B9B9B9]" />
               <div className="grid gap-2">
-                <h3 className="font-semibold text-sm">Host Name</h3>
+                <h3 className="font-semibold text-sm">{eventDetails.orgName.name}</h3>
                 <div className="flex gap-1">
-                  <button className="capitalize px-3  py-[2px] border">
-                    contact
+                  <button className="capitalize px-3  py-[2px] ">
+                  {eventDetails.orgEmail.Email}
                   </button>
                   <button className="capitalize px-3 py-[2px] border">
                     + follow
@@ -115,8 +127,12 @@ export default function Review({ eventDetails }) {
             <h3 className="font-medium text-xl capitalize">Event Description</h3>
             <p className="text-[#5A5A5A] font-normal text-sm">{detail}</p>
           </div>
+          <div>
+        <button onClick={(e)=>handleSubmit(e)} className="w-full py-4 bg-[#3557c2] text-center mt-10 rounded-md text-white">Register event</button>
+      </div>
         </div>
       </section>
+      
     </>
   );
 }

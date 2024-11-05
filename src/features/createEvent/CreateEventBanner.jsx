@@ -29,7 +29,7 @@ export default function CreateEventBanner({ navigate, navigateBack }) {
           required
           onChange={(e) => {
             const url = URL.createObjectURL(e.target.files[0]);
-            dispatchFn({ type: "event/banner", image: url });
+            dispatchFn({ type: "event/banner", image: url,file: e.target.files[0]});
           }}
         />
       </div>

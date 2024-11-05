@@ -1,6 +1,3 @@
-import image1 from "../../../src/assets/images/image1.png";
-import image2 from "../../../src/assets/images/image2.png";
-import image3 from "../../../src/assets/images/image3.png";
 import Recommend from "./Recommend";
 import OtherEvents from "./OtherEvents";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +6,7 @@ import SeaarchHeader from "./seaarchHeader";
 import { useState } from "react";
 import EventCard from "../cards/EventCard";
 import Filter from "./Filter";
+import { useSelector } from "react-redux";
 
 export default function SearchResults() {
   const [showFilter, setShowFilter] = useState(false);
@@ -16,129 +14,8 @@ export default function SearchResults() {
   function toEventDesc(){
     navigate('/eventdescription')
   }
+  const {events} = useSelector((state) => state.events);
 
-  const upcomingData = [
-    {
-      image: image1,
-      location: "Colab",
-      month: "JAN",
-      date: "25 - 26",
-      title: "Introduction to Artificial Intelligence (AI)",
-      time: "8:30 AM - 7:30 PM",
-      ticket: "Free",
-      interested: 14,
-    },
-    {
-      image: image2,
-      location: "Ihifix",
-      month: "FEB",
-      date: "01 - 04",
-      title: "Africa Soft Power Summit 2024",
-      time: "8:30 AM - 7:30 PM",
-      ticket: "Free",
-      interested: 14,
-    },
-    {
-      image: image3,
-      location: "KADAHIVE",
-      month: "FEB",
-      date: "25 - 26",
-      title: "The RollApp Draft Hackathon Powered b...",
-      time: "8:30 AM - 7:30 PM",
-      ticket: "Free",
-      interested: 14,
-    },
-    {
-      image: image1,
-      location: "Colab",
-      month: "JAN",
-      date: "25 - 26",
-      title: "Introduction to Artificial Intelligence (AI)",
-      time: "8:30 AM - 7:30 PM",
-      ticket: "Free",
-      interested: 14,
-    },
-    {
-      image: image2,
-      location: "Ihifix",
-      month: "FEB",
-      date: "01 - 04",
-      title: "Africa Soft Power Summit 2024",
-      time: "8:30 AM - 7:30 PM",
-      ticket: "Free",
-      interested: 14,
-    },
-    {
-      image: image3,
-      location: "KADAHIVE",
-      month: "FEB",
-      date: "25 - 26",
-      title: "The RollApp Draft Hackathon Powered b...",
-      time: "8:30 AM - 7:30 PM",
-      ticket: "Free",
-      interested: 14,
-    },
-    {
-      image: image1,
-      location: "Colab",
-      month: "JAN",
-      date: "25 - 26",
-      title: "Introduction to Artificial Intelligence (AI)",
-      time: "8:30 AM - 7:30 PM",
-      ticket: "Free",
-      interested: 14,
-    },
-    {
-      image: image2,
-      location: "Ihifix",
-      month: "FEB",
-      date: "01 - 04",
-      title: "Africa Soft Power Summit 2024",
-      time: "8:30 AM - 7:30 PM",
-      ticket: "Free",
-      interested: 14,
-    },
-    {
-      image: image3,
-      location: "KADAHIVE",
-      month: "FEB",
-      date: "25 - 26",
-      title: "The RollApp Draft Hackathon Powered b...",
-      time: "8:30 AM - 7:30 PM",
-      ticket: "Free",
-      interested: 14,
-    },
-    {
-      image: image1,
-      location: "Colab",
-      month: "JAN",
-      date: "25 - 26",
-      title: "Introduction to Artificial Intelligence (AI)",
-      time: "8:30 AM - 7:30 PM",
-      ticket: "Free",
-      interested: 14,
-    },
-    {
-      image: image2,
-      location: "Ihifix",
-      month: "FEB",
-      date: "01 - 04",
-      title: "Africa Soft Power Summit 2024",
-      time: "8:30 AM - 7:30 PM",
-      ticket: "Free",
-      interested: 14,
-    },
-    {
-      image: image3,
-      location: "KADAHIVE",
-      month: "FEB",
-      date: "25 - 26",
-      title: "The RollApp Draft Hackathon Powered b...",
-      time: "8:30 AM - 7:30 PM",
-      ticket: "Free",
-      interested: 14,
-    },
-  ];
   const filterHandler=()=>{
     setShowFilter(prev=>!prev)
   }
@@ -155,7 +32,7 @@ export default function SearchResults() {
         <div className="h-[130vh] border-[0.1px] border-[#d1d5db] md:hidden"></div>
         
          <div className="mt-[2rem] flex flex-wrap justify-center gap-[2rem] md:gap-[1rem] sm:gap-0">
-            {upcomingData.map((data, index) => {
+            {events.map((data, index) => {
               return (
                 <EventCard event={data} key={index} />
               );

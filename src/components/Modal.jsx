@@ -18,7 +18,7 @@ export default function Modal({ modalHandler, children }) {
   return (
     <>
       {createPortal(
-        <div className="w-full h-full fixed bg-slate-400/40 z-30 top-0 flex justify-center items-center font-LexendDeca" ref={ref}>
+        <div className="w-full h-full fixed bg-slate-400/70 z-30 top-0 flex justify-center items-center font-LexendDeca" ref={ref}>
           {children}
         </div>,
         document.getElementById("register")

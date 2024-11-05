@@ -16,6 +16,9 @@ import MainProfile from "../../features/profile";
 import CreateEventContextProvider from "../../stateManagement/CreateEventContex";
 import ContactUs from "../../features/contactUs/ContactUs";
 import AboutUs from "../../features/aboutUs/aboutUs";
+import { Loader } from "../../components/Loading";
+import { eventLoader } from "../../services/get-event-by-id";
+import { Suspense } from "react";
 
 const routesArray = [
   {
@@ -33,6 +36,7 @@ const routesArray = [
   {
     path: appRoutes.eventsDescription,
     element: <EventsDesc />,
+    Loader: eventLoader,
   },
   {
     path: appRoutes.ticketBooking,
@@ -95,10 +99,11 @@ const routesArray = [
 const AllRoutes = () => {
   return (
     <Router>
+      <Suspense fallback={<Loader />}>
       <Routes>
         <Route element={<DashboardLayout />}>
           {routesArray.map((route, index) => (
-            <Route key={index} path={route.path} element={route.element}>
+            <Route key={index} path={route.path} element={route.element}   Loader={route?.Loader}>
               {route.children?.map((routes, number) => (
                 <Route
                   path={routes.path}
@@ -110,6 +115,7 @@ const AllRoutes = () => {
           ))}
         </Route>
       </Routes>
+      </Suspense>
     </Router>
   );
 };

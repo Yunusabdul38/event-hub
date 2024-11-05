@@ -1,16 +1,19 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserDetails } from "../../../services/Auth/user-context";
+import { Loader } from "../../../components/Loading";
+import { updateUser } from "../../../services/upate-user";
 
 const AccountInfo = () => {
-  const {fullName,avatar,portfolio,github,bio} = useSelector((state) => state.user.user);
+  const {user,token} = useSelector((state) => state?.user);
+  const {fullName,avatar,portfolio,github,bio} = user
   const [profileImage, setProfileImage] = useState(avatar);
   const [contactInfo, setContactInfo] = useState([]);
   const [profileInfo, setProfileInfo] = useState([]);
   const dispatcher = useDispatch();
-  const user = useSelector((state) => state?.user);
   const [firstName,...lastName] = fullName?.split(" ");
-  
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleProfileImage = (e) => {
     const imageFile = e.target.files[0];
     const fileReader = new FileReader();
@@ -43,7 +46,7 @@ const AccountInfo = () => {
       bio,
       portfolio,
       github,
-      avatar
+      image:avatar
     };
     if(profileInfo.firstname){
       data.fullName = profileInfo.firstname + " " + profileInfo.lastname
@@ -64,17 +67,18 @@ const AccountInfo = () => {
       data.contact = contactInfo.number
     }
     if(profileInfo.profileImage){
-      data.avatar = profileInfo.profileImage
+      data.image = profileInfo.profileImage
     } 
     if(profileInfo.github){
       data.github = profileInfo.github
     }
-    
-    dispatcher(updateUserDetails({data,token:user.token}));
-  
-  }
+    console.log(data);
+    updateUser(data,token,setIsLoading);
+ }
 
   return (
+    <>
+    {isLoading && <Loader/> }
     <main className="px-3">
       <h2 className="font-bold text-gray-800 pb-2 text-3xl my-4 w-full border-b-[2px] border-gray-300">
         Account Information
@@ -277,7 +281,7 @@ const AccountInfo = () => {
         </button>
       </div>
     </main>
-  );
+    </>)
 };
 
 export default AccountInfo;

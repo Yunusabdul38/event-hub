@@ -11,10 +11,11 @@ import OtherEvents from "./OtherEvents";
 import AIimage from '../../../src/assets/images/AIimage.png'
 import SimpleMap from "./SimpleMap";
 import TicketBooking from "./TicketBooking";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import Modal from "../Modal";
 import AttendeeDets from "./AttendeeDets";
 import Share from "./Share";
+import { useSelector } from "react-redux";
 
 const tagData = [
   { name: "Tech" },
@@ -31,10 +32,17 @@ const tagData = [
 ];
 
 export default function EventsDesc() {
+  const {eventId} = useParams()
+  const {events} = useSelector((state) => state?.events);
+  console.log(events)
   const [modal, setModal] = useState(false);
   const [shareModal, setShareModal] = useState(false);
   const navigate = useNavigate();
 
+  const eventDetails = events.find((event) => event["_id"] === eventId);
+  const {imageUrl, location, title,startTime,endTime,date:date_string,organizer=[],description } =eventDetails;
+  const date = new Date(date_string).toLocaleDateString("en-Us",{day: "2-digit", month: "numeric", year: "numeric"}).replaceAll("/", "-");  
+  console.log(date)
   function buyTicket(e) {
     e.preventDefault();
     navigate("/ticketBooking");
@@ -47,7 +55,6 @@ export default function EventsDesc() {
   return (
     <>
     {modal && <Modal modalHandler={() => setModal(false)} >
-   
       <AttendeeDets/>
     </Modal>}
     {shareModal && <Modal modalHandler={() => setShareModal(false)} >
@@ -58,7 +65,7 @@ export default function EventsDesc() {
       <div className="max-w-4xl mx-auto">
       <div className="w-[100%] h-[40vh] md:h-[25vh] sm:h-[20vh] rounded-[10px]">
         <img
-          src={AIimage}
+          src={imageUrl}
           alt=""
           className="w-full h-full rounded-[10px] object-cover"
         />
@@ -66,7 +73,7 @@ export default function EventsDesc() {
 
       <div className="mt-[2rem] sm:mt-[1rem]  text-[#2D2C3C] flex items-center justify-between">
         <h1 className="text-xl sm:text-[1.2rem] font-[800]">
-          Introduction to Artificial Intelligence
+         {title}
         </h1>
         <div className="text-[2rem] sm:text-[1.5rem] flex gap-2">
           <IoStar className="cursor-pointer"/>
@@ -82,13 +89,13 @@ export default function EventsDesc() {
           <span className="flex items-center gap-[0.5rem]">
             <IoCalendarOutline className="text-[1.2rem]" />
             <h1 className="text-[0.9rem] md:text-[1.1rem] sm:text-[0.9rem] font-[500]">
-              Saturday, 25 Jan 2024
+              {date}
             </h1>
           </span>
           <span className="flex items-center gap-[0.5rem]">
             <BsClock className="text-[1.2rem]" />
             <h1 className="text-[0.9rem] md:text-[1.1rem] sm:text-[0.9rem] font-[500]">
-              8:30 AM - 12:30 PM
+            {startTime}-{endTime}
             </h1>
           </span>
           <a href="">
@@ -120,8 +127,7 @@ export default function EventsDesc() {
         <span className="flex md:items-start gap-4">
           <SlLocationPin className="text-4xl md:text-[4rem] md:hidden" />
           <p className="md:text-[1.2rem] sm:text-[1rem]">
-            Lorem ipsum dolor sit amet consectetur. Eget ut ipsum et quam et a a
-            cras ipsum. Sed augue volutpat augue volutpat viverra magna quis.{" "}
+          {location}
           </p>
         </span>
         <div className="w-[100%] h-[40vh] rounded-[10px]">
@@ -137,8 +143,8 @@ export default function EventsDesc() {
               <MdPerson className="text-white text-[2rem] absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2" />
             </div>
             <div>
-              <h1 className="text-[0.9rem] font-[600]">Colab</h1>
-              <p className="text-[0.7rem] font-[200]">@colabinnovationhub</p>
+              <h1 className="text-[0.9rem] font-[600]">{organizer[0]?.name}</h1>
+              <p className="text-[0.7rem] font-[200]">{organizer[0]?.email}</p>
             </div>
             <div className="relative w-[2rem] h-[2rem] rounded-[100px] bg-[#5040A1]">
               <FaPlus className="text-white absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2" />
@@ -158,7 +164,7 @@ export default function EventsDesc() {
 
       <div className="mt-[3rem]">
         <h1 className="text-[1.4rem] sm:text-[1.2rem] font-[600]">Event Description</h1>
-        <div className="text-[#5A5A5A] italic">
+        {/* <div className="text-[#5A5A5A] italic">
           <p className="my-[1rem]">
             Lorem ipsum dolor sit amet consectetur. Et mattis integer arcu
             ultricies elit scelerisque. Proin in nulla nuncincidunt{" "}
@@ -189,7 +195,8 @@ export default function EventsDesc() {
           <p className="text-[0.9rem]">
             3. Lorem ipsum dolor sit amet consectetur.
           </p>
-        </div>
+        </div> */}
+        {description}
       </div>
 
       <div className="mt-[3rem]">

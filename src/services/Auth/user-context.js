@@ -1,25 +1,28 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { END_POINT } from "../../config/environment";
 
 
-let Base_url = "https://apis-event-hub.onrender.com/api/users/"
 export const userSignIn = createAsyncThunk(
     'user/signIn',
     async (data) => {
-        try{
-            const reqest = await fetch("https://apis-event-hub.onrender.com/api/users/login", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(data),
-            });
-            const res = await reqest.json()
-            return res
-          }catch(error){
-            return error.message;
-          }
-    },
+      try{
+        const request = await fetch(`${END_POINT.BASE_URL}/users/login`,{
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+        const response = await request.json()
+        if(request.status !== 200){
+          throw new Error(`Failed to create user st: ${request.status}`);
+        }
+        return response;
+      }catch(error){
+        console.log(error)
+      }
+    }
   )
 
 export const userSignUp = createAsyncThunk(
@@ -27,7 +30,7 @@ export const userSignUp = createAsyncThunk(
     async (data) => {
       try{
         const reqest = await fetch("https://apis-event-hub.onrender.com/api/users/signup", {
-          method: "Put",
+          method: "Post",
           headers: {
             "Content-Type": "application/json",
           },
@@ -49,7 +52,7 @@ export const userSignUp = createAsyncThunk(
     async (data) => {
       const {data:updateData, token} = data   
         try{
-            const reqest = await fetch("https://cemp-backend.onrender.com/api/users/me/update", {
+            const reqest = await fetch(`${END_POINT.BASE_URL}/users/me/update`, {
               method: "put",
               headers: {
                 "Content-Type": "application/json",
@@ -58,7 +61,7 @@ export const userSignUp = createAsyncThunk(
               body: JSON.stringify(updateData),
             });
             if (!reqest.ok){
-              throw new Error('Failed to update user details');
+              throw new Error(`Failed to create user st: ${reqest.status} stText${reqest.statusText} formdata ${reqest.formData} body ${reqest.body}`);
             }
             const res = await reqest.json()
             console.log(res)
@@ -68,6 +71,22 @@ export const userSignUp = createAsyncThunk(
           }
     },
   )  
+  export const logUserOut = createAsyncThunk(
+    'user/sign-out',
+    async () => { 
+        try{
+            const reqest = await fetch(`${END_POINT.BASE_URL}/users/logout`);
+            if (!reqest.ok){
+              throw new Error(`Failed to create user st: ${reqest.status} stText${reqest.statusText} formdata ${reqest.formData} body ${reqest.body}`);
+            }
+            const res = await reqest.json()
+            console.log(res)
+            return res.success
+          }catch(error){
+            return error.message;
+          }
+    },
+  ) 
 const  authentication =createSlice({
     name: 'authentication',
     initialState: {
@@ -84,12 +103,12 @@ const  authentication =createSlice({
         },
     },
     extraReducers:(builder)=>{
-      builder.addCase(userSignIn.pending,(state,action)=>{
+      builder.addCase(userSignIn.pending,(state)=>{
         state.error=null,
         state.loading=true
     }),
         builder.addCase(userSignIn.fulfilled,(state,action)=>{
-            console.log(action.payload)
+            console.log(action)
             state.user=action.payload.data.user         
             state.token = action.payload.token;
             state.loading=false
@@ -129,7 +148,22 @@ const  authentication =createSlice({
         builder.addCase(updateUserDetails.rejected,(state,action)=>{
             state.error=action.error
             state.loading=false
-        })
+        }),
+        builder.addCase(logUserOut.pending,(state,action)=>{
+          state.error=null,
+          state.loading=true
+      }),
+      builder.addCase(logUserOut.fulfilled,(state,action)=>{
+        console.log(action.payload)
+          state.user=null
+          state.loading = false;
+          state.token = null;
+          state.error=null
+      }),
+      builder.addCase(logUserOut.rejected,(state,action)=>{
+          state.error=action.error
+          state.loading=false
+      })
     }
 });
 

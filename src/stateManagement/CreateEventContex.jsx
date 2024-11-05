@@ -72,7 +72,7 @@ const reducerFn = (state, action) => {
   if (action.type === "event/banner") {
     return {
       ...state,
-      banner: { ...state.banner, image: action.image, error: false },
+      banner: { ...state.banner, image: action.image, error: false,file:action.file },
     };
   }
   //dispact event actions for empty input fields

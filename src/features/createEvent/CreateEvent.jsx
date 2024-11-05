@@ -9,12 +9,15 @@ import Review from "./Preview";
 import useEvent from "../../hooks/useEvent";
 import { useView } from "../../hooks/useView";
 import OtherEvents from "../../components/pages/OtherEvents";
+import { useSelector } from "react-redux";
 
 export default function CreateEvent() {
   //effect to makes component view start from the top of the page
   useView();
   const [route, setRoute] = useState(0);
   const navigate = useNavigate();
+  const {token} = useSelector((state) => state.user)
+  console.log(token)
   const eventDetails = useEvent();
   // navigate a step back to the previous route/create form component
   function oneClickBack() {

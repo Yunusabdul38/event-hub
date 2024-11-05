@@ -59,7 +59,7 @@ const SignUp = () => {
       setFormData({})
     }  
     
-    //dispatch(userSignUp({confirmPassword,email,fullName,password}))
+    dispatch(userSignUp({confirmPassword,email,fullName,password}))
   }
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -185,6 +185,9 @@ const SignUp = () => {
           </div>
         </form>
       </AuthenticationForm>
+      <div className="flex justify-center items-center h-full">
+      <div className="w-12 h-12 border-4 border-gray-300 border-t-transparent rounded-full animate-spin"></div>
+    </div>
     </div>
   )
 }

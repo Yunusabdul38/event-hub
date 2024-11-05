@@ -13,6 +13,8 @@ import EventCard from "../../components/cards/EventCard";
 import { FaSliders } from "react-icons/fa6";
 import { getEvents } from "../../services/Auth/event-contex";
 import { useDispatch, useSelector } from "react-redux";
+import { END_POINT } from "../../config/environment";
+import { Loader } from "../../components/Loading";
 
 const categoriesData = [
   { name: "Technology & Innovation", image: tech },
@@ -25,7 +27,7 @@ const categoriesData = [
 
 const upcomingData = [
   {
-    image: image1,
+    imageUrl: image1,
     location: "Colab",
     month: "JAN",
     date: "25 - 26",
@@ -35,7 +37,7 @@ const upcomingData = [
     interested: 14,
   },
   {
-    image: image2,
+    imageUrl: image2,
     location: "Ihifix",
     month: "FEB",
     date: "01 - 04",
@@ -45,7 +47,7 @@ const upcomingData = [
     interested: 14,
   },
   {
-    image: image1,
+    imageUrl: image1,
     location: "KADAHIVE",
     month: "FEB",
     date: "25 - 26",
@@ -65,7 +67,7 @@ const upcomingData = [
     interested: 14,
   },
   {
-    image: image1,
+    imageUrl: image1,
     location: "Ihifix",
     month: "FEB",
     date: "01 - 04",
@@ -75,7 +77,7 @@ const upcomingData = [
     interested: 14,
   },
   {
-    image: image2,
+    imageUrl: image2,
     location: "KADAHIVE",
     month: "FEB",
     date: "25 - 26",
@@ -90,8 +92,12 @@ export default function Home() {
   const [placeValue, setPlaceValue] = useState("KadaHive");
   const [timeValue, setTimeValue] = useState("Any Date");
   const dipatch =  useDispatch();
-  const event = useSelector((state) => state.events);
-  
+  const {events,loading} = useSelector((state) => state.events);
+  useEffect(()=>{
+    if(events.length === 0){
+      dipatch(getEvents())
+    }
+  },[])
 
   useEffect(() => {
     const storedValue = localStorage.getItem("searchEvent");
@@ -131,7 +137,13 @@ export default function Home() {
   const handlePlaceChange = (event) => {
     setPlaceValue(event.target.value);
   };
+
+  if(loading){
+    return <Loader/>
+  }
+
   return (
+    <>
     <div className="">
       <div>
         <div className="hero-bg-img relative min-h-[400px] flex items-end justify-center lg:px-12 md:px-8 px-4">
@@ -321,7 +333,7 @@ export default function Home() {
           </div>
 
           <div className="mt-[2rem] flex flex-wrap justify-center gap-[2rem] md:gap-[1rem] sm:gap-0">
-            {upcomingData.map((data, index) => {
+            {events.map((data, index) => {
               return <EventCard event={data} key={index} />;
             })}
           </div>
@@ -337,7 +349,7 @@ export default function Home() {
             </h2>
           </div>
           <div className="mt-[2rem] flex flex-wrap justify-center gap-[2rem] md:gap-[1rem] sm:gap-0">
-            {upcomingData.map((data, index) => {
+            {events.map((data, index) => {
               return <EventCard event={data} key={index} />;
             })}
           </div>
@@ -350,5 +362,6 @@ export default function Home() {
         <OtherEvents />
       </div>
     </div>
+    </>
   );
 }

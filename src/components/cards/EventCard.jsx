@@ -26,8 +26,8 @@ const EventCard = ({ event }) => {
           <h1 className="text-center text-[#2D2C3C] font-[600]">{date}</h1>
         </div>
         <div>
-          <h1 className="text-[1.1rem] font-[500]">{location}</h1>
-          <p className="text-[0.9rem]">{title}</p>
+          <h1 className="text-[1.1rem] font-[500]">{title}</h1>
+          <p className="text-[0.9rem]">{location}</p>
           <p className="text-[0.8rem] font-[300]">{startTime}-{endTime}</p>
           <div className="flex items-center gap-[0.7rem]">
             <span className="flex items-center gap-[0.3rem] text-[#5A5A5A] text-[0.9rem]">

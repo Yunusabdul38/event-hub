@@ -136,15 +136,9 @@ const Profile = ({activePath}) => {
               <h2>{user?.fullName}</h2>
             </div>
 
-            {/* Date of Birth */}
-            <div className="dob lg:text-[16px] md:text-[16px] text-sm">
-              <span>Date of Birth: </span>
-              <span>00/00/00</span>
-            </div>
-
             {/* Email */}
             <div className="email lg:text-[16px] md:text-[16px] text-sm">
-              <span>Email ID: </span>
+              <span>Email Id: </span>
               <span>{user?.email}</span>
             </div>
 

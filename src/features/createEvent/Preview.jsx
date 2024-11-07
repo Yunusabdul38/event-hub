@@ -13,6 +13,7 @@ import { useState } from "react";
 
 
 export default function Review({ eventDetails }) {
+  const dispatchFn = useDispatch();
   const {
     title: { name: Title },
     banner: { image,file },
@@ -27,7 +28,7 @@ export default function Review({ eventDetails }) {
   console.log(token)
   const [isLoading,setIsLoading] = useState(false)
   const handleSubmit = async () => {
-   await createEventFn(eventDetails,file,navigate,token,setIsLoading)
+   await createEventFn(eventDetails,file,navigate,token,setIsLoading,dispatchFn)
    console.log("end")
   };
   useView();

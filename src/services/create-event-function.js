@@ -1,6 +1,8 @@
+import toast from "react-hot-toast";
 import { END_POINT } from "../config/environment";
+import { getEvents } from "./Auth/event-contex";
 
-export const createEventFn = async (eventDetails,file,navigate,token,setIsLoading) => {
+export const createEventFn = async (eventDetails,file,navigate,token,setIsLoading,dispatchFn) => {
   setIsLoading(true)
     const formData = new FormData();
 
@@ -28,7 +30,7 @@ export const createEventFn = async (eventDetails,file,navigate,token,setIsLoadin
 
     formData.append("title", body.title);
     formData.append("image", body.imageUrl);
-    formData.append("category", body.category);
+    formData.append("area", body.category.category);
     formData.append("location", body.location.name);
     formData.append("date", body.date);
     formData.append("startTime", body.startTime);
@@ -53,13 +55,17 @@ export const createEventFn = async (eventDetails,file,navigate,token,setIsLoadin
         .then((result) => {
           if (result.success === true) {
             console.log("event success", result.data);
+            dispatchFn(getEvents())
+            toast.success("Event Created Successfully")
             navigate("/")
           } else {
+            toast.error(`Event Creation Failed due to ${result.message}`);
             console.log("error", result.message);
           }
           setIsLoading(false)
         })
         .catch((error) => {
+          toast.error("Event Creation Failed");
           console.log("error", error);
           setIsLoading(false)
         });

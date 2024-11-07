@@ -11,11 +11,14 @@ import OtherEvents from "./OtherEvents";
 import AIimage from '../../../src/assets/images/AIimage.png'
 import SimpleMap from "./SimpleMap";
 import TicketBooking from "./TicketBooking";
-import { useNavigate, Link, useParams } from "react-router-dom";
+import { useNavigate, Link, useParams, useLoaderData } from "react-router-dom";
 import Modal from "../Modal";
 import AttendeeDets from "./AttendeeDets";
 import Share from "./Share";
 import { useSelector } from "react-redux";
+import { END_POINT } from "../../config/environment";
+import ProtectedRouteMessage from "../ProtectedRouteMessage";
+import toast from "react-hot-toast";
 
 const tagData = [
   { name: "Tech" },
@@ -31,16 +34,17 @@ const tagData = [
   { name: "Software" },
 ];
 
-export default function EventsDesc() {
-  const {eventId} = useParams()
-  const {events} = useSelector((state) => state?.events);
-  console.log(events)
-  const [modal, setModal] = useState(false);
+function EventsDesc() {
+  //the return fetch event data
+  const eventDetails = useLoaderData()
+  const {token,user} = useSelector(state=>state.user)
+  console.log(eventDetails)
+  const [isAuth,setIsAuth] = useState(false)
+  //const [modal, setModal] = useState(false);
   const [shareModal, setShareModal] = useState(false);
   const navigate = useNavigate();
 
-  const eventDetails = events.find((event) => event["_id"] === eventId);
-  const {imageUrl, location, title,startTime,endTime,date:date_string,organizer=[],description } =eventDetails;
+  const {imageUrl, location, title,startTime,endTime,date:date_string,organizer=[],description } =eventDetails.data;
   const date = new Date(date_string).toLocaleDateString("en-Us",{day: "2-digit", month: "numeric", year: "numeric"}).replaceAll("/", "-");  
   console.log(date)
   function buyTicket(e) {
@@ -52,18 +56,62 @@ export default function EventsDesc() {
     setShareModal(true)
   }
 
+  async function eventRegHandler(){
+    if(token === null){
+      setIsAuth(true)
+      return
+    }
+      let userConfirmed = window.confirm(
+        "are you sure you want to register for this event"
+      );
+      if (userConfirmed) {
+        var myHeaders = new Headers();
+        myHeaders.append("x-auth-token", token);
+
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          redirect: "follow",
+        };
+        await fetch(
+          `${END_POINT.BASE_URL}/event/${eventDetails.data["_id"]}/register`,
+          requestOptions
+        )
+          .then((response) => {
+            console.log(response)
+            toast.success("registration successfull");
+            return response.json();
+          })
+          .then((result) => {
+            if (result.status === "success") {
+              console.log("success", result);
+              alert("registration successfull");
+            } else {
+              toast.error(result.message);
+              console.log("error", result.message);
+            }
+          })
+          .catch((error) => {
+            console.log("error", error);
+          });
+      } 
+     
+  };
+ 
+ 
   return (
     <>
-    {modal && <Modal modalHandler={() => setModal(false)} >
-      <AttendeeDets/>
-    </Modal>}
-    {shareModal && <Modal modalHandler={() => setShareModal(false)} >
+    {/* {modal && <Modal modalHandler={() => setModal(false)} >
+      <AttendeeDets title={title} date={date_string} modalHandler={() => setModal(false)} />
+    </Modal>} */}
+    {isAuth && <ProtectedRouteMessage/>}
+    {shareModal && <Modal modalHandler={() => setShareModal(false)}>
   
-   <Share/>
+   <Share title={title} location={location}/>
  </Modal>}  
     <div className="sm:px-9 lg:px-0 px-5 max-w-7xl m-auto pt-5 font-openSans">
       <div className="max-w-4xl mx-auto">
-      <div className="w-[100%] h-[40vh] md:h-[25vh] sm:h-[20vh] rounded-[10px]">
+      <div className="w-[100%] h-[40vh] md:h-[35vh] sm:h-[20vh] rounded-[10px]">
         <img
           src={imageUrl}
           alt=""
@@ -107,10 +155,10 @@ export default function EventsDesc() {
         <div className="py-4">
           <button
             //onClick={buyTicket}
-            onClick={()=> setModal(true)}
+            onClick={eventRegHandler}
             className="py-3 px-6 sm:px-2 rounded-md flex w-full  bg-[#3557C2] text-white justify-center "
           >
-            <IoTicket className="text-[1.5rem]" /> Buy Tickets
+            <IoTicket className="text-[1.5rem]" /> Register
           </button>
           <h1 className="my-[1rem] text-[1.3rem] sm:text-[1.1rem] font-[600]">
             Ticket Information
@@ -222,3 +270,4 @@ export default function EventsDesc() {
     </>
   );
 }
+export default EventsDesc;

@@ -172,6 +172,19 @@ const AccountInfo = () => {
               placeholder="Enter Github"
             />
           </div>
+          <div className="flex flex-wrap items-center justify-start firstname">
+            <label className="w-[30%]" htmlFor="number">
+              Phone Number:
+            </label>
+            <input
+              onChange={handleContactInfo}
+              className="w-[70%] text-gray-800 border border-gray-300 px-2 rounded-[8px] h-[45px]"
+              type="text"
+              name="number"
+              id="number"
+              placeholder="Enter phone number"
+            />
+          </div>
           <div className="flex flex-wrap items-center justify-between company">
             <label className="w-[30%]" htmlFor="bio">
               bio:
@@ -187,7 +200,7 @@ const AccountInfo = () => {
           </div>
         </form>
       </div>
-
+{/* 
       <div className="profileContact max-w-[500px] mx-auto my-8 py-4">
         <h3 className="text-2xl font-bold">Contact Details</h3>
         <p className="mb-4 text-gray-700">
@@ -196,19 +209,7 @@ const AccountInfo = () => {
         </p>
 
         <form className="flex flex-col gap-4">
-          <div className="flex flex-wrap items-center justify-start firstname">
-            <label className="w-[30%]" htmlFor="number">
-              Phone Number:
-            </label>
-            <input
-              onChange={handleContactInfo}
-              className="w-[70%] text-gray-800 border border-gray-300 px-2 rounded-[8px] h-[45px]"
-              type="text"
-              name="number"
-              id="number"
-              placeholder="Enter phone number"
-            />
-          </div>
+         
 
           <div className="flex flex-wrap items-start justify-between lastname">
             <label className="w-[30%]" htmlFor="address">
@@ -269,7 +270,7 @@ const AccountInfo = () => {
             />
           </div>
         </form>
-      </div>
+      </div> */}
 
       <div className="formBtn max-w-[500px] mx-auto my-8 text-left">
         <button

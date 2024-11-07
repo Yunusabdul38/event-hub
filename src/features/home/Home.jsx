@@ -15,6 +15,9 @@ import { getEvents } from "../../services/Auth/event-contex";
 import { useDispatch, useSelector } from "react-redux";
 import { END_POINT } from "../../config/environment";
 import { Loader } from "../../components/Loading";
+import { Link } from "react-router-dom";
+import { appRoutes } from "../../config/routeMgt/RoutePaths";
+import  Message  from "../../components/Message";
 
 const categoriesData = [
   { name: "Technology & Innovation", image: tech },
@@ -137,10 +140,6 @@ export default function Home() {
   const handlePlaceChange = (event) => {
     setPlaceValue(event.target.value);
   };
-
-  if(loading){
-    return <Loader/>
-  }
 
   return (
     <>
@@ -331,18 +330,24 @@ export default function Home() {
               </div>
             </div>
           </div>
-
           <div className="mt-[2rem] flex flex-wrap justify-center gap-[2rem] md:gap-[1rem] sm:gap-0">
+          {loading && <div className="w-full bg-[#3557c2] flex justify-center items-center h-[400px]">
+              <span class="loader"></span>
+            </div> }
+            {events.length !==0  && <>
             {events.map((data, index) => {
               return <EventCard event={data} key={index} />;
             })}
+            </>}
           </div>
-          <button className="bg-[#3557C2] px-[10rem] sm:px-[7rem] py-[0.5rem] rounded-[5px] text-white flex m-auto">
+          {events.length > 0 && <div className="flex flex-wrap justify-center">
+          <Link to={appRoutes.search} className="bg-[#3557C2] text-center  py-[0.5rem] rounded-[5px] text-white mx-auto w-4/5 sm:w-[400px]">
             See More
-          </button>
+          </Link>
+          </div>}
         </div>
-
-        <div className="mt-[5rem] mb-[5rem] lg:px-12 md:px-8 px-4">
+        {events.lengt === 0 && !loading && <Message />}
+       {events.length > 0 &&  <div className="mt-[5rem] mb-[5rem] lg:px-12 md:px-8 px-4">
           <div className="flex items-center gap-[13rem]">
             <h2 className="text-[24px] lg:text-[32px] md:text[28px] font-[700] font-montserrat text-[#2D2C3C]">
               Popular Events
@@ -353,13 +358,15 @@ export default function Home() {
               return <EventCard event={data} key={index} />;
             })}
           </div>
-          <button className="bg-[#3557C2] px-[10rem] sm:px-[7rem] py-[0.5rem] rounded-[5px] text-white flex m-auto">
+          <div className="flex flex-wrap justify-center">
+          <Link to={appRoutes.search} className="bg-[#3557C2] text-center  py-[0.5rem] rounded-[5px] text-white mx-auto w-4/5 sm:w-[400px]">
             See More
-          </button>
-        </div>
+          </Link>
+          </div>
+        </div>}
 
         <Recommend />
-        <OtherEvents />
+        {events.length > 0 && <OtherEvents />}
       </div>
     </div>
     </>

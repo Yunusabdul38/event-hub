@@ -1,19 +1,32 @@
-import React, { useState } from "react";
-import { IoIosArrowForward, IoMdArrowBack } from "react-icons/io";
-import { IoCalendarOutline, IoStar, IoTicket } from "react-icons/io5";
+import React, { useRef, useState } from "react";
+import { IoIosArrowForward} from "react-icons/io";
+import { IoCalendarOutline} from "react-icons/io5";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { FaXmark } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import useGlobalContext from "../../stateManagement/use-global-context";
 
-export default function AttendeeDets() {
+export default function AttendeeDets({date:eventDate,title,modalHandler}) {
+  const nameRef = useRef()
+  const emailRef = useRef()
+  const contactRef = useRef()
   const {fullName, setFullName, email, setEmail, phone, setPhone, price, quantity} = useGlobalContext()
+  const event_date = new Date(eventDate).toLocaleDateString("en-Us",{day: "2-digit", month: "numeric", year: "numeric"}).replaceAll("/", "-");
   const navigate = useNavigate();
-
   function toCheckout() {
     navigate("/orderSummary");
   }
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    const name = nameRef.current.value;
+    const email = emailRef.current.value;
+    const contact = contactRef.current.value;
+    
+    console.log({name, email, contact})
+
+  }
   return (
  
       <div
@@ -22,8 +35,8 @@ export default function AttendeeDets() {
       >
         <div className="bg-white">
           <h1 className=" p-[1rem] text-[1.2rem] font-[400] shadow-sm flex items-center gap-[0.6rem]">
-            <IoMdArrowBack
-              onClick={() => navigate(-1)}
+            <FaXmark
+              onClick={() =>  modalHandler()}
               className="cursor-pointer"
             />{" "}
             Attendee Details
@@ -31,9 +44,9 @@ export default function AttendeeDets() {
         </div>
 
         <div className="flex justify-between px-[1rem] mt-[1rem] text-[#5A5A5A] text-[0.9rem] sm:text-[0.7rem]">
-          <h1>AI/ML Summit 2024</h1>
+          <h1>{title}</h1>
           <h1 className="flex items-center gap-[0.3rem]">
-            <IoCalendarOutline /> Saturday, 2 May 2024 
+            <IoCalendarOutline /> {event_date}
           </h1>
         </div>
 
@@ -44,12 +57,13 @@ export default function AttendeeDets() {
           <div className="mt-[0.5rem]">
             <div className="h-[0.3rem] bg-[#4872C6]"></div>
             <div className="bg-white p-[1rem]">
-              <form action="" className="grid gap-[1rem]">
+              <form action="" className="grid gap-[1rem]" onSubmit={handleSubmit}>
                 <div className="grid">
                   <label htmlFor="" className="text-[#636363] text-[0.9rem]">
                     Full Name
                   </label>
                   <input
+                  ref={nameRef}
                     type="text"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
@@ -63,6 +77,7 @@ export default function AttendeeDets() {
                     Email
                   </label>
                   <input
+                  ref={emailRef}
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -76,6 +91,7 @@ export default function AttendeeDets() {
                     Phone Number
                   </label>
                   <PhoneInput
+                  ref={contactRef}
                     country={"us"}
                     placeholder="Enter Attendee’s Phone Number"
                     value={phone}

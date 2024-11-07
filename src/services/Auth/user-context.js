@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 import { END_POINT } from "../../config/environment";
+import toast from "react-hot-toast";
 
 
 export const userSignIn = createAsyncThunk(
     'user/signIn',
-    async (data) => {
+    async (data,{ rejectWithValue }) => {
       try{
         const request = await fetch(`${END_POINT.BASE_URL}/users/login`,{
           method: "post",
@@ -16,40 +16,44 @@ export const userSignIn = createAsyncThunk(
         })
         const response = await request.json()
         if(request.status !== 200){
-          throw new Error(`Failed to create user st: ${request.status}`);
+          throw new Error(response.message);
         }
+        toast.success("welcome back")
         return response;
       }catch(error){
-        console.log(error)
+        toast.error(error.message)
+        return rejectWithValue(error.message)
       }
     }
   )
 
 export const userSignUp = createAsyncThunk(
     'user/signUp',
-    async (data) => {
+    async (data,{ rejectWithValue }) => {
       try{
-        const reqest = await fetch("https://apis-event-hub.onrender.com/api/users/signup", {
+        const request = await fetch("https://apis-event-hub.onrender.com/api/users/signup", {
           method: "Post",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
         });
-        if (!reqest.ok){
-          throw new Error(`Failed to create user st: ${reqest.status} stText${reqest.statusText} formdata ${reqest.formData} body ${reqest.body}`);
+        if (!request.ok){
+          throw new Error(`Failed to create user`);
         }
-        const res = await reqest.json()
-        return res
+        const res = await request.json()
+        toast.success("welcome to event hub")
+        return res;
       }catch(error){
-        return error.message;
+        toast.error(error.message)
+        return rejectWithValue(error.message);
       }
     },
   )
 
   export const updateUserDetails = createAsyncThunk(
     'user/update',
-    async (data) => {
+    async (data,{ rejectWithValue }) => {
       const {data:updateData, token} = data   
         try{
             const reqest = await fetch(`${END_POINT.BASE_URL}/users/me/update`, {
@@ -67,7 +71,7 @@ export const userSignUp = createAsyncThunk(
             console.log(res)
             return res
           }catch(error){
-            return error.message;
+            return rejectWithValue(error.message);
           }
     },
   )  
@@ -80,9 +84,10 @@ export const userSignUp = createAsyncThunk(
               throw new Error(`Failed to create user st: ${reqest.status} stText${reqest.statusText} formdata ${reqest.formData} body ${reqest.body}`);
             }
             const res = await reqest.json()
-            console.log(res)
+            toast.success("Logged out")
             return res.success
           }catch(error){
+            toast.error(error.message)
             return error.message;
           }
     },
@@ -132,6 +137,7 @@ const  authentication =createSlice({
           console.log(action,state)
             state.error=action.error            
             state.token = null;
+            state.loading=false
         }),
         builder.addCase(updateUserDetails.pending,(state,action)=>{
             console.log(action,"pending")
@@ -161,6 +167,7 @@ const  authentication =createSlice({
           state.error=null
       }),
       builder.addCase(logUserOut.rejected,(state,action)=>{
+        console.log(action)
           state.error=action.error
           state.loading=false
       })

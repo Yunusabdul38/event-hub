@@ -7,7 +7,6 @@ import styles from './Layout.module.css'
 import { appRoutes } from "../config/routeMgt/RoutePaths";
 import logo from "../assets/logo.png";
 import { useDispatch, useSelector } from "react-redux";
-import { Loader } from "../components/Loading";
 import { logUserOut } from "../services/Auth/user-context";
 
 const NavBar = () => {
@@ -34,7 +33,6 @@ const NavBar = () => {
 
   return (
    <>
-   {loading && <Loader/>}
     <div className="flex flex-wrap z-20 border-b border-b-gray-200 sticky top-0 bg-white justify-between lg:px-12 md:px-8 px-4 h-auto">
       <div className="flex flex-wrap justify-between w-full">
         <div className="py-5 w-full flex flex-wrap lg:gap-x-20 md:gap-x-16 gap-x-4 gap-y-4 items-center justify-between border-b border-b-gray-300">

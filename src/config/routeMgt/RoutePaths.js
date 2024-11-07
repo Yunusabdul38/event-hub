@@ -8,7 +8,7 @@ export const appRoutes = {
 
   //Pages
   search: '/search',
-  eventsDescription: '/eventdescription',
+  eventsDescription: '/:eventId',
   ticketBooking: '/ticketBooking',
   attendeeDets: '/attendeeDetails',
   orderSummary: '/orderSummary',

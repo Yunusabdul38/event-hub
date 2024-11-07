@@ -5,15 +5,18 @@ import { IoStar } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 const EventCard = ({ event }) => {
-  const { image, location, title, date, month, interested, time, ticket } =
+  const {_id:id, imageUrl, location, title, interestedUsers, time, ticket="free",startTime,endTime,date:date_string } =
     event;
+    const date = new Date(date_string).getDate()
+    const month = new Date(date_string).toLocaleString('default', { month: 'short' });
+    console.log(date,date_string)
   return (
     <Link
-      to={`/eventdescription`}
+      to={`/${id}`}
       className="mb-[3rem] border border-gray-50 w-[350px] hover:border-gray-200 transition-all duration-300 p-4 rounded-[8px] cursor-pointer"
     >
       <img
-        src={image}
+        src={imageUrl}
         alt=""
         className="w-full h-1/2 object-cover rounded-tr-[10px] rounded-tl-[10px]"
       />
@@ -23,9 +26,9 @@ const EventCard = ({ event }) => {
           <h1 className="text-center text-[#2D2C3C] font-[600]">{date}</h1>
         </div>
         <div>
-          <h1 className="text-[1.1rem] font-[500]">{location}</h1>
-          <p className="text-[0.9rem]">{title}</p>
-          <p className="text-[0.8rem] font-[300]">{time}</p>
+          <h1 className="text-[1.1rem] font-[500]">{title}</h1>
+          <p className="text-[0.9rem]">{location}</p>
+          <p className="text-[0.8rem] font-[300]">{startTime}-{endTime}</p>
           <div className="flex items-center gap-[0.7rem]">
             <span className="flex items-center gap-[0.3rem] text-[#5A5A5A] text-[0.9rem]">
               <IoTicket />
@@ -35,7 +38,7 @@ const EventCard = ({ event }) => {
             <span className="flex items-center gap-[0.3rem]">
               <IoStar className="text-[#4539B4]" />
               <h1 className="text-[#5A5A5A] text-[0.9rem]">
-                {interested} interested
+                {interestedUsers.length} interested
               </h1>
             </span>
           </div>

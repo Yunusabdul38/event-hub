@@ -16,7 +16,7 @@ export default function OrderSummary() {
       className="fixed inset-0 flex justify-center items-center bg-[#bfdbfe]/30 backdrop-blur-sm font-openSans"
     >
       <div
-        className="bg-[#F1F3F6] w-[40vw] md:w-[70vw] sm:w-[90vw] transition-all"
+        className="bg-[#F1F3F6] w-[90vw] md:w-[70vw] sm:w-[90vw] transition-all"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="bg-white">
@@ -25,14 +25,14 @@ export default function OrderSummary() {
           </h1>
         </div>
 
-        <div className="mt-[1.5rem] px-[1.5rem]">
-          <div className="mt-[0.5rem]">
-            <div className="h-[0.3rem] bg-[#4872C6]"></div>
+        <div className="mt-[1.5rem] ">
+          <div className="mt-[0.5rem] border bg-red-500 w-full">
+            <div className="h-[0.3rem] bg-[#4872C6] w-full"></div>
             <div className="bg-white p-[1rem] shadow">
               <h1 className="text-center text-[1.5rem] sm:text-[1.2rem] text-[#4872c6]">
                 Standard Ticket
               </h1>
-              <div className="mt-[1.2rem] flex sm:grid justify-center gap-[6rem] sm:gap-[1rem]">
+              <div className="mt-[1.2rem] flex-col sm:flex-row text-center flex sm:grid justify-center gap-[6rem] sm:gap-[1rem]">
                 <span className="text-[#2D2C3C]">
                   <h1 className="font-[600] text-[0.9rem] mb-[0.3rem]">
                     {fullName}
@@ -41,32 +41,33 @@ export default function OrderSummary() {
                     {email}
                   </h1>
                 </span>
-                <button className="bg-[#4872C6] text-white px-[1.4rem] py-[0.3rem] rounded-[5px]">
+                <button className="bg-[#4872C6] text-white py-[1rem] sm:px-[1.4rem] sm:py-[0.3rem] rounded-[5px]">
                   NGN {price}
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <div className="mt-[2rem] bg-white py-[1rem]">
+        <div className="mt-[2rem] bg-white py-[1rem] px-8 ">
           <span className="flex justify-center items-center gap-[1rem] text-center">
             <div className="text-end">
-              <h1 className="text-[#5A5A5A] text-[1.2rem]">Subtotal:</h1>
+              <h1 className="text-[#5A5A5A] text-[1.1
+              rem]">Subtotal:</h1>
               <h1 className="text-[#5A5A5A]">Tax:</h1>
             </div>
             <div className="text-start">
-              <h1 className="text-[1.2rem]">NGN {price}</h1>
+              <h1 className="text-[1.1rem]">NGN {price}</h1>
               <h1 className="">NGN {tax}</h1>
             </div>
           </span>
           <hr className="w-[50%] m-auto my-[1rem]" />
             <span className="flex items-center justify-center gap-[2rem]">
-                <h1 className="text-[1.4rem] sm:text-[1.2rem] font-[500]">Order Total:</h1>
-                <h1 className="text-[1.4rem] sm:text-[1.2rem] font-[500] text-[#3557C2]">NGN {price + tax}</h1>
+                <h1 className="text-[1rem] sm:text-[1.2rem] font-[500]">Order Total:</h1>
+                <h1 className="text-[1rem] sm:text-[1.2rem] font-[500] text-[#3557C2]">NGN {price + tax}</h1>
             </span>
-          <button className="flex items-center gap-[0.4rem] mt-[1rem] sm:px-[6rem] px-[10rem] py-[0.7rem] m-auto bg-[#3557C2] rounded-[5px] text-white font-[500]">
-          <FaLock className="text-[1.1rem]" /> Pay Now
-          </button>
+         <button className="bg-[#3557C2] py-[1rem] text-white flex justify-center gap-3 items-center w-full rounded-lg">
+         <FaLock className="text-[1.1rem]" /> Pay Now
+         </button>
         </div>
       </div>
     </div>

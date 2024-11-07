@@ -6,7 +6,8 @@ import { AppButton } from "../components/button/AppButton";
 import styles from './Layout.module.css'
 import { appRoutes } from "../config/routeMgt/RoutePaths";
 import logo from "../assets/logo.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logUserOut } from "../services/Auth/user-context";
 
 const NavBar = () => {
   const [isActive, setIsActive] = useState("Home");
@@ -15,6 +16,8 @@ const NavBar = () => {
   // category and search
   const [selectedValue, setSelectedValue] = useState("");
   const [searchText, setSearchText] = useState("");
+  const {loading} = useSelector((state) => state.user);
+  const dispatch = useDispatch()
   const handleSelectChange = (event) => {
     setSelectedValue(event.target.value);
   };
@@ -23,7 +26,13 @@ const NavBar = () => {
     setSearchText(event.target.value);
   };
 
+  function handleLogOut(){
+    dispatch(logUserOut())
+    console.log("close")
+  }
+
   return (
+   <>
     <div className="flex flex-wrap z-20 border-b border-b-gray-200 sticky top-0 bg-white justify-between lg:px-12 md:px-8 px-4 h-auto">
       <div className="flex flex-wrap justify-between w-full">
         <div className="py-5 w-full flex flex-wrap lg:gap-x-20 md:gap-x-16 gap-x-4 gap-y-4 items-center justify-between border-b border-b-gray-300">
@@ -65,8 +74,11 @@ const NavBar = () => {
 
           {/* sign up & login */}
           {token !== null ? (
-            <div className="profileImage bg-gray-300 border w-[50px] h-[50px] rounded-full">
+            <div className="flex items-center justify-between gap-4">
+            <button className="bg-[#3557c2] capitalize py-1 px-2 rounded-md text-white" onClick={handleLogOut}>sign out</button>
+            <Link to="/profile" className="profileImage bg-gray-300 border w-[50px] h-[50px] rounded-full">
                 <img src={user?.avatar} alt="Profile Image" className="w-full h-full rounded-full" />
+            </Link>
             </div>
           ) : (
             <div className="min-w-[120px] flex items-center justify-between gap-4">
@@ -156,6 +168,7 @@ const NavBar = () => {
         </div>
       </div>
     </div>
+   </>
   );
 };
 

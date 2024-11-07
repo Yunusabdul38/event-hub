@@ -9,12 +9,16 @@ import Review from "./Preview";
 import useEvent from "../../hooks/useEvent";
 import { useView } from "../../hooks/useView";
 import OtherEvents from "../../components/pages/OtherEvents";
+import { useSelector } from "react-redux";
+import ProtectedRouteMessage from "../../components/ProtectedRouteMessage";
 
 export default function CreateEvent() {
   //effect to makes component view start from the top of the page
   useView();
   const [route, setRoute] = useState(0);
   const navigate = useNavigate();
+  const {token} = useSelector((state) => state.user)
+  console.log(token)
   const eventDetails = useEvent();
   // navigate a step back to the previous route/create form component
   function oneClickBack() {
@@ -32,8 +36,10 @@ export default function CreateEvent() {
     if (route === 3) return;
     setRoute((num) => num + 1);
   }
+
   return (
     <>
+    {!token && <ProtectedRouteMessage/>}
       <section className="px-5 font-openSans max-w-7xl m-auto pt-5">
         <div className="inline-flex items-center gap-2 text-xl lg:text-2xl text-[##2D2C3C] font-extrabold">
           <IoIosArrowRoundBack

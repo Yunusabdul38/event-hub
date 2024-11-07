@@ -1,16 +1,19 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserDetails } from "../../../services/Auth/user-context";
+import { Loader } from "../../../components/Loading";
+import { updateUser } from "../../../services/upate-user";
 
 const AccountInfo = () => {
-  const {fullName,avatar,portfolio,github,bio} = useSelector((state) => state.user.user);
+  const {user,token} = useSelector((state) => state?.user);
+  const {fullName,avatar,portfolio,github,bio} = user
   const [profileImage, setProfileImage] = useState(avatar);
   const [contactInfo, setContactInfo] = useState([]);
   const [profileInfo, setProfileInfo] = useState([]);
   const dispatcher = useDispatch();
-  const user = useSelector((state) => state?.user);
   const [firstName,...lastName] = fullName?.split(" ");
-  
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleProfileImage = (e) => {
     const imageFile = e.target.files[0];
     const fileReader = new FileReader();
@@ -43,7 +46,7 @@ const AccountInfo = () => {
       bio,
       portfolio,
       github,
-      avatar
+      image:avatar
     };
     if(profileInfo.firstname){
       data.fullName = profileInfo.firstname + " " + profileInfo.lastname
@@ -64,17 +67,18 @@ const AccountInfo = () => {
       data.contact = contactInfo.number
     }
     if(profileInfo.profileImage){
-      data.avatar = profileInfo.profileImage
+      data.image = profileInfo.profileImage
     } 
     if(profileInfo.github){
       data.github = profileInfo.github
     }
-    
-    dispatcher(updateUserDetails({data,token:user.token}));
-  
-  }
+    console.log(data);
+    updateUser(data,token,setIsLoading);
+ }
 
   return (
+    <>
+    {isLoading && <Loader/> }
     <main className="px-3">
       <h2 className="font-bold text-gray-800 pb-2 text-3xl my-4 w-full border-b-[2px] border-gray-300">
         Account Information
@@ -168,6 +172,19 @@ const AccountInfo = () => {
               placeholder="Enter Github"
             />
           </div>
+          <div className="flex flex-wrap items-center justify-start firstname">
+            <label className="w-[30%]" htmlFor="number">
+              Phone Number:
+            </label>
+            <input
+              onChange={handleContactInfo}
+              className="w-[70%] text-gray-800 border border-gray-300 px-2 rounded-[8px] h-[45px]"
+              type="text"
+              name="number"
+              id="number"
+              placeholder="Enter phone number"
+            />
+          </div>
           <div className="flex flex-wrap items-center justify-between company">
             <label className="w-[30%]" htmlFor="bio">
               bio:
@@ -183,7 +200,7 @@ const AccountInfo = () => {
           </div>
         </form>
       </div>
-
+{/* 
       <div className="profileContact max-w-[500px] mx-auto my-8 py-4">
         <h3 className="text-2xl font-bold">Contact Details</h3>
         <p className="mb-4 text-gray-700">
@@ -192,19 +209,7 @@ const AccountInfo = () => {
         </p>
 
         <form className="flex flex-col gap-4">
-          <div className="flex flex-wrap items-center justify-start firstname">
-            <label className="w-[30%]" htmlFor="number">
-              Phone Number:
-            </label>
-            <input
-              onChange={handleContactInfo}
-              className="w-[70%] text-gray-800 border border-gray-300 px-2 rounded-[8px] h-[45px]"
-              type="text"
-              name="number"
-              id="number"
-              placeholder="Enter phone number"
-            />
-          </div>
+         
 
           <div className="flex flex-wrap items-start justify-between lastname">
             <label className="w-[30%]" htmlFor="address">
@@ -265,7 +270,7 @@ const AccountInfo = () => {
             />
           </div>
         </form>
-      </div>
+      </div> */}
 
       <div className="formBtn max-w-[500px] mx-auto my-8 text-left">
         <button
@@ -277,7 +282,7 @@ const AccountInfo = () => {
         </button>
       </div>
     </main>
-  );
+    </>)
 };
 
 export default AccountInfo;

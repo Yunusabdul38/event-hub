@@ -1,39 +1,25 @@
 import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
-let Base_url = "https://apis-event-hub.onrender.com/api/events"
+import { END_POINT } from "../../config/environment";
 
 export const getEvents = createAsyncThunk(
     'get',
-    // async () => {
-    //     const token =
-    //     "eycJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM3MTg5NTY0ZDRkZDJiZjg5NWQzNDYiLCJpYXQiOjE3MjYyNzQyMjEsImV4cCI6MTcyODg2NjIyMX0.If99rA1BFIbZkDY1_7bmCHhIgPXfkczNfljuDx3tPho";
-        
-    //     //      try {
-    //     //       const response = await axios.get(`https://apis-event-hub.onrender.com/api/event/all`, {
-    //     //         headers: {
-    //     //            "x-auth-token": token,
-    //     //          },});
-    //     //        console.log('Created:', response.data);
-    //     //        return response.data;
-    //     //      } catch (error) {
-    //     //        console.error("Error fetching data:", error);
-    //     //      }
-    //   try{
-    //         const reqest = await fetch("https://apis-event-hub.onrender.com/api/event/all", {
-    //           method: "GET",
-    //           headers: {
-    //             "Content-Type": "application/json",
-    //             "x-auth-token": token,
-    //           },
-    //         });
-    //         const res = await reqest.json()
-    //         return res
-    //       }catch(error){
-    //         return error.message;
-    //       }
-    // },
+    async () => {
+      try{
+            const reqest = await fetch(`${END_POINT.BASE_URL}/event/all`, {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            });
+            const response = await reqest.json()
+            return response.events
+          }catch(error){
+            return error.message;
+          }
+    },
   )
+
 
 const  eventSlice =createSlice({
     name: 'event',
@@ -56,7 +42,7 @@ const  eventSlice =createSlice({
       .addCase(getEvents.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      });
+      })
   }
 })
 export const eventReducer = eventSlice.reducer

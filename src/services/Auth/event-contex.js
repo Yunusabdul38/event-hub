@@ -6,7 +6,7 @@ export const getEvents = createAsyncThunk(
     'get',
     async () => {
       try{
-            const reqest = await fetch(`${END_POINT.BASE_URL}/event/all`, {
+            const reqest = await fetch(`${END_POINT.BASE_URL}/event/all?limit=10`, {
               method: "GET",
               headers: {
                 "Content-Type": "application/json",

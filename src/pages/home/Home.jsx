@@ -9,9 +9,11 @@ import Recommend from "../../components/pages/Recommend";
 import OtherEvents from "../../components/pages/OtherEvents";
 
 import { FaSliders } from "react-icons/fa6";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {  Outlet } from "react-router-dom";
 import Message from "../../components/Message"
+import { getEvents } from "../../services/Auth/event-contex";
+import EventList from "./EventList";
 
 const categoriesData = [
   { name: "Technology & Innovation", image: tech },
@@ -27,7 +29,10 @@ export default function Home() {
   const [placeValue, setPlaceValue] = useState("KadaHive");
   const [timeValue, setTimeValue] = useState("Any Date");
   const {events,loading,error} = useSelector((state) => state.events);
-
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(getEvents())
+  },[])
   useEffect(() => {
     const storedValue = localStorage.getItem("searchEvent");
     if (storedValue) {
@@ -71,18 +76,18 @@ export default function Home() {
     <>
     <div className="">
       <div>
-        <div className="hero-bg-img relative min-h-[400px] flex items-end justify-center lg:px-12 md:px-8 px-4">
+        <div className="hero-bg-img relative min-h-[400px] flex flex-col items-end justify-center lg:px-12 md:px-8 px-4">
           <div className="font-montserrat mb-16 z-10">
-            <h1 className="text-center text-white lg:text-[40px] md:text-[36px] text-[32px] font-[600]">
+            <h1 className="text-center text-white lg:text-[40px] md:text-[36px] text-2xl sm:text-3xl font-extrabold">
               Don’t miss out!
             </h1>
-            <h1 className="text-center text-white lg:text-[40px] md:text-[36px] text-[32px] font-[600]">
-              Explore the <span className="text-[#FFE047]">vibrant events</span>{" "}
+            <h1 className="text-center text-white lg:text-[40px] md:text-[36px] text-xl sm:text-2xl font-bold">
+              Explore the <span className="text-[#FFE047]">vibrant events</span>
               happening locally and globally.
             </h1>
           </div>
-          <div className="bg-[#3557C2] lg:block md:block hidden absolute ml-auto mr-auto left-0 right-0 -bottom-[50px] w-[90%] lg:w-[70vw] md:w-[90%] rounded-[10px] px-[3rem] py-[1.5rem] text-white">
-            <form className="flex justify-center gap-[2rem] lg:gap-[4rem] md:gap-[3rem]">
+          <div className="bg-[#3557C2] lg:block md:block hidden absolute mx-auto left-0 right-0 -bottom-[50px] w-fit rounded-[10px] py-[1.5rem] text-white px-4">
+            <form className="flex justify-center gap-[2rem] lg:gap-[4rem] md:gap-[3rem] w-fit ">
               <div className="grid gap-[0.6rem]">
                 <label htmlFor="" className="text-[0.7rem] font-[200]">
                   Search Event
@@ -256,8 +261,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-       {!loading && !error &&   <Outlet/>}
-       {events.length === 0 && <Message />}
+       <EventList/>
         </div>
 
         <Recommend />

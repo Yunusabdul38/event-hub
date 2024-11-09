@@ -1,13 +1,16 @@
 import { Link, useLoaderData, useNavigation } from "react-router-dom";
 import { appRoutes } from "../../config/routeMgt/RoutePaths";
 import EventCard from "../../components/cards/EventCard";
+import { useSelector } from "react-redux";
+import Message from "../../components/Message";
 
 export default function EventList (){
-    const {events,loading} = useLoaderData()
+  const {events,loading } = useSelector((state) => state.events);
     const navigation = useNavigation()
     return (
         <>
-        {navigation.state === "loading"  && <div className="w-full bg-[#3557c2] flex justify-center items-center h-[400px]">
+        {events.length === 0 && !loading && <Message />}
+        {loading  && <div className="w-full bg-[#3557c2] flex justify-center items-center h-[400px]">
         <span class="loader"></span>
       </div> }
         {events.length>0 &&   <>

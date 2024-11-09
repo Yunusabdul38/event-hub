@@ -39,6 +39,7 @@ import EventCard from "../cards/EventCard";
 
 export default function OtherEvents() {
   const {events} = useSelector((state) => state.events);
+  console.log(events)
   let otherEventsData = events.slice(0, 3);
   return (
     <div className="lg:px-12 md:px-8 px-4 my-16">

@@ -10,13 +10,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { logUserOut } from "../../services/Auth/user-context";
 
 const NavBar = () => {
-  const [isActive, setIsActive] = useState("Home");
-  const isLogin = false;
   const {token,user} = useSelector((state) => state?.user);
   // category and search
   const [selectedValue, setSelectedValue] = useState("");
   const [searchText, setSearchText] = useState("");
-  const {loading} = useSelector((state) => state.user);
   const dispatch = useDispatch()
   const handleSelectChange = (event) => {
     setSelectedValue(event.target.value);
@@ -75,94 +72,76 @@ const NavBar = () => {
           {/* sign up & login */}
           {token !== null ? (
             <div className="flex items-center justify-between gap-4">
-            <button className="bg-[#3557c2] capitalize py-1 px-2 rounded-md text-white" onClick={handleLogOut}>sign out</button>
+            <button className="border text-[#3557c2] border-[#3557c2] capitalize py-1 px-2 rounded-md hover:text-white hover:bg-[#3557c2] hover:border-transparent" onClick={handleLogOut}>sign out</button>
             <Link to="/profile" className="profileImage bg-gray-300 border w-[50px] h-[50px] rounded-full">
                 <img src={user?.avatar} alt="Profile Image" className="w-full h-full rounded-full" />
             </Link>
             </div>
           ) : (
-            <div className="min-w-[120px] flex items-center justify-between gap-4">
-              <Link to={appRoutes.sign_up}>
-                <AppButton variant="text" label="Sign Up" containerStyle="whitespace-nowrap min-w-[70px]" />
-              </Link>
-              <Link to={appRoutes.login}>
-                <AppButton label="Login" containerStyle="min-w-[70px]" />
-              </Link>
+            <div className="min-w-[120px] flex items-center justify-between gap-4 auth capitalize">
+              <NavLink to={appRoutes.sign_up} className="border border-[#3557c2] py-2 text-[#3557c2] rounded-md px-4">
+                sign up
+              </NavLink>
+              <NavLink to={appRoutes.login} className="border border-[#3557c2] py-2 text-[#3557c2] rounded-md px-4">
+                login
+              </NavLink>
             </div>
           )}
         </div>
-
+        
         {/* main nav area for large sreens*/}
         <div className="hidden lg:flex md:flex w-full relative justify-center">
-          <nav className="flex gap-4 justify-between">
-            <Link
-              className={`${isActive === "Home" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold px-1 lg:px-5 md:px-3 py-5`}
-              onClick={() => {
-                setIsActive("Home");
-              }}
+          <nav className="flex gap-4 justify-between large">
+            <NavLink
+              className="border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold px-1 lg:px-5 md:px-3 py-5"
               to={appRoutes.home}
             >
               Home
-            </Link>
-            <Link className={`${isActive === "Find Events" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold px-1 lg:px-5 md:px-3 py-5`}
-              onClick={() => {
-                setIsActive("Find Events");
-              }}
+            </NavLink>
+            <NavLink 
+              className="border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold px-1 lg:px-5 md:px-3 py-5"
               to={appRoutes.search}
             >
               Find Events
-            </Link>
-            <Link
-              className={`${isActive === "Create Events" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold px-1 lg:px-5 md:px-3 py-5`}
-              onClick={() => {
-                setIsActive("Create Events");
-              }}
+            </NavLink>
+            <NavLink
+              className="border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold px-1 lg:px-5 md:px-3 py-5"
               to={appRoutes.create_Event}
             >
               Create Events
-            </Link>
-            <Link
-              className={`${isActive === "Help Center" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold px-1 lg:px-5 md:px-3 py-5`}
-              onClick={() => {
-                setIsActive("Help Center");
-              }}
+            </NavLink>
+            <NavLink
+               className="border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold px-1 lg:px-5 md:px-3 py-5"
               to={appRoutes.helpCenter}
               >
               Help Center
-            </Link>
-            <Link
-              className={`${isActive === "About Us" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold px-1 lg:px-5 md:px-3 py-5`}
-              onClick={() => {
-                setIsActive("About Us");
-              }}
+            </NavLink>
+            <NavLink
+               className="border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold px-1 lg:px-5 md:px-3 py-5"
               to={appRoutes.aboutUs}
               >
               About Us
-            </Link>
-            <Link
-              className={`${isActive === "Contact Us" ? "text-[var(--app-blue)] border-t-[var(--app-blue)]" : ""}  border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold px-1 lg:px-5 md:px-3 py-5`}
-              onClick={() => {
-                setIsActive("Contact Us");
-              }}
+            </NavLink>
+            <NavLink
+               className="border-t-2 border-transparent hover:text-[var(--app-blue)] cursor-pointer ease-in duration-300 font-bold px-1 lg:px-5 md:px-3 py-5"
               to={appRoutes.contactUs}
             >
               Contact Us
-            </Link>
+            </NavLink>
           </nav>
         </div>
 
         {/* main nav for mobile screens (smartphone and tab) */}
-        <div className="flex lg:hidden md:hidden items-stretch justify-center gap-4 w-full py-5">
-        
-          <Link to={appRoutes.home} className="text-base border capitalize text-[#3557C2] px-2 py-1 rounded-lg border-[#3557C2]">
+        <div className="flex lg:hidden md:hidden items-stretch justify-center gap-4 w-full py-5 mobile text-center">        
+          <NavLink to={appRoutes.home} className="grid place-content-center text-base border capitalize text-[#3557C2] px-2 py-1 rounded-lg border-[#3557C2]">
           {/* <AppButton variant="transparent" label="Home"/> */}
-          home
-          </Link>
-          <NavLink to={appRoutes.search}  className="text-base border capitalize text-[#3557C2] px-2 py-1 rounded-lg border-[#3557C2] self-center">
+        home
+          </NavLink>
+          <NavLink to={appRoutes.search}  className="grid place-content-center text-base border capitalize text-[#3557C2] px-2 py-1 rounded-lg border-[#3557C2] self-center">
           Find events
           </NavLink>
     
-         <NavLink to={appRoutes.create_Event}  className="text-base border capitalize text-[#3557C2] px-2 py-1 rounded-lg border-[#3557C2]">
+         <NavLink to={appRoutes.create_Event}  className="grid place-content-center text-base border capitalize text-[#3557C2] px-2 py-1 rounded-lg border-[#3557C2]">
           create event +
          </NavLink>
         </div>

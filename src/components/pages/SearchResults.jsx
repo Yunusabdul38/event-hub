@@ -10,7 +10,6 @@ import { useSelector } from "react-redux";
 
 export default function SearchResults() {
   const {events} = useLoaderData()
-  //console.log(data)
   const [showFilter, setShowFilter] = useState(false);
   const navigate = useNavigate()
   function toEventDesc(){
@@ -23,13 +22,13 @@ export default function SearchResults() {
   }
   return (
     <>
-    <div className="overflow-x-hidden">
+    <div className="">
       <SeaarchHeader/>
       <div>
       {/* <div className="px-[1.5rem] mt-[2rem] text-[#2D2C3C]">    
         <h1 className="text-[1.3rem] flex items-center gap-[0.5rem]">Filter <FaSliders className="text-[1.3rem] md:hidden" onClick={filterHandler}/></h1>
       </div> */}
-      <div className="md:px-12 flex gap-[2rem] border border-red-950">
+      <div className="md:px-12 flex gap-[2rem]">
         {/* <Filter showFilter={showFilter}/> */}
         {/* <div className="h-[130vh] border-[0.1px] border-[#d1d5db] md:hidden"></div> */}
         
@@ -44,13 +43,6 @@ export default function SearchResults() {
       </div>
     </div>
     <div>
-    {/* <div className="px-[4rem] md:px-0">
-        <Recommend />
-      </div>
-
-      <div className="px-[4rem] md:px-[1rem]">
-        <OtherEvents />
-      </div> */}
     </div>
     </>
   );

@@ -1,27 +1,26 @@
-import { Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { appRoutes } from "./config/routeMgt/RoutePaths";
-import SearchResults from "./components/pages/SearchResults";
-import EventsDesc from "./components/pages/EventsDesc";
-import TicketBooking from "./components/pages/TicketBooking";
-import AttendeeDets from "./components/pages/AttendeeDets";
 import OrderSummary from "./components/pages/OrderSummary";
-import Share from "./components/pages/Share";
-import ComingSoon from "./components/ComingSoon";
 import DashboardLayout from "./layout/Layout";
-import LogIn from "./authentication/pages/LogIn";
-import SignUp from "./authentication/pages/SignUp";
-import Home from "./features/home/Home";
-import CreateEvent from "./features/createEvent/CreateEvent";
-import MainProfile from "./features/profile";
 import CreateEventContextProvider from "./stateManagement/CreateEventContex";
-import ContactUs from "./features/contactUs/ContactUs";
-import AboutUs from "./features/aboutUs/aboutUs";
 import { Loader } from "./components/Loading";
 import { eventLoader } from "./services/get-event-by-id";
 import { getAlleventLoader } from "./services/getEventByLimit";
+import { homeGetEventLoader } from "./services/home-page-loader.";
 
+// Lazy-load
+const Home = lazy(() => import("./pages/home/Home"));
+const SearchResults = lazy(() => import("./components/pages/SearchResults"));
+const EventsDesc = lazy(() => import("./components/pages/EventsDesc"));
+const ComingSoon = lazy(() => import("./components/ComingSoon"));
+const CreateEvent = lazy(() => import("./pages/createEvent/CreateEvent"));
+const LogIn = lazy(() => import("./pages/authentication/LogIn"));
+const SignUp = lazy(() => import("./pages/authentication/SignUp"));
+const MainProfile = lazy(() => import("./pages/profile/index"));
+const ContactUs = lazy(() => import("./pages/contactUs/ContactUs"));
+const AboutUs = lazy(() => import("./pages/aboutUs/aboutUs"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,6 +41,7 @@ const route = createBrowserRouter([
       {
         path: appRoutes.home,
         element: <Home />,
+        loader:homeGetEventLoader,
       },
       {
         path: appRoutes.contactUs,
@@ -58,20 +58,8 @@ const route = createBrowserRouter([
         loader: eventLoader,
       },
       {
-        path: appRoutes.ticketBooking,
-        element: <TicketBooking />,
-      },
-      {
-        path: appRoutes.attendeeDets,
-        element: <AttendeeDets />,
-      },
-      {
         path: appRoutes.orderSummary,
         element: <OrderSummary />,
-      },
-      {
-        path: appRoutes.share,
-        element: <Share />,
       },
       {
         path: appRoutes.login,

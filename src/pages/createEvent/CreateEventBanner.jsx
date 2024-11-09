@@ -27,6 +27,7 @@ export default function CreateEventBanner({ navigate, navigateBack }) {
           type="file"
           placeholder="select an image"
           required
+          accept="image/*"
           onChange={(e) => {
             const url = URL.createObjectURL(e.target.files[0]);
             dispatchFn({ type: "event/banner", image: url,file: e.target.files[0]});

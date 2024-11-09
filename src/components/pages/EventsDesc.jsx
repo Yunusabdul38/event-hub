@@ -19,6 +19,7 @@ import { useSelector } from "react-redux";
 import { END_POINT } from "../../config/environment";
 import ProtectedRouteMessage from "../ProtectedRouteMessage";
 import toast from "react-hot-toast";
+import { useView } from "../../hooks/useView";
 
 const tagData = [
   { name: "Tech" },
@@ -35,6 +36,8 @@ const tagData = [
 ];
 
 function EventsDesc() {
+  //hook to ie component from the top of the page
+  useView()
   //the return fetch event data
   const eventDetails = useLoaderData()
   const {token,user} = useSelector(state=>state.user)

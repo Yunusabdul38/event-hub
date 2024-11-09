@@ -9,7 +9,6 @@ const EventCard = ({ event }) => {
     event;
     const date = new Date(date_string).getDate()
     const month = new Date(date_string).toLocaleString('default', { month: 'short' });
-    console.log(date,date_string)
   return (
     <Link
       to={`/${id}`}
@@ -26,7 +25,7 @@ const EventCard = ({ event }) => {
           <h1 className="text-center text-[#2D2C3C] font-[600]">{date}</h1>
         </div>
         <div>
-          <h1 className="text-[1.1rem] font-[500]">{title}</h1>
+          <h1 className="text-[1.1rem] font-[500] capitalize">{title}</h1>
           <p className="text-[0.9rem]">{location}</p>
           <p className="text-[0.8rem] font-[300]">{startTime}-{endTime}</p>
           <div className="flex items-center gap-[0.7rem]">

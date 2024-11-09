@@ -23,26 +23,28 @@ export const updatePaswordFn = async (data,token,setIsLoading) => {
       myHeaders.append("x-auth-token", token);
 
       var requestOptions = {
-        method: "POST",
+        method: "PUT",
         headers: myHeaders,
         redirect: "follow",
         body: formData,
       };
-      await fetch(`${END_POINT.BASE_URL}/users/me/update-password`, requestOptions)
-        .then((response) => response.json())
-        .then((result) => {
-          if (result.success === true) {
+
+      try {
+        const request =await fetch(`${END_POINT.BASE_URL}/users/me/update-password`, requestOptions)
+        console.log(request)
+        if(!request.ok){
+          throw new Error (request)
+        }
+        const response = await request.json()
+        if (response.success === true) {
             toast.success(result.message);
           } else {
             toast.error(`Password Update Failed check your inputs and try again`);
             console.log("error", result);
           }
+      } catch (error) {
+        console.log("error", error);
           setIsLoading(false)
-        })
-        .catch((error) => {
-          toast.error("Event Creation Failed");
-          console.log("error", error);
-          setIsLoading(false)
-        });
+      }
     }
   };

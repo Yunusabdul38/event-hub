@@ -15,7 +15,7 @@ import { getEvents } from "../../services/Auth/event-contex";
 import { useDispatch, useSelector } from "react-redux";
 import { END_POINT } from "../../config/environment";
 import { Loader } from "../../components/Loading";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { appRoutes } from "../../config/routeMgt/RoutePaths";
 import  Message  from "../../components/Message";
 
@@ -28,69 +28,9 @@ const categoriesData = [
   { name: "Sports & Fitness", image: field },
 ];
 
-const upcomingData = [
-  {
-    imageUrl: image1,
-    location: "Colab",
-    month: "JAN",
-    date: "25 - 26",
-    title: "Introduction to Artificial Intelligence (AI)",
-    time: "8:30 AM - 7:30 PM",
-    ticket: "Free",
-    interested: 14,
-  },
-  {
-    imageUrl: image2,
-    location: "Ihifix",
-    month: "FEB",
-    date: "01 - 04",
-    title: "Africa Soft Power Summit 2024",
-    time: "8:30 AM - 7:30 PM",
-    ticket: "Free",
-    interested: 14,
-  },
-  {
-    imageUrl: image1,
-    location: "KADAHIVE",
-    month: "FEB",
-    date: "25 - 26",
-    title: "The RollApp Draft Hackathon Powered b...",
-    time: "8:30 AM - 7:30 PM",
-    ticket: "Free",
-    interested: 14,
-  },
-  {
-    image: image2,
-    location: "Colab",
-    month: "JAN",
-    date: "25 - 26",
-    title: "Introduction to Artificial Intelligence (AI)",
-    time: "8:30 AM - 7:30 PM",
-    ticket: "Free",
-    interested: 14,
-  },
-  {
-    imageUrl: image1,
-    location: "Ihifix",
-    month: "FEB",
-    date: "01 - 04",
-    title: "Africa Soft Power Summit 2024",
-    time: "8:30 AM - 7:30 PM",
-    ticket: "Free",
-    interested: 14,
-  },
-  {
-    imageUrl: image2,
-    location: "KADAHIVE",
-    month: "FEB",
-    date: "25 - 26",
-    title: "The RollApp Draft Hackathon Powered b...",
-    time: "8:30 AM - 7:30 PM",
-    ticket: "Free",
-    interested: 14,
-  },
-];
 export default function Home() {
+  const loader = useLoaderData()
+  console.log(loader)
   const [searchEvent, setSearchEvent] = useState("Google Dev Fest");
   const [placeValue, setPlaceValue] = useState("KadaHive");
   const [timeValue, setTimeValue] = useState("Any Date");

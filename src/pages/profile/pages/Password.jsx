@@ -1,14 +1,18 @@
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { IoEyeOffSharp, IoEyeSharp } from "react-icons/io5";
+import { updatePaswordFn } from "../../../services/update-password";
+import { useSelector } from "react-redux";
 
 const Password = () => {
+  const {token} = useSelector((state)=>state.user)
+  const [isLoading,setIsLoading] = useState(false)
   const oldPassword = useRef(null);
   const newPassword = useRef(null);
   const confirmpassword = useRef(null);
   const [showPassword, setShowPassword] = useState(true);
 
-const  handleSubmit = (e) => {
+const handleSubmit = (e) => {
     e.preventDefault()
     const old_Password = oldPassword.current.value;
     const new_Password = newPassword.current.value;
@@ -22,7 +26,13 @@ const  handleSubmit = (e) => {
       toast.error("Passwords does not match!");
       return
     }
-    console.log({old_Password,new_Password,confirm_password})    
+    const data = {
+      oldPassword:old_Password,
+      newPassword:new_Password,
+      confirmpassword:confirm_password
+    }
+    console.log(token)
+    updatePaswordFn(data,token, setIsLoading)
   }
   return (
     <main className="max-w-full mx-auto lg:px-16 md:px-8 px-4">
@@ -30,19 +40,19 @@ const  handleSubmit = (e) => {
 
       <form onSubmit={handleSubmit}>
         <p>A password has not been set for your account </p>
-        <div>
+        <div className="grid gap-4 mt-6">
         <span className="grid gap-2 w-full relative">
             <label htmlFor="oldPassword">
             <span>old Password</span>
             </label>
             <input
+            ref={oldPassword}
               className="w-full border border-gray-500 outline-none rounded-md p-3 text-center md:text-start"
               type={!showPassword ? "text" : "password"}
               id="oldPassword"
               name="oldPassword"
               placeholder="Enter password"
               required
-              onChange={handleChange}
             />
             <div
             className="absolute right-2 bottom-3 p-1 text-gray-600 text-lg"
@@ -56,13 +66,13 @@ const  handleSubmit = (e) => {
             <span>new Password</span>
             </label>
             <input
+            ref={newPassword}
               className="w-full border border-gray-500 outline-none rounded-md p-3 text-center md:text-start"
               type={!showPassword ? "text" : "password"}
               id="newPassword"
               name="newPassword"
               placeholder="Enter password"
               required
-              onChange={handleChange}
             />
             <div
             className="absolute right-2 bottom-3 p-1 text-gray-600 text-lg"
@@ -76,13 +86,13 @@ const  handleSubmit = (e) => {
               <span>confirm Password</span>
             </label>
             <input
+            ref={confirmpassword}
               className="w-full border border-gray-500 outline-none rounded-md p-3 text-center md:text-start"
               type={!showPassword ? "text" : "password"}
               id="confirmPassword"
               name="confirmPassword"
               placeholder="Confirm password"
               required
-              onChange={handleChange}
             />
             <div
                className="absolute right-2 bottom-3 p-1 text-gray-600 text-lg"
@@ -92,8 +102,8 @@ const  handleSubmit = (e) => {
             </div>
           </span>
         </div>
-        <div className="formBtn max-w-[500px] mx-auto my-8 text-left">
-          <button className="bg-[#3557C2]/90 text-white px-8 hover:bg-[#3557C2] transition-all duration-400 py-3 rounded-[8px]">Set Password</button>
+        <div className="formBtn max-w-[500px] my-8 text-left">
+          <button className="disabled:cursor-not-allowed bg-[#3557C2]/90 text-white px-8 hover:bg-[#3557C2] transition-all duration-400 py-3 rounded-[8px]" disabled={isLoading} >Set Password</button>
         </div>
       </form>
     </main>

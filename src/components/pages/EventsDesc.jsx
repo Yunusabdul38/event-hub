@@ -215,38 +215,6 @@ function EventsDesc() {
 
       <div className="mt-[3rem]">
         <h1 className="text-[1.4rem] sm:text-[1.2rem] font-[600]">Event Description</h1>
-        {/* <div className="text-[#5A5A5A] italic">
-          <p className="my-[1rem]">
-            Lorem ipsum dolor sit amet consectetur. Et mattis integer arcu
-            ultricies elit scelerisque. Proin in nulla nuncincidunt{" "}
-          </p>
-          <p className="my-[1rem]">
-            Lorem ipsum dolor sit amet consectetur. Et mattis integer arcu
-            ultricies elit scelerisque. Proin in nulla nunc lacus lectus tempus
-            vel condimentum dis. Tincidunt pretium erat interdum consectetur.
-            Arcu euismod lectus tortor duis egestas amet lacinia magna.
-          </p>
-          <p className="my-[1rem]">
-            Lorem ipsum dolor sit amet consectetur. Et mattis integer arcu
-            ultricies elit scelerisque. Proin in nulla nunc lacus lectus tempus
-            vel condimentum dis. Tincidunt pretium erat interdum consectetur.
-            Arcu euismod lectus tortor duis egestas amet lacinia magna.
-          </p>
-        </div>
-        <div className="text-[0.9rem] text-[#5A5A5A]">
-          <h1 className="mb-[1rem] font-[700]">
-            3 Reasons to attend the event:
-          </h1>
-          <p className="text-[0.9rem]">
-            1. Lorem ipsum dolor sit amet consectetur.
-          </p>
-          <p className="text-[0.9rem]">
-            2. Lorem ipsum dolor sit amet consectetur.
-          </p>
-          <p className="text-[0.9rem]">
-            3. Lorem ipsum dolor sit amet consectetur.
-          </p>
-        </div> */}
         {description}
       </div>
 

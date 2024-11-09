@@ -3,12 +3,14 @@ import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { appRoutes } from "./config/routeMgt/RoutePaths";
 import OrderSummary from "./components/pages/OrderSummary";
-import DashboardLayout from "./layout/Layout";
+import DashboardLayout from "./components/layout/Layout";
 import CreateEventContextProvider from "./stateManagement/CreateEventContex";
 import { Loader } from "./components/Loading";
 import { eventLoader } from "./services/get-event-by-id";
 import { getAlleventLoader } from "./services/getEventByLimit";
 import { homeGetEventLoader } from "./services/home-page-loader.";
+import ErrorPage from "./components/ErrorPage";
+import EventList from "./pages/home/EventList";
 
 // Lazy-load
 const Home = lazy(() => import("./pages/home/Home"));
@@ -37,11 +39,16 @@ const route = createBrowserRouter([
   {
     path:"/",
     element: <DashboardLayout/>,
+    errorElement:<ErrorPage/>,
     children:[
       {
         path: appRoutes.home,
         element: <Home />,
-        loader:homeGetEventLoader,
+        children:[{
+          path:"/",
+          element:<EventList/>,
+          loader:homeGetEventLoader,
+        }]
       },
       {
         path: appRoutes.contactUs,

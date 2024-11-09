@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Select, MenuItem, TextField, InputAdornment, Box } from "@mui/material";
 import { Link, NavLink } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
-import { AppButton } from "../components/button/AppButton";
+import { AppButton } from "../../components/button/AppButton";
 import styles from './Layout.module.css'
-import { appRoutes } from "../config/routeMgt/RoutePaths";
-import logo from "../assets/logo.png";
+import { appRoutes } from "../../config/routeMgt/RoutePaths";
+import logo from "../../assets/logo.png";
 import { useDispatch, useSelector } from "react-redux";
-import { logUserOut } from "../services/Auth/user-context";
+import { logUserOut } from "../../services/Auth/user-context";
 
 const NavBar = () => {
   const [isActive, setIsActive] = useState("Home");

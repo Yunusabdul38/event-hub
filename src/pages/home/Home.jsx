@@ -5,19 +5,13 @@ import education from "../../../src/assets/images/education.png";
 import entertainment from "../../../src/assets/images/entertainment.png";
 import field from "../../../src/assets/images/field.png";
 import governmental from "../../../src/assets/images/governmental.png";
-import image1 from "../../../src/assets/images/blocks.png";
-import image2 from "../../../src/assets/images/blog.png";
 import Recommend from "../../components/pages/Recommend";
 import OtherEvents from "../../components/pages/OtherEvents";
-import EventCard from "../../components/cards/EventCard";
+
 import { FaSliders } from "react-icons/fa6";
-import { getEvents } from "../../services/Auth/event-contex";
-import { useDispatch, useSelector } from "react-redux";
-import { END_POINT } from "../../config/environment";
-import { Loader } from "../../components/Loading";
-import { Link, useLoaderData } from "react-router-dom";
-import { appRoutes } from "../../config/routeMgt/RoutePaths";
-import  Message  from "../../components/Message";
+import { useSelector } from "react-redux";
+import {  Outlet } from "react-router-dom";
+import Message from "../../components/Message"
 
 const categoriesData = [
   { name: "Technology & Innovation", image: tech },
@@ -29,18 +23,10 @@ const categoriesData = [
 ];
 
 export default function Home() {
-  const loader = useLoaderData()
-  console.log(loader)
   const [searchEvent, setSearchEvent] = useState("Google Dev Fest");
   const [placeValue, setPlaceValue] = useState("KadaHive");
   const [timeValue, setTimeValue] = useState("Any Date");
-  const dipatch =  useDispatch();
-  const {events,loading} = useSelector((state) => state.events);
-  useEffect(()=>{
-    if(events.length === 0){
-      dipatch(getEvents())
-    }
-  },[])
+  const {events,loading,error} = useSelector((state) => state.events);
 
   useEffect(() => {
     const storedValue = localStorage.getItem("searchEvent");
@@ -270,40 +256,9 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="mt-[2rem] flex flex-wrap justify-center gap-[2rem] md:gap-[1rem] sm:gap-0">
-          {loading && <div className="w-full bg-[#3557c2] flex justify-center items-center h-[400px]">
-              <span class="loader"></span>
-            </div> }
-            {events.length !==0  && <>
-            {events.map((data, index) => {
-              return <EventCard event={data} key={index} />;
-            })}
-            </>}
-          </div>
-          {events.length > 0 && <div className="flex flex-wrap justify-center">
-          <Link to={appRoutes.search} className="bg-[#3557C2] text-center  py-[0.5rem] rounded-[5px] text-white mx-auto w-4/5 sm:w-[400px]">
-            See More
-          </Link>
-          </div>}
+       {!loading && !error &&   <Outlet/>}
+       {events.length === 0 && <Message />}
         </div>
-        {events.lengt === 0 && !loading && <Message />}
-       {events.length > 0 &&  <div className="mt-[5rem] mb-[5rem] lg:px-12 md:px-8 px-4">
-          <div className="flex items-center gap-[13rem]">
-            <h2 className="text-[24px] lg:text-[32px] md:text[28px] font-[700] font-montserrat text-[#2D2C3C]">
-              Popular Events
-            </h2>
-          </div>
-          <div className="mt-[2rem] flex flex-wrap justify-center gap-[2rem] md:gap-[1rem] sm:gap-0">
-            {events.map((data, index) => {
-              return <EventCard event={data} key={index} />;
-            })}
-          </div>
-          <div className="flex flex-wrap justify-center">
-          <Link to={appRoutes.search} className="bg-[#3557C2] text-center  py-[0.5rem] rounded-[5px] text-white mx-auto w-4/5 sm:w-[400px]">
-            See More
-          </Link>
-          </div>
-        </div>}
 
         <Recommend />
         {events.length > 0 && <OtherEvents />}

@@ -1,6 +1,5 @@
 import toast from "react-hot-toast";
 import { END_POINT } from "../config/environment";
-import { getEvents } from "./Auth/event-contex";
 
 export const createEventFn = async (eventDetails,file,navigate,token,setIsLoading,dispatchFn) => {
   setIsLoading(true)

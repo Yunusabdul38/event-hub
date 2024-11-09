@@ -1,7 +1,7 @@
-import googlePlay from '../assets/googlePlay.png'
-import apple from '../assets/apple.png'
+import googlePlay from '../../assets/googlePlay.png'
+import apple from '../../assets/apple.png'
 import { Link } from 'react-router-dom';
-import { appRoutes } from '../config/routeMgt/RoutePaths';
+import { appRoutes } from '../../config/routeMgt/RoutePaths';
 
 
 const Footer = () => {

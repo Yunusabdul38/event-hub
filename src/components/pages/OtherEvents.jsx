@@ -39,7 +39,6 @@ import EventCard from "../cards/EventCard";
 
 export default function OtherEvents() {
   const {events} = useSelector((state) => state.events);
-  console.log(events)
   let otherEventsData = events.slice(0, 3);
   return (
     <div className="lg:px-12 md:px-8 px-4 my-16">
@@ -47,7 +46,7 @@ export default function OtherEvents() {
         Explore Categories
       </h2>
       <div className="mt-[2rem] flex flex-wrap justify-center lg:gap-[2rem] md:gap-[1rem] gap-4">
-        {otherEventsData.map((data, index) => {
+        {otherEventsData?.map((data, index) => {
           return (
             <EventCard event={data} key={index} />
           );

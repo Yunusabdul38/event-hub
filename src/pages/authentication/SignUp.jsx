@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
-import { appRoutes } from "../config/routeMgt/RoutePaths";
-import AuthenticationDetails from "../components/button/AuthenticationDetails";
-import AuthenticationForm from "../components/button/AuthenticationForm"
+import { appRoutes } from "../../config/routeMgt/RoutePaths";
+import AuthenticationDetails from "../../components/button/AuthenticationDetails";
+import AuthenticationForm from "../../components/button/AuthenticationForm"
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { GoArrowUpRight } from "react-icons/go";
 import { IoEyeOffSharp, IoEyeSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { userSignUp } from "../services/Auth/user-context";
+import { userSignUp } from "../../services/Auth/user-context";
 
 
 const SignUp = () => {

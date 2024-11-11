@@ -28,10 +28,9 @@ const handleSubmit = (e) => {
     }
     const data = {
       oldPassword:old_Password,
-      newPassword:new_Password,
-      confirmpassword:confirm_password
+      password:new_Password,
+      confirmPassword:confirm_password
     }
-    console.log(token)
     updatePaswordFn(data,token, setIsLoading)
   }
   return (

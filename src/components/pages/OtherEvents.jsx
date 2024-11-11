@@ -4,42 +4,9 @@ import image2 from "../../../src/assets/images/image2.png";
 import image3 from "../../../src/assets/images/image3.png";
 import EventCard from "../cards/EventCard";
 
-// const otherEventsData = [
-//   {
-//     image: image1,
-//     location: "Colab",
-//     month: "JAN",
-//     date: "25 - 26",
-//     title: "Introduction to Artificial Intelligence (AI)",
-//     time: "8:30 AM - 7:30 PM",
-//     ticket: "Free",
-//     interested: 14,
-//   },
-//   {
-//     image: image2,
-//     location: "Ihifix",
-//     month: "FEB",
-//     date: "01 - 04",
-//     title: "Africa Soft Power Summit 2024",
-//     time: "8:30 AM - 7:30 PM",
-//     ticket: "Free",
-//     interested: 14,
-//   },
-//   {
-//     image: image3,
-//     location: "KADAHIVE",
-//     month: "FEB",
-//     date: "25 - 26",
-//     title: "The RollApp Draft Hackathon Powered b...",
-//     time: "8:30 AM - 7:30 PM",
-//     ticket: "Free",
-//     interested: 14,
-//   },
-// ]
-
 export default function OtherEvents() {
   const {events} = useSelector((state) => state.events);
-  console.log(events)
+
   let otherEventsData = events.slice(0, 3);
   return (
     <div className="lg:px-12 md:px-8 px-4 my-16">

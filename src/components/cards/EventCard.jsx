@@ -12,7 +12,7 @@ const EventCard = ({ event }) => {
   return (
     <Link
       to={`/${id}`}
-      className="mb-[3rem] border border-gray-50 w-fit sm:w-[350px] hover:border-gray-200 transition-all duration-300 p-4 rounded-[8px] cursor-pointer"
+      className="mb-[3rem] border border-gray-50 w-[300px] sm:w-[350px] hover:border-gray-200 transition-all duration-300 p-4 rounded-[8px] cursor-pointer"
     >
       <img
         src={imageUrl}

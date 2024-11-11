@@ -9,6 +9,9 @@ import { FcGoogle } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { userSignIn } from "../../services/Auth/user-context";
 
+const arr = [1,2,...[3,4]]
+
+console.log()
 const LogIn = () => {
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(true);

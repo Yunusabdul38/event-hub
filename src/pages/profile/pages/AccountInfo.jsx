@@ -7,7 +7,8 @@ import { updateUser } from "../../../services/upate-user";
 const AccountInfo = () => {
   const {user,token} = useSelector((state) => state?.user);
   const {fullName,avatar,portfolio,github,bio} = user
-  const [profileImage, setProfileImage] = useState(avatar);
+  const [profileImage, setProfileImage] = useState();
+  const [imageFile,setImageFile] = useState(null)
   const [contactInfo, setContactInfo] = useState([]);
   const [profileInfo, setProfileInfo] = useState([]);
   const dispatcher = useDispatch();
@@ -15,12 +16,14 @@ const AccountInfo = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleProfileImage = (e) => {
+    setImageFile(e.target.files[0])
     const imageFile = e.target.files[0];
     const fileReader = new FileReader();
     fileReader.readAsDataURL(imageFile);
 
     fileReader.onload = (e) => {
       setProfileImage(e.target.result);
+      console.log(e.target.result)
     };
     // setProfileImage(e.target.files[0]);
     console.log(e.target.files[0]);
@@ -41,21 +44,12 @@ const AccountInfo = () => {
     //   alert("Fill form completely");
     //   return;
     // }
-    let data = {
-      fullName:fullName,
-      bio,
-      portfolio,
-      github,
-      image:avatar
-    };
+    let data = {};
     if(profileInfo.firstname){
-      data.fullName = profileInfo.firstname + " " + profileInfo.lastname
+      data.fullName = profileInfo.firstname ?? firstName + " " + profileInfo.lastname ?? lastName
     }
     if(profileInfo.lastname){
-      data.fullName = profileInfo.firstname + " " + profileInfo.lastname
-      const full = profileInfo.firstname + " " + profileInfo.lastname
-      let [_, ...b] = full.split(" ")
-      console.log(b.join(" "));
+      data.fullName = profileInfo.firstname ??  firstName + " " + profileInfo.lastname ?? lastName
     }
     if(profileInfo.bio){
       data.bio = profileInfo.bio
@@ -66,8 +60,8 @@ const AccountInfo = () => {
     if(contactInfo.number){
       data.contact = contactInfo.number
     }
-    if(profileInfo.profileImage){
-      data.image = profileInfo.profileImage
+    if(imageFile){
+      data.avatar = imageFile
     } 
     if(profileInfo.github){
       data.github = profileInfo.github
@@ -89,7 +83,7 @@ const AccountInfo = () => {
         <div className="image lg:w-[200px] md:w-[200px] w-[200px] h-[200px] border relative rounded-full bg-gray-200 flex items-center justify-center">
             <img
               className="w-full h-full rounded-full"
-              src={avatar}
+              src={profileImage?profileImage: avatar}
               alt="Profile Image"
             />
           <div className="imageBtn absolute cursor-pointer border border-gray-800 overflow-hidden w-[45px] h-[45px] rounded-full bottom-[15px] right-[0px]">

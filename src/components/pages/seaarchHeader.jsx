@@ -26,6 +26,7 @@ export default function SeaarchHeader({searchHandler}) {
       toast.error("Failed to search for event")
     }
   }
+  
   return (
     <div className="relative">
       <div className="w-[100vw] h-[300px] md:h-[300px] relative">

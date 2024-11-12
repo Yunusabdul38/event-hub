@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Select, MenuItem, TextField, InputAdornment, Box } from "@mui/material";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import { AppButton } from "../../components/button/AppButton";
 import styles from './Layout.module.css'
@@ -11,18 +11,21 @@ import { logUserOut } from "../../services/Auth/user-context";
 
 const NavBar = () => {
   const {token,user} = useSelector((state) => state?.user);
-  // category and search
+  // category and search pathname: "/search"
   const [selectedValue, setSelectedValue] = useState("");
-  const location = useLocation();
+  const {pathname} = useLocation();
+  const navigate = useNavigate()
   const [searchText, setSearchText] = useState("");
   const dispatch = useDispatch()
+
   const handleSelectChange = (event) => {
     setSelectedValue(event.target.value);
   };
 
   const handleSearchChange = (event) => {
-    console.log(event.target.value);
-    console.log(location)
+    if(pathname !== "/search"){
+      navigate(`/search`)
+    }
     setSearchText(event.target.value);
   };
 

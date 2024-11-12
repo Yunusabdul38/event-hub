@@ -27,7 +27,7 @@ const SignUp = () => {
     e.preventDefault()
     const {confirmPassword,email,fullName,password} = formData
     const validationErrors = {};
-
+    console.log(formData)
     if (!formData.fullName.trim()) {
       validationErrors.name = "Name is required"
     }
@@ -48,16 +48,12 @@ const SignUp = () => {
       validationErrors.confirmPassword = "Passwords do not match!"
     }
 
-    if (!formData.check.trim()) {
-      validationErrors.check = "Please agree with our terms of use!"
-    }
-
     setErrors(validationErrors)
 
-    if (Object.keys(validationErrors).length === 0) {
-      alert("Form Submitted Successfuly")
-      setFormData({})
-    }  
+    // if (Object.keys(validationErrors).length === 0) {
+    //   alert("Form Submitted Successfuly")
+    //   setFormData({})
+    // }  
     
     dispatch(userSignUp({confirmPassword,email,fullName,password}))
   }
@@ -155,11 +151,6 @@ const SignUp = () => {
               {!showPassword ? <IoEyeSharp /> : <IoEyeOffSharp />}
             </div>
           </span>
-          <div className="flex items-center text-center">
-              <input type="checkbox" />
-              <span>I agree with the <span className="no-underline text-[blue]">Terms of Use</span> and <span className="no-underline text-[blue]">Privacy Policy</span></span> 
-          </div>
-          {errors.check && <span className="my-13 text-[red] block">{errors.check}</span>}
           <button
             className="hover:bg-[#17337C] bg-[#3557C2] border-none capitalize text-white font-openSans font-semibold w-full py-3 cursor-pointer disabled:cursor-not-allowed"
             type="submit"
@@ -185,9 +176,6 @@ const SignUp = () => {
           </div>
         </form>
       </AuthenticationForm>
-      <div className="flex justify-center items-center h-full">
-      <div className="w-12 h-12 border-4 border-gray-300 border-t-transparent rounded-full animate-spin"></div>
-    </div>
     </div>
   )
 }

@@ -31,18 +31,23 @@ export const userSignUp = createAsyncThunk(
     'user/signUp',
     async (data,{ rejectWithValue }) => {
       try{
-        const request = await fetch("https://apis-event-hub.onrender.com/api/users/signup", {
+        const request = await fetch(`${END_POINT.BASE_URL}/users/signup`, {
           method: "Post",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
         });
-        if (!request.ok){
-          throw new Error(`Failed to create user`);
-        }
+        console.log(request)
+        // if (!request.ok){
+        //   throw new Error(`Failed to create user`);
+        // }
         const res = await request.json()
-        toast.success("welcome to event hub")
+        if(request.status === 401){
+          throw new Error(res.message);
+        }
+        console.log(res)
+        //toast.success("welcome to event hub")
         return res;
       }catch(error){
         toast.error(error.message)

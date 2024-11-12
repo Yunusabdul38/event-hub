@@ -20,50 +20,16 @@ export const updatePaswordFn = async (data,token,setIsLoading) => {
           headers:{
             'Content-Type': 'application/json',
             "x-auth-token":token,
-            //Authorization:`Bearer ${token}`,
           }          
         })
-        console.log(request)
-        if(request.status !== 200){
-          throw new Error(request)
-        }
         setIsLoading(false)
-          const response = request.json()
+          const response = await request.json()
           console.log(response)
+          toast.success(response.message)
       }catch(error){
+        toast.error("failed to update password")
         setIsLoading(false)
         console.log(error)
       }
     }
-     
-    // if (token) {
-    //   // Verify token on the backend
-    //   var myHeaders = new Headers();
-    //   myHeaders.append("Authorization",`Bearer ${token}`)
-
-    //   var requestOptions = {
-    //     method: "PUT",
-    //     headers: myHeaders,
-    //     redirect: "follow",
-    //     body: formData,
-    //   };
-
-    //   try {
-    //     const request =await fetch(`${END_POINT.BASE_URL}/users/me/update-password`, requestOptions)
-    //     console.log(request)
-    //     if(!request.ok){
-    //       throw new Error (request)
-    //     }
-    //     const response = await request.json()
-    //     if (response.success === true) {
-    //         toast.success(result.message);
-    //       } else {
-    //         toast.error(`Password Update Failed check your inputs and try again`);
-    //         console.log("error", result);
-    //       }
-    //   } catch (error) {
-    //     console.log("error", "error sening request");
-    //       setIsLoading(false)
-    //   }
-    //  }
   };

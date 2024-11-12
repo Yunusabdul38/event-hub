@@ -120,17 +120,17 @@ const Profile = ({activePath}) => {
   
   return (
     <main className="lg:px-0 md:px-0 px-2">
-      <div className="w-full flex py-10 px-4 gap-4">
-        <div className="profileImage w-[350px] rounded-[18px] overflow-hidden shadow-md h-[250px] bg-gray-200 flex items-center justify-center">
+      <div className="w-full flex flex-col md:flex-row py-10 px-4 gap-4 items-center relative">
+        <div className="border w-52 h-52 md:w-1/2 md:h-fit max-w-72 overflow-hidden shadow-md bg-gray-200 rounded-full flex items-center justify-center">
             <img
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-full"
               src={user?.avatar}
               alt="Profile Image"
             />
         </div>
 
-        <div className="profileBio w-full flex items-start justify-between">
-          <div className="details text-gray-700 flex flex-col gap-2">
+        <div className="profileBio w-full flex items-start justify-between sm:text-center">
+          <div className="text-gray-700 mx-auto md:mx-0">
             {/* Name */}
             <div className="name text-2xl capitalize mb-5 font-bold">
               <h2>{user?.fullName}</h2>
@@ -145,11 +145,11 @@ const Profile = ({activePath}) => {
             {/* Contact Number */}
             <div className="contact lg:text-[16px] md:text-[16px] text-sm">
               <span>Contact Number: </span>
-              <span>{user?.contact_number?user?.contact_number:"000000000"}</span>
+              <span>{user?.contact?user?.contact:"000000000"}</span>
             </div>
           </div>
 
-          <div className="editIcon cursor-pointer pt-1">
+          <div className="editIcon cursor-pointer pt-1 absolute top-0 right-0">
             <img className="w-[25px] h-[25px] cursor-pointer" src="https://img.icons8.com/fluency-systems-regular/48/create-new.png" alt="create-new" onClick={() => 
               activePath({
                 path: "account info"

@@ -18,7 +18,6 @@ export default function CreateEvent() {
   const [route, setRoute] = useState(0);
   const navigate = useNavigate();
   const {token} = useSelector((state) => state.user)
-  console.log(token)
   const eventDetails = useEvent();
   // navigate a step back to the previous route/create form component
   function oneClickBack() {

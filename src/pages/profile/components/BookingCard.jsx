@@ -58,11 +58,11 @@ const BookingCard = ({ booking }) => {
         </div>
       </div>
 
-      <div className="cardExtra flex flex-col lg:items-start md:items-start items-center lg:gap-1 md:gap-1 gap-0 mt-4 lg:text-[16px] md:text-[16px] text-sm">
+      {/* <div className="cardExtra flex flex-col lg:items-start md:items-start items-center lg:gap-1 md:gap-1 gap-0 mt-4 lg:text-[16px] md:text-[16px] text-sm">
         <p className="text-gray-700">Follow Organizers</p>
         <p className="text-gray-700">Report Event</p>
         <p className="cursor-pointer text-red-700 underline">Cancel Booking</p>
-      </div>
+      </div> */}
     </div>
   );
 };

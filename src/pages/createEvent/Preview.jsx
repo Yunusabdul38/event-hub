@@ -29,7 +29,6 @@ export default function Review({ eventDetails }) {
   const [isLoading,setIsLoading] = useState(false)
   const handleSubmit = async () => {
    await createEventFn(eventDetails,file,navigate,token,setIsLoading,dispatchFn)
-   console.log("end")
   };
   useView();
 
@@ -109,15 +108,15 @@ export default function Review({ eventDetails }) {
           </div>
           <div className="mt-8 grid gap-3">
             <h3 className="font-medium text-xl">hosted by</h3>
-            <div className="grid grid-cols-[.5fr_2fr] max-w-64 gap-3">
-              <div className="rounded-md bg-[#B9B9B9]" />
+            <div className="flex gap-3">
+              <div className="rounded-md bg-[#B9B9B9] w-16" />
               <div className="grid gap-2">
                 <h3 className="font-semibold text-sm">{eventDetails.orgName.name}</h3>
-                <div className="flex gap-1">
-                  <button className="capitalize px-3  py-[2px] ">
+                <div className="flex gap-1 items-center">
+                  <h2 className="capitalize  py-[2px] ">
                   {eventDetails.orgEmail.Email}
-                  </button>
-                  <button className="capitalize px-3 py-[2px] border">
+                  </h2>
+                  <button className="capitalize px-3 border rounded-md flex items-center gap-2 hover:text-[#3557c2]">
                     + follow
                   </button>
                 </div>

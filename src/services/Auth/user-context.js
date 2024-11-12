@@ -60,24 +60,32 @@ export const userSignUp = createAsyncThunk(
     'user/update',
     async (data,{ rejectWithValue }) => {
       const {data:updateData, token} = data   
-        try{
-            const reqest = await fetch(`${END_POINT.BASE_URL}/users/me/update`, {
-              method: "put",
-              headers: {
-                "Content-Type": "application/json",
-                'Authorization': `Bearer ${token}`,
-              },
-              body: JSON.stringify(updateData),
-            });
-            if (!reqest.ok){
-              throw new Error(`Failed to create user st: ${reqest.status} stText${reqest.statusText} formdata ${reqest.formData} body ${reqest.body}`);
-            }
-            const res = await reqest.json()
-            console.log(res)
-            return res
-          }catch(error){
-            return rejectWithValue(error.message);
-          }
+      const formData = new FormData();
+      for (const key in updateData) {
+       formData.append(key, updateData[key]);
+      }
+      console.log(formData,updateData)
+       if (token) {
+        var myHeaders = new Headers();
+        myHeaders.append("x-auth-token", token);
+  
+        var requestOptions = {
+          method: "PUT",
+          headers: myHeaders,
+          redirect: "follow",
+          body: formData,
+        };
+        try {
+          const request = await fetch(`${END_POINT.BASE_URL}/users/me/update`, requestOptions)
+          const response = await request.json() 
+          console.log(response)
+          toast.success(response.message)
+          return  response.data.user
+        } catch (error) {
+          console.log("error", error);
+          return rejectWithValue("failed to update user profile");
+        }
+      }
     },
   )  
   export const logUserOut = createAsyncThunk(
@@ -153,7 +161,6 @@ const  authentication =createSlice({
           console.log(action.payload)
             state.user=action.payload
             state.loading = false;
-            state.token = action.payload.token;
             state.error=null
         }),
         builder.addCase(updateUserDetails.rejected,(state,action)=>{

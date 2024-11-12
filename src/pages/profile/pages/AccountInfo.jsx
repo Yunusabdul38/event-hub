@@ -2,10 +2,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserDetails } from "../../../services/Auth/user-context";
 import { Loader } from "../../../components/Loading";
-import { updateUser } from "../../../services/upate-user";
 
 const AccountInfo = () => {
-  const {user,token} = useSelector((state) => state?.user);
+  const {user,token,loading} = useSelector((state) => state?.user);
   const {fullName,avatar,portfolio,github,bio} = user
   const [profileImage, setProfileImage] = useState();
   const [imageFile,setImageFile] = useState(null)
@@ -13,7 +12,6 @@ const AccountInfo = () => {
   const [profileInfo, setProfileInfo] = useState([]);
   const dispatcher = useDispatch();
   const [firstName,...lastName] = fullName?.split(" ");
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleProfileImage = (e) => {
     setImageFile(e.target.files[0])
@@ -38,7 +36,7 @@ const AccountInfo = () => {
     setProfileInfo({ ...profileInfo, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const  handleSubmit =  (e) => {
     e.preventDefault();
     // if(profileInfo.length < 4 || contactInfo.length < 5) {
     //   alert("Fill form completely");
@@ -67,12 +65,13 @@ const AccountInfo = () => {
       data.github = profileInfo.github
     }
     console.log(data);
-    updateUser(data,token,setIsLoading);
+    dispatcher(updateUserDetails({data,token}));
+    //updateUser(data,token,setIsLoading)
  }
 
   return (
     <>
-    {isLoading && <Loader/> }
+    {/* {loading && <Loader/> } */}
     <main className="px-3">
       <h2 className="font-bold text-gray-800 pb-2 text-3xl my-4 w-full border-b-[2px] border-gray-300">
         Account Information
@@ -177,6 +176,7 @@ const AccountInfo = () => {
               name="number"
               id="number"
               placeholder="Enter phone number"
+              defaultValue={user.contact}
             />
           </div>
           <div className="flex flex-wrap items-center justify-between company">
@@ -270,9 +270,9 @@ const AccountInfo = () => {
         <button
           className="bg-[#3557C2]/90 text-white px-8 hover:bg-[#3557C2] transition-all duration-400 py-3 rounded-[8px] disabled:cursor-not-allowed"
           onClick={handleSubmit}
-          disabled={user.loading}
+          disabled={loading}
         >
-          {user.loading ? "Loading..." : "Save my profile"}
+          {loading ? "Loading..." : "Save my profile"}
         </button>
       </div>
     </main>

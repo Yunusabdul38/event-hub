@@ -65,7 +65,7 @@ const LogIn = () => {
     <div className="bg-[#F0F0F0] flex flex-wrap lg:flex-nowrap justify-between items-center gap-10 text-[14px] max-w-7xl mx-auto px-4">
       <AuthenticationDetails />
       <AuthenticationForm>
-        <form onSubmit={handleSubmit} className="w-full">
+        <form onSubmit={handleSubmit} className="w-full grid gap-4">
           <h1 className="text-[20px] font-bold text-center">Login</h1>
           <p className="text-center font-semibold">
             Welcome back! Please log in to access your account.
@@ -112,16 +112,16 @@ const LogIn = () => {
           </div>
           <Link
             to={appRoutes.reset_password}
-            className="text-right text-[blue] no-underline"
+            className="text-right text-[blue] no-underline "
           >
             Forgot Password?
           </Link>
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             <label className="">
               Remember me
               <input type="checkbox" />
             </label>
-          </div>
+          </div> */}
           <button
             className="hover:bg-[#17337C] bg-[#3557C2] border-none capitalize text-white font-openSans font-semibold w-full py-3 cursor-pointer disabled:cursor-not-allowed"
             type="submit"

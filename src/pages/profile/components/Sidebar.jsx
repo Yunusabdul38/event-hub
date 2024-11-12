@@ -38,14 +38,13 @@ const Sidebar = ({activePath}) => {
         })
       }
     })
-    console.log(newArr)
     setSettingOptions(newArr);
   }
   // const settingOptions = 
 
   return (
     <div className="lg:w-[400px]  md:w-[350px] w-full lg:bg-gray-100 md:bg-gray-100 border-b h-min-[400px]">
-      <h2 className="font-bold flex justify-between lg:text-left md:text-left text-center text-3xl lg:mb-10 md:mb-10 p-6">
+      <h2 className="font-bold flex items-center justify-between md:text-left md:text-2xl lg:mb-10 md:mb-10 p-6">
         <span>Account Settings</span>
         <span className="lg:hidden md:hidden visible" onClick={() => setActive(!active)}><img width="30" height="30" src="https://img.icons8.com/ios/50/menu--v1.png" alt="menu--v1"/></span>
       </h2>

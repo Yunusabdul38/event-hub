@@ -37,11 +37,11 @@ export default function SeaarchHeader({searchHandler}) {
         <h1 className="text-white text-center text-base md:text-2xl font-[700] font-montserrat">
           Explore a world of events. Find what excites you!
         </h1>
-        <form className="flex w-full justify-center flex-col sm:grid sm:gap-2 sm:grid-cols-[2fr_0.5fr]" onSubmit={(e)=>{
+        <form className="flex w-full justify-center flex-col sm:flex-row gap-2" onSubmit={(e)=>{
             e.preventDefault()
           searchForEventHandler()
         }}>
-          <div className="relative flex w-full max-[367px]:mb-2">
+          <div className="relative flex w-full">
             <input
             ref={ref}
               type="search"
@@ -50,7 +50,7 @@ export default function SeaarchHeader({searchHandler}) {
             />
             <IoSearch className="absolute text-gray-400 left-3 sm:top-1 -top-0 mt-[0.7rem] md:mt-[0.9rem]  text-[1.6rem] sm:text-[1.2rem] md:text-xl" />
           </div>
-          <button className="py-3 rounded-md hover:bg-white capitalize hover:text-[#3557c2] bg-[#3557c2] text-white">search</button>
+          <button className="py-3 rounded-md hover:bg-white capitalize hover:text-[#3557c2] bg-[#3557c2] text-white sm:px-10">search</button>
           {/* <div className="relative max-[367px]:border-none border-gray-300 border-l-[0.5px] text-[#5A5A5A] w-2/5 max-[367px]:w-full">
             <SlLocationPin className="absolute top-2 sm:top-3 left-4 text-[1.5rem] sm:text-[1.2rem]" />
             <select

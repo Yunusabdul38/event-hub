@@ -3,7 +3,6 @@ import { MdOutlineAccessTime } from "react-icons/md";
 import { IoTicket } from "react-icons/io5";
 import { CiLocationOn } from "react-icons/ci";
 import PropTypes from "prop-types";
-import { useView } from "../../hooks/useView";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { END_POINT } from "../../config/environment";
@@ -30,7 +29,6 @@ export default function Review({ eventDetails }) {
   const handleSubmit = async () => {
    await createEventFn(eventDetails,file,navigate,token,setIsLoading,dispatchFn)
   };
-  useView();
 
   return (
     <>

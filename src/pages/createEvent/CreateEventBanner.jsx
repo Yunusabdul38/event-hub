@@ -1,7 +1,6 @@
 import { AppButton } from "../../components/button/AppButton";
 import useEvent from "../../hooks/useEvent";
 import PropTypes from "prop-types";
-import { useView } from "../../hooks/useView";
 
 export default function CreateEventBanner({ navigate, navigateBack }) {
   const {
@@ -12,8 +11,6 @@ export default function CreateEventBanner({ navigate, navigateBack }) {
   const onSubmit = function () {
     navigate();
   };
-  //effect to makes component view start from the top of the page
-  useView();
 
   return (
     <form className="capitalize w-full lg:px-16 " onSubmit={onSubmit}>

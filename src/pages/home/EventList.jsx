@@ -3,16 +3,21 @@ import { appRoutes } from "../../config/routeMgt/RoutePaths";
 import EventCard from "../../components/cards/EventCard";
 import { useSelector } from "react-redux";
 import Message from "../../components/Message";
+import { Skeleton } from "@mui/material";
 
 export default function EventList (){
   const {events,loading } = useSelector((state) => state.events);
     const navigation = useNavigation()
+    let placeholder = new Array(15).fill(0)
     return (
         <>
         {events.length === 0 && !loading && <Message />}
-        {loading  && <div className="w-full bg-[#3557c2] flex justify-center items-center h-[400px]">
-        <span class="loader"></span>
-      </div> }
+      {loading && <div className="mt-[2rem] flex flex-wrap justify-center gap-[2rem] md:gap-[1rem] sm:gap-0">
+       {placeholder.map((_,index)=>{
+        return  <Skeleton variant="rectangular" width={380} height={200} key={index} />
+       })}
+      </div>}
+     
         {events.length>0 &&   <>
           <div className="mt-[2rem] flex flex-wrap justify-center gap-[2rem] md:gap-[1rem] sm:gap-0">
             {events?.length !==0  && <>

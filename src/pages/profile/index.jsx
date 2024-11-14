@@ -12,7 +12,7 @@ const MainProfile = () => {
       <Sidebar activePath={(e) => {
         setActive(e.path);
       }} />
-      <div className="w-full">
+      <div className="w-full md:px-20">
         {active == "profile" && <Profile activePath={(e) => {
           setActive(e.path);
         }} />}

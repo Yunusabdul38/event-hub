@@ -3,15 +3,11 @@ import { appRoutes } from "../../config/routeMgt/RoutePaths";
 import AuthenticationDetails from "../../components/button/AuthenticationDetails";
 import AuthenticationForm from "../../components/button/AuthenticationForm";
 import { useEffect, useState } from "react";
-import { GoArrowUpRight } from "react-icons/go";
 import { IoEyeOffSharp, IoEyeSharp } from "react-icons/io5";
-import { FcGoogle } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { userSignIn } from "../../services/Auth/user-context";
+import GoogleAuth from "./Google-Auth";
 
-const arr = [1,2,...[3,4]]
-
-console.log()
 const LogIn = () => {
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(true);
@@ -111,7 +107,7 @@ const LogIn = () => {
             </div>
           </div>
           <Link
-            to={appRoutes.reset_password}
+            to={appRoutes.forgot_password}
             className="text-right text-[blue] no-underline "
           >
             Forgot Password?
@@ -133,20 +129,9 @@ const LogIn = () => {
             <hr className="text-gray-700" />
             <span className="absolute top-2 bg-white px-2">Or</span>
           </div>
-          <button className="bg-[#F7F7F8] border border-gray-700 text-black capitalize font-openSans font-semibold w-full py-2 flex justify-center items-center gap-2 cursor-pointer disabled:cursor-not-allowed" disabled={isLoading}>
-            <FcGoogle className="text-2xl" />
-            <span>Login with Google </span>
-          </button>
-
+          <GoogleAuth isLoading={isLoading}/>
           <div className="text-center">
             Don&apos;t have an account?
-            <Link
-              to={appRoutes.sign_up}
-              className="font-semibold no-underline text-black hover:text-[#3557C2]"
-            >
-              Sign up
-              <GoArrowUpRight />
-            </Link>
           </div>
         </form>
       </AuthenticationForm>

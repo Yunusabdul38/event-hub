@@ -14,9 +14,9 @@ export default function SearchResults() {
   const loaderData = useLoaderData()
   const [event,setEvent] = useState(loaderData)
   const [isLoading, setIsLoading] = useState(false)
-  //console.log(currentPage,totalPages)
   const [showFilter, setShowFilter] = useState(false);
   const [eventNumm,setEventNum ] = useState(25)
+  let placeholder = new Array(15).fill(0)
 
   function searchHandler(data) {
     setEvent(data)
@@ -58,6 +58,11 @@ export default function SearchResults() {
         {/* <div className="h-[130vh] border-[0.1px] border-[#d1d5db] md:hidden"></div> */}
         
          <div className="mt-[2rem] flex flex-wrap justify-center gap-[2rem] md:gap-[1rem] sm:gap-0 mx-auto">
+         {isLoading && <div className="mt-[2rem] flex flex-wrap justify-center gap-[2rem] md:gap-[1rem] sm:gap-0">
+       {placeholder.map((_,index)=>{
+        return  <Skeleton variant="rectangular" width={380} height={200} key={index} />
+       })}
+      </div>}
             {event.events.map((data, index) => {
               return (
                 <EventCard event={data} key={index} />

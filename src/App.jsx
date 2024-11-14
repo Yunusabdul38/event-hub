@@ -9,6 +9,7 @@ import { Loader } from "./components/Loading";
 import { eventLoader } from "./services/get-event-by-id";
 import { getAlleventLoader } from "./services/getEventByLimit";
 import ErrorPage from "./components/ErrorPage";
+import ForgetPassword, { ResetPassword } from "./pages/authentication/Forget-Password";
 
 // Lazy-load
 const Home = lazy(() => import("./pages/home/Home"));
@@ -37,7 +38,7 @@ const route = createBrowserRouter([
   {
     path:"/",
     element: <DashboardLayout/>,
-    errorElement:<ErrorPage/>,
+    //errorElement:<ErrorPage/>,
     children:[
       {
         path: appRoutes.home,
@@ -68,6 +69,9 @@ const route = createBrowserRouter([
       {
         path: appRoutes.sign_up,
         element: <SignUp />,
+      },{
+        path:appRoutes.reset_password,
+        element:<ResetPassword/>
       },
       {
         path: appRoutes.coming_soon,
@@ -98,8 +102,8 @@ const route = createBrowserRouter([
         element: <ComingSoon />,
       },
       {
-        path: appRoutes.find_Event,
-        element: "",
+        path: appRoutes.forgot_password,
+        element: <ForgetPassword/>,
       }
     ],
   }  

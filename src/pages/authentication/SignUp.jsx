@@ -8,6 +8,7 @@ import { GoArrowUpRight } from "react-icons/go";
 import { IoEyeOffSharp, IoEyeSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { userSignUp } from "../../services/Auth/user-context";
+import GoogleAuth from "./Google-Auth";
 
 
 const SignUp = () => {
@@ -162,17 +163,9 @@ const SignUp = () => {
             <hr className="text-gray-700"/>
             <span className="absolute top-2 bg-white px-2">Or</span>
           </div>
-          <button className="border border-gray-700 text-black capitalize font-openSans font-semibold w-full py-2 flex justify-center items-center gap-2 cursor-pointer bg-[#F7F7F8] disabled:cursor-not-allowed" disabled={isLoading}>
-            <FcGoogle className="text-2xl" />
-            <span>Login with Google </span>
-          </button>
-
+            <GoogleAuth/>
           <div className="text-center">
           Already have an account?
-            <Link to={appRoutes.login} className="font-semibold no-underline text-black hover:text-[#3557C2]">
-            LogIn
-                <GoArrowUpRight />
-            </Link>
           </div>
         </form>
       </AuthenticationForm>

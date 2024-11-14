@@ -44,7 +44,7 @@ function EventsDesc() {
   const [shareModal, setShareModal] = useState(false);
   const navigate = useNavigate();
 
-  const {imageUrl, location, title,startTime,endTime,date:date_string,organizer=[],description } =eventDetails.data;
+  const {imageUrl, location, title,startTime,endTime,date:date_string,organizer=[],description,status } =eventDetails.data;
   const date = new Date(date_string).toLocaleDateString("en-Us",{day: "2-digit", month: "numeric", year: "numeric"}).replaceAll("/", "-");  
   console.log(date)
   function buyTicket(e) {
@@ -107,7 +107,7 @@ function EventsDesc() {
     {isAuth && <ProtectedRouteMessage/>}
     {shareModal && <Modal modalHandler={() => setShareModal(false)}>
   
-   <Share title={title} location={location}/>
+   <Share title={title} location={location} modalHandler={() => setShareModal(false)}/>
  </Modal>}  
     <div className="sm:px-9 lg:px-0 px-5 max-w-7xl m-auto pt-5 font-openSans">
       <div className="max-w-4xl mx-auto">
@@ -120,12 +120,11 @@ function EventsDesc() {
       </div>
 
       <div className="mt-[2rem] sm:mt-[1rem]  text-[#2D2C3C] flex items-center justify-between">
-        <h1 className="text-xl sm:text-[1.2rem] font-[800]">
+        <h1 className="text-xl sm:text-2xl font-extrabold capitalize">
          {title}
         </h1>
         <div className="text-[2rem] sm:text-[1.5rem] flex gap-2">
-          <IoStar className="cursor-pointer"/>
-          <BiShareAlt onClick={toShare} className="cursor-pointer"/>
+          <BiShareAlt onClick={toShare} className="cursor-pointer hover:text-[#3557c2]"/>
         </div>
       </div>
 
@@ -153,13 +152,13 @@ function EventsDesc() {
           </a>
         </div>
         <div className="py-4">
-          <button
+         {status !== "Past" &&  <button
             //onClick={buyTicket}
             onClick={eventRegHandler}
             className="py-3 px-6 sm:px-2 rounded-md flex w-full  bg-[#3557C2] text-white justify-center "
           >
             <IoTicket className="text-[1.5rem]" /> Register
-          </button>
+          </button>}
           <h1 className="my-[1rem] text-[1.3rem] sm:text-[1.1rem] font-[600]">
             Ticket Information
           </h1>

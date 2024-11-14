@@ -129,7 +129,7 @@ const Profile = ({activePath}) => {
             />
         </div>
 
-        <div className="profileBio w-full flex items-start justify-between sm:text-center">
+        <div className="profileBio w-full flex items-start justify-between md:text-start text-center">
           <div className="text-gray-700 mx-auto md:mx-0">
             {/* Name */}
             <div className="name text-2xl capitalize mb-5 font-bold">
@@ -145,7 +145,7 @@ const Profile = ({activePath}) => {
             {/* Contact Number */}
             <div className="contact lg:text-[16px] md:text-[16px] text-sm">
               <span>Contact Number: </span>
-              <span>{user?.contact?user?.contact:"000000000"}</span>
+              <span>{user?.contact?user?.contact:"7425855257"}</span>
             </div>
           </div>
 

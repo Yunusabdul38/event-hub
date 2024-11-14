@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { BiMenu } from 'react-icons/bi';
+import { FaXmark } from 'react-icons/fa6';
 
 // eslint-disable-next-line react/prop-types
 const Sidebar = ({activePath}) => {
@@ -43,12 +45,18 @@ const Sidebar = ({activePath}) => {
   // const settingOptions = 
 
   return (
-    <div className="lg:w-[400px]  md:w-[350px] w-full lg:bg-gray-100 md:bg-gray-100 border-b h-min-[400px]">
-      <h2 className="font-bold flex items-center justify-between md:text-left md:text-2xl lg:mb-10 md:mb-10 p-6">
+   <>
+    <span className="fixed z-20 left-5 bg-red-5000  visible" onClick={() => setActive(!active)}>
+      <div className='text-3xl'>
+        {active? <FaXmark/>:<BiMenu/>}
+      </div>
+    </span>
+    <div className={`${!active?"w-20 transition-all duration-200":"w-full"} transition-all duration-200 absolute z-10 lg:bg-gray-100 md:bg-gray-100 border-b  max-w-60`}>
+      {active && <>
+        <h2 className="font-bold flex items-center justify-between md:text-left md:text-xl lg:mb-10 md:mt-4 p-6">
         <span>Account Settings</span>
-        <span className="lg:hidden md:hidden visible" onClick={() => setActive(!active)}><img width="30" height="30" src="https://img.icons8.com/ios/50/menu--v1.png" alt="menu--v1"/></span>
       </h2>
-      <div className={`settingOptions lg:flex md:flex gap-3 flex-wrap ${active ? 'visible text-center' : 'hidden'}`}>
+      <div className={`settingOptions lg:flex md:flex gap-3 flex-wrap ${active ? 'visible text-center md:text-start' : 'hidden'}`}>
         {settingOptions.map((opt, _i) => (
             <p key={_i} className={`capitalize text-lg cursor-pointer w-full px-6 py-3 ${opt.active ? 'bg-white lg:font-[500] md:font-[500] font-bold' : 'bg-none'}`} onClick={() => {
               toggleActive(settingOptions, opt.name)
@@ -60,7 +68,9 @@ const Sidebar = ({activePath}) => {
             </p>
         ))}
       </div>
+      </>}
     </div>
+   </>
   )
 }
 Sidebar.PropTypes = {

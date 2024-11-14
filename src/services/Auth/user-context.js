@@ -43,11 +43,11 @@ export const userSignUp = createAsyncThunk(
         //   throw new Error(`Failed to create user`);
         // }
         const res = await request.json()
-        if(request.status === 401){
+        if(request.status === 401 || request.status === 400){ 
           throw new Error(res.message);
         }
         console.log(res)
-        //toast.success("welcome to event hub")
+        toast.success("welcome to event hub")
         return res;
       }catch(error){
         toast.error(error.message)
@@ -91,6 +91,7 @@ export const userSignUp = createAsyncThunk(
   export const logUserOut = createAsyncThunk(
     'user/sign-out',
     async () => { 
+      console.log("cll")
         try{
             const reqest = await fetch(`${END_POINT.BASE_URL}/users/logout`);
             if (!reqest.ok){

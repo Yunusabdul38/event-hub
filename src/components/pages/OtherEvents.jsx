@@ -1,7 +1,4 @@
 import { useSelector } from "react-redux";
-import image1 from "../../../src/assets/images/image1.png";
-import image2 from "../../../src/assets/images/image2.png";
-import image3 from "../../../src/assets/images/image3.png";
 import EventCard from "../cards/EventCard";
 
 export default function OtherEvents() {

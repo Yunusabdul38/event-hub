@@ -9,7 +9,6 @@ const EventCard = ({ event }) => {
     event;
     const date = new Date(date_string).getDate()
     const month = new Date(date_string).toLocaleString('default', { month: 'short' });
-    console.log(status)
   return (
     <Link
       to={`/${id}`}

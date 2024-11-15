@@ -6,10 +6,11 @@ import OrderSummary from "./components/pages/OrderSummary";
 import DashboardLayout from "./components/layout/Layout";
 import CreateEventContextProvider from "./stateManagement/CreateEventContex";
 import { Loader } from "./components/Loading";
-import { eventLoader } from "./services/get-event-by-id";
+import { eventLoader, findEventLoader } from "./services/get-event-by-id";
 import { getAlleventLoader } from "./services/getEventByLimit";
 import ErrorPage from "./components/ErrorPage";
 import ForgetPassword, { ResetPassword } from "./pages/authentication/Forget-Password";
+import FindEvent from "./pages/FindEvent";
 
 // Lazy-load
 const Home = lazy(() => import("./pages/home/Home"));
@@ -38,7 +39,7 @@ const route = createBrowserRouter([
   {
     path:"/",
     element: <DashboardLayout/>,
-    //errorElement:<ErrorPage/>,
+    errorElement:<ErrorPage/>,
     children:[
       {
         path: appRoutes.home,
@@ -104,6 +105,11 @@ const route = createBrowserRouter([
       {
         path: appRoutes.forgot_password,
         element: <ForgetPassword/>,
+      },
+      {
+        path:appRoutes.find_event,
+        element:<FindEvent />,
+        loader:findEventLoader,
       }
     ],
   }  

@@ -156,9 +156,9 @@ export default function Home() {
             <h2 className="text-[24px] lg:text-[32px] md:text[28px] font-[700] font-montserrat text-[#2D2C3C]">
               Upcoming Events
             </h2>
-            <div className="block lg:hidden md:hidden cursor-pointer border">
+            {/* <div className="block lg:hidden md:hidden cursor-pointer border">
               <FaSliders className="text-[1.4rem]" />
-            </div>
+            </div> */}
             {/* Mobile view */}
             <div className="w-full lg:hidden md:hidden flex gap-2 text-[#1D275F] text-sm flex-wrap">
               <div className="bg-[#F2F4FF] rounded-[50px] px-[1rem] py-[0.3rem]">

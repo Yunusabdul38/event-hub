@@ -67,7 +67,7 @@ const SignUp = () => {
 
 
   return (
-    <div className="bg-[#F0F0F0] flex flex-wrap lg:flex-nowrap justify-between items-center lg:p-10 sm:p-5 gap-10 text-[14px] max-w-7xl mx-auto px-4" >
+    <div className="bg-[#F0F0F0] flex flex-wrap lg:flex-nowrap justify-between items-center px-4 sm:px-10 md:px-20 gap-10 text-sm py-20">
       <AuthenticationDetails />
       <AuthenticationForm>
       <form onSubmit={handleSubmit} className="grid gap-3 w-full">

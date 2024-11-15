@@ -1,6 +1,6 @@
 import Recommend from "./Recommend";
 import OtherEvents from "./OtherEvents";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { NavLink, useLoaderData, useNavigate } from "react-router-dom";
 import { FaSliders } from "react-icons/fa6";
 import SeaarchHeader from "./seaarchHeader";
 import { useState } from "react";
@@ -8,6 +8,8 @@ import EventCard from "../cards/EventCard";
 import Filter from "./Filter";
 import toast from "react-hot-toast";
 import { END_POINT } from "../../config/environment";
+import { appRoutes } from "../../config/routeMgt/RoutePaths";
+import { Skeleton } from "@mui/material";
 
 
 export default function SearchResults() {
@@ -17,7 +19,7 @@ export default function SearchResults() {
   const [showFilter, setShowFilter] = useState(false);
   const [eventNumm,setEventNum ] = useState(25)
   let placeholder = new Array(15).fill(0)
-
+ 
   function searchHandler(data) {
     setEvent(data)
   }
@@ -63,11 +65,20 @@ export default function SearchResults() {
         return  <Skeleton variant="rectangular" width={380} height={200} key={index} />
        })}
       </div>}
-            {event.events.map((data, index) => {
+      <>
+            {event?.message? <div className="my-20 flex flex-col items-end px-7">
+              <h2>No such event at the moment try searching for other event</h2>
+              <button disabled={isLoading} className="p-2 grid border border-[#3557c2] text-[#3557c2] bg-white hover:bg-[#3557c2] w-fit rounded-md hover:border-transparent hover:text-white" onClick={getMoreEventHandle} >Get All Event</button>
+            </div> : 
+            <>
+              {event?.events.map((data, index) => {
               return (
                 <EventCard event={data} key={index} />
-              );
+              )
             })}
+            </>
+            }
+            </>
           </div>
       </div>
       </>

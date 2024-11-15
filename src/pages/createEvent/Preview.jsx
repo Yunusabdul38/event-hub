@@ -110,11 +110,11 @@ export default function Review({ eventDetails }) {
               <div className="rounded-md bg-[#B9B9B9] w-16" />
               <div className="grid gap-2">
                 <h3 className="font-semibold text-sm">{eventDetails.orgName.name}</h3>
-                <div className="flex gap-1 items-center">
+                <div className="flex gap-1 sm:items-center flex-col sm:flex-row">
                   <h2 className="capitalize  py-[2px] ">
                   {eventDetails.orgEmail.Email}
                   </h2>
-                  <button className="capitalize px-3 border rounded-md flex items-center gap-2 hover:text-[#3557c2]">
+                  <button className="capitalize px-3 border rounded-md flex items-center gap-2 hover:text-[#3557c2] w-fit">
                     + follow
                   </button>
                 </div>

@@ -15,13 +15,13 @@ export const appRoutes = {
   share: '/share',
   helpCenter: '/help-center',
   aboutUs: '/about-us',
-  contactUs: '/contact-us',
+  find_event:"/event/:name",
 
   // Landing page
   home: '/',
 
   // contact us
-
+  contactUs: '/contact-us',
   // Coming soon/Find events
   coming_soon: '/coming-soon',
 

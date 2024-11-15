@@ -7,6 +7,7 @@ import { IoEyeOffSharp, IoEyeSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { userSignIn } from "../../services/Auth/user-context";
 import GoogleAuth from "./Google-Auth";
+import { GoArrowUpRight } from "react-icons/go";
 
 const LogIn = () => {
   const [errors, setErrors] = useState({});
@@ -58,10 +59,10 @@ const LogIn = () => {
   };
 
   return (
-    <div className="bg-[#F0F0F0] flex flex-wrap lg:flex-nowrap justify-between items-center gap-10 text-[14px] max-w-7xl mx-auto px-4">
+    <div className="bg-[#F0F0F0] flex flex-wrap lg:flex-nowrap justify-between items-center px-4 sm:px-10 md:px-20 gap-10 text-sm py-20">
       <AuthenticationDetails />
       <AuthenticationForm>
-        <form onSubmit={handleSubmit} className="w-full grid gap-4">
+        <form onSubmit={handleSubmit} className="w-full grid gap-4 ">
           <h1 className="text-[20px] font-bold text-center">Login</h1>
           <p className="text-center font-semibold">
             Welcome back! Please log in to access your account.
@@ -127,11 +128,15 @@ const LogIn = () => {
           </button>
           <div className="text-center relative py-3">
             <hr className="text-gray-700" />
-            <span className="absolute top-2 bg-white px-2">Or</span>
+            <span className="absolute top-1 bg-white px-2">Or</span>
           </div>
           <GoogleAuth isLoading={isLoading}/>
-          <div className="text-center">
-            Don&apos;t have an account?
+          <div className="text-center flex justify-center items-center">
+          Already have an account?
+            <Link to={appRoutes.login} className="flex font-semibold no-underline text-black hover:text-[#3557C2] items-center">
+            LogIn
+                <GoArrowUpRight />
+            </Link>
           </div>
         </form>
       </AuthenticationForm>

@@ -126,13 +126,13 @@ body {
   input[type="number"] {
       -moz-appearance: textfield;
   }
-  input:-webkit-autofill {
+  /* input:-webkit-autofill {
     color: black;
     background: #fff;
    
    
-}
+} */
 
-footer p:hover{
+footer p:hover,footer a:hover{
   color: #fff;
 }

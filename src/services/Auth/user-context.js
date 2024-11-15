@@ -3,6 +3,61 @@ import { END_POINT } from "../../config/environment";
 import toast from "react-hot-toast";
 
 
+export const forgetPassord = createAsyncThunk(
+  'user/forget-password',
+  async (data,{ rejectWithValue }) => {
+    toast.loading("sending request")
+    try{
+      const request = await fetch(`${END_POINT.BASE_URL}/users/forgot-password`,{
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+      const response = await request.json()
+      if(request.status !== 200){
+        throw new Error(response.message);
+      }
+      toast.success("check your email for further instruction")
+      console.log(response)
+      return response;
+    }catch(error){
+      toast.error(error.message)
+      return rejectWithValue(error.message)
+    }
+  }
+)
+
+export const resetPassord = createAsyncThunk(
+  'user/reset-password',
+  async (data,{ rejectWithValue }) => {
+    const {userData,token} = data
+    toast.loading("sending request")
+    try{
+      const request = await fetch(`${END_POINT.BASE_URL}/users/reset-password/${token}`,{
+        method: "put",
+        headers: {
+          "Content-Type": "application/json",
+          // "x-auth-token":token,
+        },
+        body: JSON.stringify(userData),
+      })
+      console.log(request)
+      const response = await request.json()
+      if(request.status !== 200){
+        throw new Error(response.message);
+      }
+      toast.success("passoword reset successfully")
+      console.log(response)
+      return response;
+    }catch(error){
+      toast.error(error.message)
+      return rejectWithValue(error.message)
+    }
+  }
+)
+
 export const userSignIn = createAsyncThunk(
     'user/signIn',
     async (data,{ rejectWithValue }) => {
@@ -183,7 +238,39 @@ const  authentication =createSlice({
         console.log(action)
           state.error=action.error
           state.loading=false
-      })
+      }),
+      builder.addCase(forgetPassord.pending,(state,action)=>{
+        state.error=null,
+        state.loading=true
+    }),
+    builder.addCase(forgetPassord.fulfilled,(state,action)=>{
+      console.log(action.payload)
+        state.user=null
+        state.loading = false;
+        state.token = null;
+        state.error=null
+    }),
+    builder.addCase(forgetPassord.rejected,(state,action)=>{
+      console.log(action)
+        state.error=action.error
+        state.loading=false
+    }),
+    builder.addCase(resetPassord.pending,(state,action)=>{
+      state.error=null,
+      state.loading=true
+  }),
+  builder.addCase(resetPassord.fulfilled,(state,action)=>{
+    console.log(action.payload)
+      state.user=null
+      state.loading = false;
+      state.token = null;
+      state.error=null
+  }),
+  builder.addCase(resetPassord.rejected,(state,action)=>{
+    console.log(action)
+      state.error=action.error
+      state.loading=false
+  })
     }
 });
 

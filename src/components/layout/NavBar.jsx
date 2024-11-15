@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef } from "react";
 import { Select, MenuItem, TextField, InputAdornment, Box } from "@mui/material";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
@@ -11,32 +11,26 @@ import { logUserOut } from "../../services/Auth/user-context";
 
 const NavBar = () => {
   const {token,user} = useSelector((state) => state?.user);
-  // category and search pathname: "/search"
-  const [selectedValue, setSelectedValue] = useState("");
   const {pathname} = useLocation();
   const navigate = useNavigate()
-  const [searchText, setSearchText] = useState("");
+  const searchRef = useRef("");
   const dispatch = useDispatch()
 
-  const handleSelectChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
-
-  const handleSearchChange = (event) => {
-    if(pathname !== "/search"){
-      navigate(`/search`)
-    }
-    setSearchText(event.target.value);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    // if(pathname.startsWith() !== "/event"){
+    //   navigate(`/event/${event}`)
+    // }
+    navigate(`/event/${searchRef?.current?.value}`)
   };
 
   function handleLogOut(){
     dispatch(logUserOut())
-    console.log("close")
   }
 
   return (
    <>
-    <div className="flex flex-wrap z-20 border-b border-b-gray-200 sticky top-0 bg-white justify-between lg:px-12 md:px-8 px-4 h-auto">
+    <div className="font-Montserrat flex flex-wrap z-20 border-b border-b-gray-200 sticky top-0 bg-white justify-between lg:px-12 md:px-8 px-4 h-auto">
       <div className="flex flex-wrap justify-between w-full">
         <div className="py-5 w-full flex flex-wrap items-center justify-between border-b border-b-gray-300 lg:grid lg:grid-cols-[.5fr_1fr_.5fr]">
           <Link to="/" className="w-fit" >
@@ -44,7 +38,7 @@ const NavBar = () => {
           </Link>
 
           {/* category search */}
-          <div className="hidden sm:block">
+          <form className="hidden sm:block" onSubmit={(e)=>handleSearch(e)}>
             <Box display="flex" alignItems="center">
               {/* <InputLabel id="demo-simple-select-helper-label">Category</InputLabel> */}
               {/* <Select IconComponent={() => null} labelId="demo-simple-select-helper-label" id="demo-simple-select-helper" value={selectedValue} onChange={handleSelectChange} size="small" variant="outlined" displayEmpty sx={{ mr: 0, bgcolor: "var(--app-blue)", borderTopLeftRadius: 8, borderBottomLeftRadius: 8, color: "white" }} label="Category" name={"Category"} className={styles.navCategorySelect}>
@@ -55,25 +49,25 @@ const NavBar = () => {
                 <MenuItem value="option2">Option 2</MenuItem>
                 <MenuItem value="option3">Option 3</MenuItem>
               </Select> */}
-              <TextField
-                value={searchText} 
+              <input
+              ref={searchRef}
                 style={{borderBottom:"1px solid #3557c2",paddingLeft:"10px"}}
-                onChange={handleSearchChange}
                 variant="standard"
                 placeholder="Search Events Here"
-                className="focus:border-[#3357c2] border w-full pl-2 py-2 caret-[#3357c2] focus:outline-none"
+                className="outline-none border-none focus:border-[#3357c2] border w-full pl-2 py-2 caret-[#3357c2] focus:outline-none"
                 size="small"
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <SearchIcon htmlColor="var(--app-blue)" className="cursor-pointer" />
-                    </InputAdornment>
-                  ),
-                  disableUnderline: true,
-                }}
+                // InputProps={{
+                //   endAdornment: (
+                //     <InputAdornment position="end">
+                //       <SearchIcon htmlColor="var(--app-blue)" className="cursor-pointer" />
+                //     </InputAdornment>
+                //   ),
+                //   disableUnderline: true,
+                // }}
               />
+               <SearchIcon htmlColor="var(--app-blue)" className="cursor-pointer" />
             </Box>
-          </div>
+          </form>
 
           {/* sign up & login */}
           <div className="w-fit grid place-self-end">

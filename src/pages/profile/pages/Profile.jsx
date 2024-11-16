@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import profileImage from "../../../assets/img.png";
 import About from "../components/About";
 import Bookings from "../components/Bookings";
 import Settings from "../components/Settings";

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { END_POINT } from "../../config/environment";
 import toast from "react-hot-toast";
+import { appRoutes } from "../../config/routeMgt/RoutePaths";
 
 
 export const forgetPassord = createAsyncThunk(
@@ -32,7 +33,7 @@ export const forgetPassord = createAsyncThunk(
 export const resetPassord = createAsyncThunk(
   'user/reset-password',
   async (data,{ rejectWithValue }) => {
-    const {userData,token} = data
+    const {userData,token,navigate} = data
     toast.loading("sending request")
     try{
       const request = await fetch(`${END_POINT.BASE_URL}/users/reset-password/${token}`,{
@@ -50,6 +51,7 @@ export const resetPassord = createAsyncThunk(
       }
       toast.success("passoword reset successfully")
       console.log(response)
+      navigate(appRoutes.profile)
       return response;
     }catch(error){
       toast.error(error.message)

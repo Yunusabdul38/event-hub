@@ -1,19 +1,15 @@
 import React, { useState } from "react";
-import { BiCalendar, BiShareAlt } from "react-icons/bi";
-import { IoCalendarOutline, IoStar, IoTicket } from "react-icons/io5";
+import { BiShareAlt } from "react-icons/bi";
+import { IoCalendarOutline, IoTicket } from "react-icons/io5";
 import { BsClock } from "react-icons/bs";
-import { TiTickOutline } from "react-icons/ti";
 import { SlLocationPin } from "react-icons/sl";
 import { FaPlus } from "react-icons/fa6";
 import { MdPerson } from "react-icons/md";
 import { IoIosArrowDown } from "react-icons/io";
 import OtherEvents from "./OtherEvents";
-import AIimage from '../../../src/assets/images/AIimage.png'
 import SimpleMap from "./SimpleMap";
-import TicketBooking from "./TicketBooking";
-import { useNavigate, Link, useParams, useLoaderData } from "react-router-dom";
+import { useNavigate, useLoaderData } from "react-router-dom";
 import Modal from "../Modal";
-import AttendeeDets from "./AttendeeDets";
 import Share from "./Share";
 import { useSelector } from "react-redux";
 import { END_POINT } from "../../config/environment";

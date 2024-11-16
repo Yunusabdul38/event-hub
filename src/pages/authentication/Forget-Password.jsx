@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { appRoutes } from "../../config/routeMgt/RoutePaths";
 import { useRef, useState } from "react";
 import { IoEyeOffSharp, IoEyeSharp } from "react-icons/io5";
@@ -35,11 +35,12 @@ export default function ForgetPassword() {
 
 export function ResetPassword(){
   const {loading} = useSelector((state)=>state.user)
+  const navigate = useNavigate()
+  const {token} = useParams();
   const [showPassword, setShowPassword] = useState(true);
   const dispatch = useDispatch()
   const passwordRef = useRef()
   const conirmPasswordRef = useRef()
-
    function submitHandle(e){
     e.preventDefault()
     if(!passwordRef.current.value && !conirmPasswordRef.current.value){
@@ -53,7 +54,8 @@ export function ResetPassword(){
         password:passwordRef.current.value,
         confirmPassord:conirmPasswordRef.current.value
       },
-      token:"a761a5ed29448c8c7934dd1a2a4837c9dbec2887b9cffd25ae0f404ca0de2187"
+      token,
+      navigate
      }
      dispatch(resetPassord(data))
   }

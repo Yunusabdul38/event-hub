@@ -63,6 +63,7 @@ const users = {
     }
   ]
 };
+
 const Profile = ({activePath}) => {
   const {user,token} = useSelector((state) => state?.user);
   const navigate = useNavigate();
@@ -86,14 +87,14 @@ const Profile = ({activePath}) => {
       name: "my events",
       active: false,
     },
-    {
-      name: "calendar",
-      active: false,
-    },
-    {
-      name: "settings",
-      active: false,
-    },
+    // {
+    //   name: "calendar",
+    //   active: false,
+    // },
+    // {
+    //   name: "settings",
+    //   active: false,
+    // },
   ]);
   const [active, setActive] = useState("about me")
   
@@ -120,9 +121,9 @@ const Profile = ({activePath}) => {
   return (
     <main className="lg:px-0 md:px-0 px-2">
       <div className="w-full flex flex-col md:flex-row py-10 px-4 gap-4 items-center relative">
-        <div className="border w-52 h-52 md:w-1/2 md:h-fit max-w-72 overflow-hidden shadow-md bg-gray-200 rounded-full flex items-center justify-center">
+        <div className="border w-52 h-52 md:h-52 md:w-1/2 lg:h-72 max-w-72 overflow-hidden shadow-md bg-gray-200 rounded-full flex items-center justify-center">
             <img
-              className="w-full h-full object-cover rounded-full"
+              className="w-full h-full object-cover rounded-full text-center"
               src={user?.avatar}
               alt="Profile Image"
             />
@@ -176,8 +177,8 @@ const Profile = ({activePath}) => {
           {active == "about me" && <About />}
           {active == "my bookings" && <Bookings bookings={users.bookings} />}
           {active == "my events" && <div className="pr-4">{<MyEvents events={user.bookings}/>}</div>}
-          {active == "calendar" && <p className="text-gray-700 leading-[1.5]">{user.calendar ?? 'No events added to your calendar'}</p>}
-          {active == "settings" && <Settings />}
+          {/* {active == "calendar" && <p className="text-gray-700 leading-[1.5]">{user.calendar ?? 'No events added to your calendar'}</p>}
+          {active == "settings" && <Settings />} */}
         </div>
       </div>
     </main>

@@ -53,7 +53,6 @@ export const createEventFn = async (eventDetails,file,navigate,token,setIsLoadin
      
       try {
         const request = await fetch(`${END_POINT.BASE_URL}/event/create-event`, requestOptions)
-        console.log(request)
         const response = await request.json()
       
         if (response?.message){
@@ -61,14 +60,12 @@ export const createEventFn = async (eventDetails,file,navigate,token,setIsLoadin
           setIsLoading(false)
           return null
         }
-        console.log("event success", response);
           dispatchFn(getEvents())
           toast.success("Event Created Successfully")
           navigate("/")
         setIsLoading(false)
       } catch (error) {
         toast.error("Event Creation Failed");
-        console.log("error", error);
         setIsLoading(false)
       }   
     }

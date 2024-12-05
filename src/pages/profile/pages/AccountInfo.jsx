@@ -5,14 +5,20 @@ import { Loader } from "../../../components/Loading";
 
 const AccountInfo = () => {
   const {user,token,loading} = useSelector((state) => state?.user);
-  const {fullName,avatar,portfolio,github,bio} = user
+  const data = useSelector((state) => state?.user.user.data.user);
+  const {fullName,avatar,portfolio,github,bio} = data
   const [profileImage, setProfileImage] = useState();
   const [imageFile,setImageFile] = useState(null)
   const [contactInfo, setContactInfo] = useState([]);
   const [profileInfo, setProfileInfo] = useState([]);
   const dispatcher = useDispatch();
+  console.log({
+    data
+  })
   const [firstName,...lastName] = fullName?.split(" ");
-
+  console.log({
+    fullName,avatar,github,bio,
+  })
   const handleProfileImage = (e) => {
     setImageFile(e.target.files[0])
     const imageFile = e.target.files[0];

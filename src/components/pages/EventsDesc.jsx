@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { END_POINT } from "../../config/environment";
 import ProtectedRouteMessage from "../ProtectedRouteMessage";
 import toast from "react-hot-toast";
+import { AddToCalendarButton } from "add-to-calendar-button-react";
 
 const tagData = [
   { name: "Tech" },
@@ -36,13 +37,14 @@ function EventsDesc() {
   const {token,user} = useSelector(state=>state.user)
   console.log(eventDetails)
   const [isAuth,setIsAuth] = useState(false)
-  //const [modal, setModal] = useState(false);
   const [shareModal, setShareModal] = useState(false);
   const navigate = useNavigate();
 
   const {imageUrl, location, title,startTime,endTime,date:date_string,organizer=[],description,status } =eventDetails.data;
   const date = new Date(date_string).toLocaleDateString("en-Us",{day: "2-digit", month: "numeric", year: "numeric"}).replaceAll("/", "-");  
   console.log(date)
+  const googleCalendarLink = `https://calendar.google.com/calendar/r/eventedit?text=React+Workshop&dates=20241201T100000Z/20241201T120000Z&details=Join+our+React+Workshop&location=Online`;
+
   function buyTicket(e) {
     e.preventDefault();
     navigate("/ticketBooking");
@@ -142,9 +144,9 @@ function EventsDesc() {
             </h1>
           </span>
           <a href="">
-            <p className="px-[1rem] text-[0.9rem] md:text-[1.2rem] sm:text-[0.9rem] font-[500] text-[#4539B4]">
+            <a href={`http://www.google.com/calendar/event?action=TEMPLATE&dates=${date_string}%2FDATE_END&text=${title}&location=${location}&details=${description}`} className="px-[1rem] text-[0.9rem] md:text-[1.2rem] sm:text-[0.9rem] font-[500] text-[#4539B4]" target="_blank">
               + Add to Calendar
-            </p>
+            </a>
           </a>
         </div>
         <div className="py-4">

@@ -12,7 +12,7 @@ import ErrorPage from "./components/ErrorPage";
 import ForgetPassword, { ResetPassword } from "./pages/authentication/Forget-Password";
 import FindEvent from "./pages/FindEvent";
 
-// Lazy-load
+// Lazy-load component
 const Home = lazy(() => import("./pages/home/Home"));
 const SearchResults = lazy(() => import("./components/pages/SearchResults"));
 const EventsDesc = lazy(() => import("./components/pages/EventsDesc"));
@@ -39,7 +39,7 @@ const route = createBrowserRouter([
   {
     path:"/",
     element: <DashboardLayout/>,
-    errorElement:<ErrorPage/>,
+    //errorElement:<ErrorPage/>,
     children:[
       {
         path: appRoutes.home,
@@ -116,13 +116,11 @@ const route = createBrowserRouter([
 ])
 function App() {
   return (
-    // <AuthProvider authType="localstorage" authName="event-hub">
     <QueryClientProvider client={queryClient}>
      <Suspense fallback={<Loader />}>
         <RouterProvider router={route}/>
       </Suspense>
     </QueryClientProvider>
-    // </AuthProvider>
   );
 }
 

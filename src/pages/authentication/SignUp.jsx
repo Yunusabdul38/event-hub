@@ -1,20 +1,20 @@
-import { Link } from "react-router-dom";
 import { appRoutes } from "../../config/routeMgt/RoutePaths";
 import AuthenticationDetails from "../../components/button/AuthenticationDetails";
 import AuthenticationForm from "../../components/button/AuthenticationForm"
-import { useState } from "react";
-import { FcGoogle } from "react-icons/fc";
-import { GoArrowUpRight } from "react-icons/go";
+import { useEffect, useState } from "react";
 import { IoEyeOffSharp, IoEyeSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { userSignUp } from "../../services/Auth/user-context";
 import GoogleAuth from "./Google-Auth";
+import { useNavigate } from "react-router-dom";
 
 
 const SignUp = () => {
   const dispatch = useDispatch()
   const [errors, setErrors] = useState({})
-  const {loading:isLoading} = useSelector((state) => state.user)
+  const {loading:isLoading,token} = useSelector((state) => state.user)
+
+  const navigate = useNavigate()
   
   const [showPassword, setShowPassword] = useState(true);
   const [formData, setFormData] = useState({
@@ -28,7 +28,6 @@ const SignUp = () => {
     e.preventDefault()
     const {confirmPassword,email,fullName,password} = formData
     const validationErrors = {};
-    console.log(formData)
     if (!formData.fullName.trim()) {
       validationErrors.name = "Name is required"
     }
@@ -65,6 +64,11 @@ const SignUp = () => {
     })
   }
 
+  useEffect(() => {
+    if(token){
+      navigate(appRoutes.profile)
+    }
+  }, [token])
 
   return (
     <div className="bg-[#F0F0F0] flex flex-wrap lg:flex-nowrap justify-between items-center px-4 sm:px-10 md:px-20 gap-10 text-sm py-20">

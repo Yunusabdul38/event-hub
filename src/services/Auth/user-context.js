@@ -21,7 +21,6 @@ export const forgetPassord = createAsyncThunk(
         throw new Error(response.message);
       }
       toast.success("check your email for further instruction")
-      console.log(response)
       return response;
     }catch(error){
       toast.error(error.message)
@@ -95,15 +94,10 @@ export const userSignUp = createAsyncThunk(
           },
           body: JSON.stringify(data),
         });
-        console.log(request)
-        // if (!request.ok){
-        //   throw new Error(`Failed to create user`);
-        // }
         const res = await request.json()
         if(request.status === 401 || request.status === 400){ 
           throw new Error(res.message);
         }
-        console.log(res)
         toast.success("welcome to event hub")
         return res;
       }catch(error){
@@ -121,7 +115,6 @@ export const userSignUp = createAsyncThunk(
       for (const key in updateData) {
        formData.append(key, updateData[key]);
       }
-      console.log(formData,updateData)
        if (token) {
         var myHeaders = new Headers();
         myHeaders.append("x-auth-token", token);
@@ -135,11 +128,9 @@ export const userSignUp = createAsyncThunk(
         try {
           const request = await fetch(`${END_POINT.BASE_URL}/users/me/update`, requestOptions)
           const response = await request.json() 
-          console.log(response)
           toast.success(response.message)
           return  response.data.user
         } catch (error) {
-          console.log("error", error);
           return rejectWithValue("failed to update user profile");
         }
       }
@@ -216,7 +207,6 @@ const  authentication =createSlice({
             state.loading=true
         }),
         builder.addCase(updateUserDetails.fulfilled,(state,action)=>{
-          console.log(action.payload)
             state.user=action.payload
             state.loading = false;
             state.error=null
@@ -230,14 +220,12 @@ const  authentication =createSlice({
           state.loading=true
       }),
       builder.addCase(logUserOut.fulfilled,(state,action)=>{
-        console.log(action.payload)
           state.user=null
           state.loading = false;
           state.token = null;
           state.error=null
       }),
       builder.addCase(logUserOut.rejected,(state,action)=>{
-        console.log(action)
           state.error=action.error
           state.loading=false
       }),
@@ -246,14 +234,12 @@ const  authentication =createSlice({
         state.loading=true
     }),
     builder.addCase(forgetPassord.fulfilled,(state,action)=>{
-      console.log(action.payload)
         state.user=null
         state.loading = false;
         state.token = null;
         state.error=null
     }),
     builder.addCase(forgetPassord.rejected,(state,action)=>{
-      console.log(action)
         state.error=action.error
         state.loading=false
     }),
@@ -262,14 +248,12 @@ const  authentication =createSlice({
       state.loading=true
   }),
   builder.addCase(resetPassord.fulfilled,(state,action)=>{
-    console.log(action.payload)
       state.user=null
       state.loading = false;
       state.token = null;
       state.error=null
   }),
   builder.addCase(resetPassord.rejected,(state,action)=>{
-    console.log(action)
       state.error=action.error
       state.loading=false
   })

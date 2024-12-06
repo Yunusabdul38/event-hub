@@ -6,7 +6,8 @@ import { IoEyeOffSharp, IoEyeSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { userSignUp } from "../../services/Auth/user-context";
 import GoogleAuth from "./Google-Auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { GoArrowUpRight } from "react-icons/go";
 
 
 const SignUp = () => {
@@ -163,13 +164,17 @@ const SignUp = () => {
           >
             sign up
           </button>
-          <div className="text-center relative py-3">
+          {/* <div className="text-center relative py-3">
             <hr className="text-gray-700"/>
             <span className="absolute top-2 bg-white px-2">Or</span>
           </div>
-            <GoogleAuth/>
-          <div className="text-center">
+            <GoogleAuth/> */}
+           <div className="text-center flex justify-center items-center">
           Already have an account?
+            <Link to={appRoutes.login} className="flex font-semibold no-underline text-black hover:text-[#3557C2] items-center">
+            LogIn
+                <GoArrowUpRight />
+            </Link>
           </div>
         </form>
       </AuthenticationForm>

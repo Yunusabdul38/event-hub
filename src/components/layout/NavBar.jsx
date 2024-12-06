@@ -6,6 +6,7 @@ import { appRoutes } from "../../config/routeMgt/RoutePaths";
 import logo from "../../assets/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logUserOut } from "../../services/Auth/user-context";
+import avatar_placeholder from "../../assets/avatar.png"
 
 const NavBar = () => {
   const {token,user} = useSelector((state) => state?.user);
@@ -52,7 +53,8 @@ const NavBar = () => {
             <div className="flex items-center justify-between gap-4">
             <button className="border text-[#3557c2] border-[#3557c2] capitalize py-1 px-2 rounded-md hover:text-white hover:bg-[#3557c2] hover:border-transparent" onClick={handleLogOut}>sign out</button>
             <Link to="/profile" className="profileImage bg-gray-300 border w-[50px] h-[50px] rounded-full">
-                <img src={user?.avatar} alt="Profile Image" className="w-full h-full rounded-full" />
+                {user?.avartar && <img src={user?.avatar} alt="user avatar" className="w-full h-full rounded-full object-cover" />}
+                {!user?.avartar && <img src={avatar_placeholder} alt="user avatar" className="w-full h-full rounded-full object-cover" />}
             </Link>
             </div>
           ) : (

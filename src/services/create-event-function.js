@@ -12,7 +12,7 @@ export const createEventFn = async (eventDetails,file,navigate,token,setIsLoadin
       orgEmail: eventDetails.orgEmail.Email,
       imageUrl: file,
       category: eventDetails.category,
-      location: eventDetails.location,
+      location: eventDetails.location.name,
       date: eventDetails.session[0].startDate.date,
       startTime: eventDetails.session[0].startTime.time,
       endTime: eventDetails.session[0].endTime.time,
@@ -50,7 +50,7 @@ export const createEventFn = async (eventDetails,file,navigate,token,setIsLoadin
         redirect: "follow",
         body: formData,
       };
-     
+     console.log(formData)
       try {
         const request = await fetch(`${END_POINT.BASE_URL}/event/create-event`, requestOptions)
         const response = await request.json()
@@ -65,6 +65,7 @@ export const createEventFn = async (eventDetails,file,navigate,token,setIsLoadin
           navigate("/")
         setIsLoading(false)
       } catch (error) {
+        console.log(error)
         toast.error("Event Creation Failed");
         setIsLoading(false)
       }   

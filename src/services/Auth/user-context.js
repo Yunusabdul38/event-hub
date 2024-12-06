@@ -139,14 +139,13 @@ export const userSignUp = createAsyncThunk(
   export const logUserOut = createAsyncThunk(
     'user/sign-out',
     async () => { 
-      console.log("cll")
         try{
             const reqest = await fetch(`${END_POINT.BASE_URL}/users/logout`);
             if (!reqest.ok){
               throw new Error(`Failed to create user st: ${reqest.status} stText${reqest.statusText} formdata ${reqest.formData} body ${reqest.body}`);
             }
             const res = await reqest.json()
-            toast.success("Logged out")
+            toast.success("Logged out successfull")
             return res.success
           }catch(error){
             toast.error(error.message)

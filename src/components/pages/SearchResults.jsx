@@ -78,7 +78,7 @@ export default function SearchResults() {
           </div>
       </div>
       </>
-      {event.currentPage !== event.totalPages && <button disabled={isLoading} className="bg-[#3557c2] rounded w-[90%] sm:w-4/5 mx-auto grid py-2 text-white my-10 capitalize md:py-4 text-center disabled:cursor-not-allowed" onClick={getMoreEventHandle}>see more</button> }
+      {event.currentPage !== event.totalPages && <button disabled={isLoading} className="bg-[#3557c2] rounded w-[90%] sm:w-4/5 mx-auto grid py-2 text-white my-10 capitalize md:py-4 text-center disabled:cursor-not-allowed" onClick={getMoreEventHandle}>{isLoading?"fetching...":"see more"}</button> }
     </div>
     <div>
     </div>

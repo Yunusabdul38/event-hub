@@ -1,20 +1,19 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserDetails } from "../../../services/Auth/user-context";
+import avatar_placeholder from "../../../assets/avatar.png"
 import { Loader } from "../../../components/Loading";
+
 
 const AccountInfo = () => {
   const {user,token,loading} = useSelector((state) => state?.user);
-  const data = useSelector((state) => state?.user.user.data.user);
-  const {fullName,avatar,portfolio,github,bio} = data
+  const {fullName,avatar,portfolio,github,bio} = user
   const [profileImage, setProfileImage] = useState();
   const [imageFile,setImageFile] = useState(null)
   const [contactInfo, setContactInfo] = useState([]);
   const [profileInfo, setProfileInfo] = useState([]);
   const dispatcher = useDispatch();
-  console.log({
-    data
-  })
+ 
   const [firstName,...lastName] = fullName?.split(" ");
   console.log({
     fullName,avatar,github,bio,
@@ -86,11 +85,16 @@ const AccountInfo = () => {
       <div className="profileImage max-w-[500px] lg:px-8 md:px-4 px-1 flex flex-col items-center justify-center mx-auto my-8">
         <h3 className="text-2xl font-bold my-4">Profile Photo</h3>
         <div className="image lg:w-[200px] md:w-[200px] w-[200px] h-[200px] border relative rounded-full bg-gray-200 flex items-center justify-center">
-            <img
-              className="w-full h-full rounded-full"
+           {avatar &&  <img
+              className="w-full h-full rounded-full object-cover"
               src={profileImage?profileImage: avatar}
-              alt="Profile Image"
-            />
+              alt="user avatar"
+            />}
+            {!avatar &&  <img
+              className="w-full h-full rounded-full object-cover"
+              src={profileImage?profileImage: avatar_placeholder}
+              alt="user avatar"
+            />}
           <div className="imageBtn absolute cursor-pointer border border-gray-800 overflow-hidden w-[45px] h-[45px] rounded-full bottom-[15px] right-[0px]">
             <img
               className="absolute p-2 cursor-pointer bg-white/90 rounded-full w-[45px]"

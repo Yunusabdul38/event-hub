@@ -38,7 +38,6 @@ const NavBar = () => {
               <input
               ref={searchRef}
                 style={{borderBottom:"1px solid #3557c2",paddingLeft:"10px"}}
-                variant="standard"
                 placeholder="Search Events Here"
                 className="outline-none border-none focus:border-[#3357c2] border w-full pl-2 py-2 caret-[#3357c2] focus:outline-none"
                 size="small"
